@@ -1,0 +1,44 @@
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "~font-awesome/scss/font-awesome";
+@import "~ionicons/dist/scss/ionicons";
+@import "~icheck/skins/square/blue.css";
+@import "~layer/src/skin/default/layer.css";
+@import "~pace-progress/themes/yellow/pace-theme-flash.css";
+@import "~select2/src/scss/core.scss";
+@import "~@fengyuanchen/datepicker/src/datepicker";
+@import "~eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker-build";
+@import "../css/nestable.css";
+@import "~fontawesome-iconpicker/dist/css/fontawesome-iconpicker.css";
+
+/***
+Custom Scrollbars
+***/
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #eaeaea;
+  border-left: 1px solid #cecece;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #afafaf;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #8c8c8c;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  box-shadow: none;
+  border: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  box-shadow: none;
+  border: 0;
+}
