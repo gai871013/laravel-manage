@@ -54,14 +54,16 @@ class Helper
      * 左侧菜单
      * @return array|null
      */
-    public static function leftMenu($guard = '')
+    public static function leftMenu($guard = '', $enable = 1)
     {
         $user = auth($guard)->user();
         if ($user) {
             $navAll = \App\Models\AdminAction::orderBy('list_order', 'asc')
-                ->orderBy('id', 'asc')
-                ->where('enable', 1)
-                ->get()->toArray();
+                ->orderBy('id', 'asc');
+            if ($enable == 1) {
+                $navAll = $navAll->where('enable', 1);
+            }
+            $navAll = $navAll->get()->toArray();
             $navs = [];
             if ($user->action_list != 'all') {
                 $roleActionList = \App\Models\Role::find($user->role_id);

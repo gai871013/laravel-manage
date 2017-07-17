@@ -60,6 +60,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'weChat.oauth' => \Overtrue\LaravelWechat\Middleware\OAuthAuthenticate::class,
         'auth.admin' => \App\Http\Middleware\AdminAuthMiddleware::class,
-        'weChat.bindUser' => \App\Http\Middleware\WeChatBindUserMiddleware::class,
+        'weChat.updateFollower' => \App\Http\Middleware\WeChatUpdateFollowerMiddleware::class,
     ];
 }

@@ -27,9 +27,9 @@ class AdminAuthMiddleware
         $user = Auth::guard('admin')->user();
         if (isset($user->role_id) && $user->role_id > 1) {
             $name = \Route::current()->uri;
-            $action_lists = Helper::leftMenu('admin');
+            $action_lists = Helper::leftMenu('admin','all');
             $permission = Helper::actionUri($action_lists);
-            $base = ['admin/home', 'admin/logout'];
+            $base = ['admin/home', 'admin/logout', 'admin'];
             $permission = array_merge($base, $permission);
             if (!in_array($name, $permission)) {
                 return abort(403);

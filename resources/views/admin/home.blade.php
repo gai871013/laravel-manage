@@ -16,6 +16,18 @@
                 <p>上次登录IP：{{ $user->last_ip or '' }} 上次登录时间：{{ $user->last_login or '' }}</p>
             </div>
             <div class="box-body">
+                <a class="btn btn-app">
+                    <span class="badge bg-yellow">0</span>
+                    <i class="fa fa-bullhorn"></i> Notifications
+                </a>
+                <a class="btn btn-app">
+                    <span class="badge bg-aqua">0</span>
+                    <i class="fa fa-envelope"></i> Inbox
+                </a>
+                <a class="btn btn-app">
+                    <span class="badge bg-purple">0</span>
+                    <i class="fa fa-users"></i> @lang('admin.user')</a>
+
                 <div class="widget-box">
                     <div class="widget-content nopadding">
                         <table class="table table-bordered table-striped with-check">

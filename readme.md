@@ -24,6 +24,12 @@ npm
 ### 2.npm包管理工具
 #### 推荐[链接在此](http://www.runoob.com/nodejs/nodejs-npm.html)
 
+## 下载
+不是composer包,所以不能使用composer require
+需要打包下载所有程序
+```shell
+git clone https://git.oschina.net/gai871013/laravelmanage.git
+```
 
 ## 安装
 #### 1.修改配置文件
