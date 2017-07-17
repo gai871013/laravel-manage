@@ -1,5 +1,6 @@
-## 智能公车管理系统
-智能公车管理系统
+# Laravel Manage System
+
+基于Laravel的后台管理系统
 
 ## 服务器要求
 本系统基于Laravel开发完成，Laravel 框架会有一些系统上的要求。当然，这些要求在 Laravel Homestead 虚拟机上都已经完全配置好了。所以，非常推荐你使用 Homestead 作为你的本地 Laravel 开发环境。
@@ -43,9 +44,9 @@ php artisan migrate
 
 #### 4.数据填充
 ```shell
-php artisan db:seed --class=AdminsTableSeeder
 php artisan db:seed --class=AdminActionTableSeeder
 php artisan db:seed --class=RoleTableSeeder
+php artisan db:seed --class=AdminsTableSeeder
 ```
 
 #### 5.前台资源
@@ -71,3 +72,11 @@ npm run watch
 watch-poll
 hot
 ```
+
+登录
+```
+地址 http://domain/admin
+账号 wang.gaichao@163.com
+密码 admin888
+```
+
