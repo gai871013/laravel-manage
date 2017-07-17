@@ -7,7 +7,7 @@
     <li class="dd-item" data-id="{{ $v['id'] }}">
         <div class="dd-handle">
             <i class="fa fa-{{ $v['icon'] }}"></i>
-            {{ trans('admin.' . $v['lang'] ) }}
+            {{ !empty($v['remark']) ? $v['remark'] : trans('admin.' . $v['lang'] ) }}
             @if(!isset($v['children']))
                 <a class="dd-nodrag" href="{{ $url }}">{{ $url }}</a>
             @endif

@@ -28,7 +28,6 @@ class SystemController extends Controller
     {
         $data = $request->all();
         $validator = \Validator::make($data, [
-            'BASE64_APP_NAME' => 'required|min:1',
             'BASE64_APP_TITLE' => 'required',
             'BASE64_APP_DESCRIPTION' => 'required',
             'BASE64_APP_KEYWORDS' => 'required',

@@ -174,4 +174,5 @@ return [
     'userAssign' => '分配用户',
     'roleDelete' => '删除角色',
     'noAccess' => '禁止访问',
+    'refresh' => '刷新',
 ];

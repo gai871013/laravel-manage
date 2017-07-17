@@ -6,7 +6,7 @@
 @foreach($menu as $v)
     <option data-url="{{ $url.$v['code'] }}" @if($id == $v['id']) selected
             @endif value="{{ $v['id'] }}">@for($i = 0; $i < $deep; $i++)&nbsp;&nbsp;&nbsp;
-        &nbsp;@endfor {{ trans('admin.' . $v['lang']) }}</option>
+        &nbsp;@endfor {{ empty($v['remark']) ? trans('admin.' . $v['lang']) : $v['remark'] }}</option>
     @if(isset($v['children']))
         @php($deep++)
         @include('tree.menu', ['menu' => $v['children'], 'id'=> $id, 'deep' => $deep, 'url' => $url . $v['code'] . '/'])

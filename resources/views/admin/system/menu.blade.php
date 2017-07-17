@@ -27,7 +27,9 @@
                     <button class="btn btn-info btn-sm" type="submit"><i
                                 class="fa fa-save"></i>&nbsp;@lang('admin.save')</button>
                     <a class="btn btn-warning btn-sm" onclick="window.location=window.location.href"><i
-                                class="fa fa-refresh"></i>&nbsp;刷新</a>
+                                class="fa fa-refresh"></i>&nbsp;@lang('admin.refresh')</a>
+                    <a class="btn btn-success btn-sm" href="{{ route('admin.system.menuEdit') }}"><i
+                                class="fa fa-plus"></i>&nbsp;@lang('admin.addMenu')</a>
                     <div class="dd" id="nestable" style="width: 100%; max-width:100%;">
                         <ol class="dd-list">
                             @include('tree.branch',['menu'=>$menu,'path' => config('app.admin_path') ])

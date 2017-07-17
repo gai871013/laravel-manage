@@ -1,4 +1,4 @@
-@php$user = auth('admin')->user();@endphp
+@php($user = auth('admin')->user())
         <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
@@ -19,11 +19,6 @@
     <link type="text/css" href="{{ asset(mix('css/AdminLTE.css')) }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script type="text/javascript">
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
     <script type="text/javascript" src="{{ asset(mix('js/admin.js')) }}"></script>
     <script>
         $.pjax.defaults.timeout = 5000;
@@ -62,9 +57,9 @@
         <!-- Logo -->
         <a href="{!! url('/') !!}" target="_blank" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini">{{ base64_decode(env('BASE64_APP_NAME','')) }}</span>
+            <span class="logo-mini">{{ env('APP_NAME','') }}</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">{{ base64_decode(env('BASE64_APP_NAME','')) }}</span>
+            <span class="logo-lg">{{ env('APP_NAME','') }}</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -124,7 +119,9 @@
     <div class="content-wrapper">
         <section class="col-xs-12">
             @include('flash::message')
-            <style>.alert{margin:20px 0 0;}</style>
+            <style>.alert {
+                    margin: 20px 0 0;
+                }</style>
         </section>
         <div class="clearfix"></div>
         @yield('content')
@@ -144,6 +141,26 @@
 <a href="" id="jump"></a>
 <script type="text/javascript">
     $(function () {
+        $('.content-wrapper').css('min-height', $(window).height() - 101);
+        // select2
+        $(".select2").select2();
+        // 提交验证按钮
+        $('.comfirm').on('click', function () {
+            var errMsg = [];
+            $('.form-filter').each(function (i, s) {
+                if ($(this).val() == '') {
+                    var str = $(this).parents('.form-group').find('.control-label').text();
+                    str = str.trim();
+                    errMsg.push(str);
+                }
+            });
+            if (errMsg.length > 0) {
+                layer.alert('<b>以下选项为必填：</b><br>' + errMsg.join('<br>'));
+                return false;
+            }
+            $(this).attr("disabled", "disabled").parents('form').submit();
+        });
+        // 左侧菜单
         $('.sidebar-menu a').each(function (index) {
             $href = $(this).attr('href');
             _href = (typeof _href == 'undefined') ? '' : window._href;
@@ -153,6 +170,7 @@
                 return false;
             }
         });
+        // 删除链接
         $('.delete').on('click', function () {
             var _this = this;
             $lang = $(_this).attr('data-lang') || '@lang("admin.confirmDelete")？';
@@ -168,13 +186,19 @@
             });
             return false;
         });
+        // 删除按钮(批量删除)
+        $('.deleteBtn').on('click', function () {
+            $lang = $(this).attr('data-lang') || '@lang("admin.confirmDelete")？';
+            if (confirm($lang)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        // 一次通知
         $('#flash-overlay-modal').modal();
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     });
-    (function () {
-        $('.content-wrapper').css('min-height', $(window).height() - 101);
-//        console.log($(window).height() - 101);
-    })();
 </script>
 </body>
 </html>

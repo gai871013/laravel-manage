@@ -50,16 +50,6 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label">@lang('admin.siteName'):
-                                                    <span class="required">*</span>
-                                                </label>
-                                                <div class="col-md-10">
-                                                    <input type="text" class="form-control form-filter"
-                                                           name="BASE64_APP_NAME"
-                                                           value="{{ base64_decode(env('BASE64_APP_NAME','')) }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
                                                 <label class="col-md-2 control-label">@lang('admin.siteTitle'):
                                                     <span class="required">*</span>
                                                 </label>
