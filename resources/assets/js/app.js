@@ -24,6 +24,7 @@
 window.$ = window.jQuery = $ = jQuery = require('jquery');
 window.FastClick = require('fastclick');
 FastClick.attach(document.body);
+window.layer = layer = require('layer');
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.getElementById('crsf-token').getAttribute('content');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

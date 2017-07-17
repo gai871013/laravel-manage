@@ -35,8 +35,7 @@ class WeChatController extends Controller
     public function getIndex(Request $request)
     {
         $follower = $this->getFollower();
-        $return = false;
-        return view('wechat.index', compact('return'));
+        return view('wechat.index', compact('follower'));
     }
 
     /**

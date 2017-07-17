@@ -27,7 +27,10 @@
                 <a class="btn btn-app">
                     <span class="badge bg-purple">0</span>
                     <i class="fa fa-users"></i> @lang('admin.user')</a>
-
+                <a href="{{ route('admin.clearCaches') }}" class="btn btn-app">
+                    <i class="fa fa-trash"></i>
+                    清除缓存
+                </a>
                 <div class="widget-box">
                     <div class="widget-content nopadding">
                         <table class="table table-bordered table-striped with-check">

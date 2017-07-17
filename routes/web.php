@@ -75,6 +75,8 @@ Route::group(
         Route::get('home', $home . 'index')->name('admin.home');
         // 退出登录
         Route::any('logout', $login . 'logout')->name('admin.logout');
+        // 清除缓存
+        Route::get('clearCaches',$home.'getClearCaches')->name('admin.clearCaches');
 
 
         // 新闻管理
