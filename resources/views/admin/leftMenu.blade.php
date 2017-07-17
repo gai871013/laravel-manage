@@ -5,7 +5,7 @@
         <li class="treeview">
             <a href="javascript:;">
                 <i class="fa fa-{{ $v['icon'] }}"></i>
-                <span>{{ trans('admin.'.$v['lang']) }}{{ trans('admin.manage') }}</span>
+                <span>{{ !empty($v['remark']) ? $v['remark'] : trans('admin.'.$v['lang']).trans('admin.manage') }}</span>
                 <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -16,9 +16,9 @@
                         @php
                             $url = $vv['route'] ? route($vv['route']) : url('admin/'.$v['code']).'/'.$vv['code'];
                         @endphp
-                        <li><a href="{{ $url }}" @if(!empty($vv['class']))clsss="{{ $vv['class'] }}"@endif><i
+                        <li><a title="{{ $vv['remark'] }}" href="{{ $url }}" @if(!empty($vv['class']))clsss="{{ $vv['class'] }}"@endif><i
                                         class="fa fa-{{ $vv['icon'] }}"></i>
-                                {{ trans('admin.'.$vv['lang']) }}</a></li>
+                                {{ !empty($vv['remark']) ? $vv['remark'] : trans('admin.'.$vv['lang']) }}</a></li>
                     @endif
                 @endforeach
             </ul>
