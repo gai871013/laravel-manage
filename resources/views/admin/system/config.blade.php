@@ -1,14 +1,5 @@
-@extends('layouts.adminBase')
-@section('title',trans('admin.config'))
-@section('content')
-    @component('layouts.content-header')
-        @slot('title')@lang('admin.system')@lang('admin.manage')@endslot
-        @slot('icon','cog')
-        @slot('nav')@endslot
-        @lang('admin.systemConfig')
-    @endcomponent
-
-    <section class="content">
+@extends('layouts.a')
+@section('section-content')
         <div class="row">
             <div class="col-xs-12">
                 <div class="nav-tabs-custom">
@@ -324,7 +315,5 @@
                 </div>
             </div>
         </div>
-    </section>
-
 @endsection
 @section('scripts')@endsection

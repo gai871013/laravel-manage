@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Follower;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -61,8 +62,8 @@ class UserController extends Controller
      */
     public function getFollowerLists(Request $request)
     {
-        $title = trans('admin.companyList');
-        return view('admin.user.followerLists', compact('title'));
+        $lists = Follower::orderBy('id', 'desc')->paginate(env('PAGE_SIZE'));
+        return view('admin.user.followerLists', compact('lists'));
     }
 
 }

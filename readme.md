@@ -50,6 +50,9 @@ php artisan migrate
 
 #### 4.数据填充
 ```shell
+php artisan db:seed
+
+或者使用单个文件填充
 php artisan db:seed --class=AdminActionTableSeeder
 php artisan db:seed --class=RoleTableSeeder
 php artisan db:seed --class=AdminsTableSeeder
