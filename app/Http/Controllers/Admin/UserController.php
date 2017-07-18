@@ -56,7 +56,7 @@ class UserController extends Controller
 
 
     /**
-     * 微信关注用户
+     * 微信关注用户 2017-7-18 16:48:08 by gai871013
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

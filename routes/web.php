@@ -133,7 +133,7 @@ Route::group(
             // 编辑用户
             Route::get('user/edit', $user . 'getUserEdit')->name('admin.user.edit');
             Route::post('user/editAction', $user . 'postUserEdit')->name('admin.user.editAction');
-            // 用户所在公司
+            // 微信用户管理
             Route::get('follower', $user . 'getFollowerLists')->name('admin.follower');
 
         });

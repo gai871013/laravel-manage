@@ -33,6 +33,7 @@
         });
         $(document).on('pjax:end', function () {
             // Pace.stop();
+            layer.msg('加载完成 😊', {offset: '90%', time: 700});
         });
         $(document).on('pjax:error', function (event, xhr) {
             layer.alert('链接错误');

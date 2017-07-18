@@ -175,4 +175,9 @@ return [
     'roleDelete' => '删除角色',
     'noAccess' => '禁止访问',
     'refresh' => '刷新',
+    'province' => '省份',
+    'city' => '城市',
+    'country' => '国家',
+    'language' => '语言',
+    'avatar' => '头像',
 ];
