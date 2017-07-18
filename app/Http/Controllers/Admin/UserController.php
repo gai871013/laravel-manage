@@ -55,14 +55,14 @@ class UserController extends Controller
 
 
     /**
-     * 公司列表
+     * 微信关注用户
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCompanyList(Request $request)
+    public function getFollowerLists(Request $request)
     {
         $title = trans('admin.companyList');
-        return view('admin.user.companyList', compact('title'));
+        return view('admin.user.followerLists', compact('title'));
     }
 
 }

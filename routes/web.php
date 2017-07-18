@@ -134,7 +134,7 @@ Route::group(
             Route::get('user/edit', $user . 'getUserEdit')->name('admin.user.edit');
             Route::post('user/editAction', $user . 'postUserEdit')->name('admin.user.editAction');
             // 用户所在公司
-            Route::get('companyList', $user . 'getCompanyList')->name('admin.companyList');
+            Route::get('follower', $user . 'getFollowerLists')->name('admin.follower');
 
         });
 

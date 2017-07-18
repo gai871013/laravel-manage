@@ -70,7 +70,9 @@
                             </tr>
                             <tr>
                                 <td>服务器主机名</td>
-                                <td><?php if ('/' == DIRECTORY_SEPARATOR) {
+                                <td>
+                                    {{ implode(' ',$os) }}
+                                    <?php if ('/' == DIRECTORY_SEPARATOR) {
                                         echo $os[1];
                                     } else {
                                         echo $os[2];
@@ -82,7 +84,7 @@
                             </tr>
                             <tr>
                                 <td>管理员邮箱</td>
-                                <td><?php echo @$_SERVER['SERVER_ADMIN']; ?></td>
+                                <td>{{ @$_SERVER['SERVER_ADMIN'] }}</td>
                             </tr>
                             <tr>
                                 <td>程序路径</td>
