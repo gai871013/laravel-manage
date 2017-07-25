@@ -15,3 +15,4 @@ require('@fengyuanchen/datepicker/i18n/datepicker.zh-CN.js');
 require('eonasdan-bootstrap-datetimepicker');
 window.nestable = $.nestable = require('./jquery.nestable');
 // window.iconpicker = $.iconpicker = require('fontawesome-iconpicker');
+window.colorpicker = $.colorpicker = require('bootstrap-colorpicker');

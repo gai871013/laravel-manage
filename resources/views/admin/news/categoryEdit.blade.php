@@ -10,9 +10,13 @@
                     <label class="col-md-2 control-label">@lang('admin.category'):
                         <span class="required">*</span>
                     </label>
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <input type="text" class="form-control form-filter" name="info[catname]"
                                value="{{ $category->catname or old('catname') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" readonly class="form-control my-colorpicker1" name="info[style]"
+                               value="{{ $category->style or old('style') }}">
                     </div>
                 </div>
 
@@ -57,6 +61,7 @@
                     </div>
                 </div>
 
+
                 @include('layouts.button',['item' => $category])
             </form>
         </div>
@@ -64,5 +69,9 @@
 @endsection
 @section('scripts')
     @include('layouts.adminUpload')
-
+    <script>
+        $(function(){
+            $('.my-colorpicker1').colorpicker();
+        });
+    </script>
 @endsection
