@@ -24,7 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->string('thumb')->default('')->comment('栏目缩略图');
             $table->string('style',24)->default('')->comment('栏目标题样式');
             $table->mediumText('description')->nullable()->comment('栏目描述');
-            $table->string('url')->default('')->comment('（外部）链接地址');
+            $table->string('url')->default('')->nullable()->comment('（外部）链接地址');
             $table->integer('hits')->default(0)->comment('点击数量');
             $table->mediumText('setting')->nullable()->comment('设置');
             $table->tinyInteger('sort')->default(0)->comment('排序');

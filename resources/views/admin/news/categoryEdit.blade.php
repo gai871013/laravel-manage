@@ -60,7 +60,40 @@
                         <input type="file" style="display: none;">
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@lang('admin.url')</label>
+                    <div class="col-md-10">
+                        <input type="text" name="info[url]" class="form-control"
+                               value="{{ $category->url or old('url') }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-md-2 control-label">@lang('admin.letter')</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control"
+                               value="{{ $category->letter or old('letter') }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@lang('admin.sort')</label>
+                    <div class="col-md-2">
+                        <input type="text" name="info[sort]" class="form-control"
+                               value="{{ $category->sort or old('sort') }}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">@lang('admin.is_menu')</label>
+                    <div class="col-md-2">
+                        <select name="info[is_menu]" class="form-control">
+                            <option @if(isset($category->is_menu) && $category->is_menu == 0) selected @endif value="0">
+                                否
+                            </option>
+                            <option @if(isset($category->is_menu) && $category->is_menu == 1) selected @endif value="1">
+                                是
+                            </option>
+                        </select>
+                    </div>
+                </div>
 
                 @include('layouts.button',['item' => $category])
             </form>
@@ -70,7 +103,7 @@
 @section('scripts')
     @include('layouts.adminUpload')
     <script>
-        $(function(){
+        $(function () {
             $('.my-colorpicker1').colorpicker();
         });
     </script>

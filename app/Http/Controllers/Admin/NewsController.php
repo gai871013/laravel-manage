@@ -45,6 +45,12 @@ class NewsController extends Controller
         return view('admin.news.categoryEdit', compact('category', 'id', 'categories'));
     }
 
+    public function postCategoryEdit(Request $request)
+    {
+        $data = $request->input('info');
+        return $data;
+    }
+
     /**
      * 编辑新闻
      * @param $id

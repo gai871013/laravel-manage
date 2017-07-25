@@ -87,6 +87,7 @@ Route::group(
             Route::post('categoriesSort', $news . 'postCategoriesSort')->name('admin.news.categories.sort');
             // 编辑分类
             Route::get('categoryEdit', $news . 'getCategoryEdit')->name('admin.news.category.edit');
+            Route::post('categoryEdit', $news . 'postCategoryEdit');
             // 新闻管理
             Route::get('newsList', $news . 'getNewsList')->name('admin.news.newsList');
             // 编辑新闻

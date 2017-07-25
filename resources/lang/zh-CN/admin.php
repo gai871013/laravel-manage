@@ -189,4 +189,6 @@ return [
     'parent' => '父',
     'uploadFile' => '上传文件',
     'uploadPicture' => '上传图片',
+    'is_menu' => '是否显示到导航',
+    'letter' => '栏目拼音',
 ];
