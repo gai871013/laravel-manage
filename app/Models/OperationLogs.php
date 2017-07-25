@@ -15,4 +15,9 @@ class OperationLogs extends Model
         'ip',
         'input'
     ];
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'user_id');
+    }
 }

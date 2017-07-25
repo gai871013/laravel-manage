@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdminAction;
+use App\Models\OperationLogs;
 use Illuminate\Http\Request;
 
 class SystemController extends Controller
@@ -177,5 +178,33 @@ class SystemController extends Controller
         }
         flash()->success(trans('admin.save') . trans('admin.success'));
         return redirect()->route('admin.system.menuManage');
+    }
+
+    /**
+     * 查看后台操作记录 2017-7-25 14:58:22 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getOperationLogs(Request $request)
+    {
+        $lists = OperationLogs::orderBy('id', 'desc')->paginate(env('PAGE_SIZE'));
+        return view('admin.system.operationLogs', compact('lists'));
+    }
+
+    /**
+     * 清除记录 2017-7-25 15:40:20 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getOperationLogsClear(Request $request)
+    {
+        $id = (int)$request->id;
+        if ($id > 0) {
+            OperationLogs::where('id', $id)->delete();
+        } else {
+            OperationLogs::truncate();
+        }
+        flash()->success('清除成功');
+        return redirect()->back();
     }
 }

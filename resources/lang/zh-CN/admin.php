@@ -180,4 +180,9 @@ return [
     'country' => '国家',
     'language' => '语言',
     'avatar' => '头像',
+    'user_id' => 'uid',
+    'path' => '路径',
+    'method' => '方法',
+    'params' => '参数',
+    'ip' => 'IP',
 ];

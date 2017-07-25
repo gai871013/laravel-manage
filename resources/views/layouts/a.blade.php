@@ -5,7 +5,9 @@
     $tit_parent = trans('admin.' . $uri_arr[1]);
     $str = 'admin.' . $lang;
     $tit = trans($str);
-    $title = isset($title) ? $title : ($tit == $str ? base64_decode(env('BASE64_APP_TITLE')) : $tit);
+    $action = \App\Models\AdminAction::where('lang',$lang)->first();
+    $t = !empty($action) && !empty($action->remark) ? $action->remark : base64_decode(env('BASE64_APP_TITLE')) ;
+    $title = isset($title) ? $title : ($tit == $str ? $t : $tit);
     $icon = \App\Models\AdminAction::where('lang',$lang)->first();
 @endphp
 @extends('layouts.adminBase')

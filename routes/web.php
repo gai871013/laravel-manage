@@ -107,6 +107,10 @@ Route::group(
             Route::post('menuEdit', $system . 'postMenuEdit');
             // 删除菜单
             Route::get('menuDelete', $system . 'getMenuDelete')->name('admin.system.menuDelete');
+            // 操作记录
+            Route::get('operationLogs', $system . 'getOperationLogs')->name('admin.system.operationLogs');
+            // 清除记录
+            Route::get('operationLogsClear', $system . 'getOperationLogsClear')->name('admin.system.operationLogsClear');
         });
 
         // 权限相关
