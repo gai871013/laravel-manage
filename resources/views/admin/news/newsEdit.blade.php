@@ -19,8 +19,8 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                        <select name="info[cat_id]" id="cat_id">
-
+                        <select name="info[cat_id]" id="cat_id" class="form-control select2">
+                            @include('tree.categoriesSelect',['categories'=>$categories ,'id'=>$id])
                         </select>
                     </div>
                 </div>
@@ -106,21 +106,7 @@
                         <input type="text" class="form-control" name="BASE64_APP_NAME" value="">
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-10 col-md-offset-2">
-
-                        <div class="actions btn-set">
-                            <a type="button" name="back" onclick="window.history.go(-1)"
-                               class="btn btn-default"><i
-                                        class="fa fa-angle-left"></i> 返回</a>
-                            <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> 重置
-                            </button>
-                            <button class="btn btn-success ajax-post no-refresh comfirm" type="submit">
-                                <i class="fa fa-check"></i> 保存
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                @include('layouts.button', ['item' => $news])
 
             </form>
         </div>

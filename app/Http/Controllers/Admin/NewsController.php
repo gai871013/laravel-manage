@@ -14,10 +14,10 @@ class NewsController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCategoryManage(Request $request)
+    public function getCategories(Request $request)
     {
-        $title = trans('admin.categoryManage');
-        return view('admin.news.category', compact('title'));
+        $categories = Categories::orderBy('sort', 'asc')->orderBy('id', 'desc')->get();
+        return view('admin.news.category', compact('categories'));
     }
 
     /**
@@ -33,6 +33,19 @@ class NewsController extends Controller
     }
 
     /**
+     * 编辑栏目 2017-7-25 17:19:28 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getCategoryEdit(Request $request)
+    {
+        $id = (int)$request->input('id');
+        $category = Categories::where('id', $id)->first();
+        $categories = Categories::where('id', '!=', $id)->orderBy('sort', 'asc')->orderBy('id', 'desc')->get();
+        return view('admin.news.categoryEdit', compact('category', 'id', 'categories'));
+    }
+
+    /**
      * 编辑新闻
      * @param $id
      * @param Request $request
@@ -42,19 +55,8 @@ class NewsController extends Controller
     {
         $id = (int)$request->input('id');
         $news = News::where('id', $id)->first();
-        $categories = Categories::orderBy('list_order', 'asc')->get();
-        return view('admin.news.newsEdit', compact('news', 'categories'));
-    }
-
-    /**
-     * 添加新闻
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getAddNews(Request $request)
-    {
-        $title = trans('admin.addNews');
-        return view('admin.news.addNews', compact('title'));
+        $categories = Categories::orderBy('sort', 'asc')->get();
+        return view('admin.news.newsEdit', compact('news', 'categories', 'id'));
     }
 
     /**
@@ -68,8 +70,14 @@ class NewsController extends Controller
         return view('admin.news.addSinglePage', compact('title'));
     }
 
-    public function getDeleteNews($id, Request $request)
+    /**
+     * 删除文章 2017-7-25 17:07:34 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getNewsDelete(Request $request)
     {
+        $id = (int)$request->input('id');
         $res = News::where('id', '=', $id)->delete();
         $title = trans('admin.delete');
         if ($res) {
@@ -77,8 +85,7 @@ class NewsController extends Controller
         } else {
             $title .= trans('admin.fail');
         }
-        $next = route('admin.news.newsList');
-        $sec = 1;
-        return view('info', compact('title', 'next', 'sec'));
+        flash($title)->success();
+        return redirect()->back();
     }
 }

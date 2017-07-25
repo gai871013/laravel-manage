@@ -185,4 +185,8 @@ return [
     'method' => '方法',
     'params' => '参数',
     'ip' => 'IP',
+    'add' => '添加',
+    'parent' => '父',
+    'uploadFile' => '上传文件',
+    'uploadPicture' => '上传图片',
 ];
