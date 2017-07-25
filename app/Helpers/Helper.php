@@ -52,6 +52,8 @@ class Helper
 
     /**
      * 左侧菜单
+     * @param string $guard
+     * @param int $enable
      * @return array|null
      */
     public static function leftMenu($guard = '', $enable = 1)
@@ -106,6 +108,13 @@ class Helper
         return $navAll;
     }
 
+    /**
+     * 获取登录用户权限内的uri
+     * @param $action
+     * @param int $parent_id
+     * @param string $url
+     * @return array
+     */
     public static function actionUri($action, $parent_id = 0, $url = 'admin')
     {
         $tmp = [];
@@ -134,7 +143,6 @@ class Helper
 
     /**
      * 十进制数转换成62进制
-     *
      * @param integer $num
      * @return string
      */
@@ -170,7 +178,9 @@ class Helper
 
     /**
      * 替换bcmath
-     **/
+     * @param $n
+     * @return string
+     */
     public static function cry62($n)
     {
         $base = 62;
@@ -182,101 +192,6 @@ class Helper
         }
         return $ret;
     }
-
-
-    /**
-     * 上传文件
-     * @param Request $request
-     * @param int $user_id
-     * @param string $user_name
-     * @param int $size
-     * @return array
-     */
-    public static function uploadFile(Request $request, $user_id = 0, $user_name = '', $size = 10)
-    {
-        $fileUtil = new FileUtil();
-//        logger($request->files);
-        $dir = 'upload/' . date('Y') . '/' . date('md') . '/';
-        $fileUtil->createDir($dir);
-
-        $files = $request->file('file');
-        $file_arr = [];
-
-        if (is_array($files)) {
-            foreach ($files as $k => $file) {
-                if ($k > ($size - 1)) {
-                    break;
-                }
-                if ($file->isValid()) {
-                    $upload = self::upload($request, $file, $dir, $user_id);
-                    $file_arr[] = json_decode($upload, true);
-                }
-            }
-        } else {
-            if ($files->isValid()) {
-                $upload = self::upload($request, $files, $dir, $user_id);
-                $file_arr[] = json_decode($upload, true);
-            }
-        }
-
-        return $file_arr;
-
-
-    }
-
-    /**
-     * 上传图片 2016-12-05 14:23:02 by gai871013
-     * @param Request $request
-     * @param $file
-     * @param $dir
-     * @param int $user_id
-     * @param int $admin_id
-     * @return Uploads
-     */
-    public static function upload(Request $request, $file, $dir, $user_id = 0, $admin_id = 0)
-    {
-        $extension = $file->guessClientExtension() ? $file->guessClientExtension() : '';
-        if ($extension == '') {
-            $extension = $file->getClientOriginalExtension();
-        }
-        if (empty($extension)) {
-            $extension = $file->getClientOriginalName();
-            $extension = explode('.', $extension);
-            $extension = end($extension);
-        }
-//                    $extension = strtolower($file->guessClientExtension());
-        $extension = strtolower($extension);
-        $rdm = str_random(16);
-        $fileName = $dir . date('His') . '_' . $rdm . '.' . $extension;
-
-        $thumb = $dir . date('His') . '_thumb_' . $rdm . '.' . $extension;
-        $file->move($dir, $fileName);
-        // 保存缩略图
-        $img = Image::make($fileName);
-        $width = $img->width() * .35;
-        $height = $img->height() * .35;
-        $img->resize($width, $height);
-        $img->save($thumb);
-        // end
-        $url = url($fileName);
-        $upload = new Uploads();
-        $upload->user_id = $user_id;
-        $upload->admin_id = $admin_id;
-        $upload->url = $url;
-        $upload->path = $dir;
-        $upload->type = $extension;
-        $upload->original_name = $file->getClientOriginalName();
-        $upload->size = $file->getClientSize();
-        $upload->mime = $file->getClientMimeType();
-        $upload->thumb = url($thumb);
-        $upload->cip = $request->ip();
-        $upload->created_at = date('Y-m-d H:i:s');
-        $upload->updated_at = date('Y-m-d H:i:s');
-        $upload->save();
-        return $upload;
-
-    }
-
 
     /*
      * 检测手机验证码有效性
@@ -352,7 +267,7 @@ class Helper
     /*
      * @param string $message 消息内容
      * @param string $status_code 代码
-     * @return json {}
+     * @return array
      *
      */
     public static function returnArr($message = '', $status_code = 200)
