@@ -15,19 +15,19 @@ class AdminAuthMiddleware
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard('admin')->guest()) {
+        if (Auth::guard($guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest(route('admin.login'));
             }
         }
-        $user = Auth::guard('admin')->user();
+        $user = Auth::guard($guard)->user();
         if (isset($user->role_id) && $user->role_id > 1) {
             $name = \Route::current()->uri;
-            $action_lists = Helper::leftMenu('admin','all');
+            $action_lists = Helper::leftMenu('admin', 'all');
             $permission = Helper::actionUri($action_lists);
             $base = ['admin/home', 'admin/logout', 'admin'];
             $permission = array_merge($base, $permission);
