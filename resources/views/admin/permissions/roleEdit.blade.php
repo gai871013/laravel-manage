@@ -25,7 +25,7 @@
                     @if($v->parent_id == 0)
                         <div class="portlet-body">
                             <div class="form-group">
-                                <label class="col-md-2 control-label">{{Lang::get('admin.'.$v->code)}}
+                                <label class="col-md-2 control-label">{{ !empty($v->remark) ? $v->remark : Lang::get('admin.'.$v->code )}}
                                     ：</label>
                                 <div class="col-md-10">
                                     @foreach($admin_action as $action)
@@ -35,7 +35,7 @@
                                                        @if(in_array( $action->id , $action_list )) checked @endif
                                                        id="action{{$action->id}}" value="{{$action->id}}"/>
                                                 <label for="action{{$action->id}}"> <i
-                                                            class="fa fa-{{ $action->icon }}"></i> {{Lang::get('admin.'.$action->code)}}
+                                                            class="fa fa-{{ $action->icon }}"></i> {{ !empty($action->remark) ? $action->remark : Lang::get('admin.'.$action->code) }}
                                                 </label>
                                             </div>
                                         @endif

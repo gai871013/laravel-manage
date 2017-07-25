@@ -9,5 +9,6 @@
 return [
     'global' => [
         'username' => 'username',
-    ]
+    ],
+    'operation_log' => true,
 ];

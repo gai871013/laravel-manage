@@ -68,7 +68,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () use ($lo
 
 // 后台用户管理
 Route::group(
-    ['prefix' => config('app.admin_path'), 'namespace' => 'Admin', 'middleware' => 'auth.admin:admin'],
+    ['prefix' => config('app.admin_path'), 'namespace' => 'Admin', 'middleware' => ['auth.admin:admin', 'admin.log']],
     function () use ($home, $login, $system, $permissions, $user, $news, $upload, $car, $journeyTask) {
         // 后台首页
         Route::get('/', $home . 'index');
@@ -76,7 +76,7 @@ Route::group(
         // 退出登录
         Route::any('logout', $login . 'logout')->name('admin.logout');
         // 清除缓存
-        Route::get('clearCaches',$home.'getClearCaches')->name('admin.clearCaches');
+        Route::get('clearCaches', $home . 'getClearCaches')->name('admin.clearCaches');
 
 
         // 新闻管理

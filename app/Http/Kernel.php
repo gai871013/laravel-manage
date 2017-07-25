@@ -61,5 +61,7 @@ class Kernel extends HttpKernel
         'weChat.oauth' => \Overtrue\LaravelWechat\Middleware\OAuthAuthenticate::class,
         'auth.admin' => \App\Http\Middleware\AdminAuthMiddleware::class,
         'weChat.updateFollower' => \App\Http\Middleware\WeChatUpdateFollowerMiddleware::class,
+        'admin.log'         => \App\Http\Middleware\OperationLog::class,
+
     ];
 }
