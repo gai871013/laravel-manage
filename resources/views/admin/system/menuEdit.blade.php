@@ -10,7 +10,7 @@
                     <div class="col-md-10">
                         <select name="info[parent_id]" class="form-control parent_id">
                             <option value="0">@lang('admin.level1menu')</option>
-                            @include('tree.menu',['menu' => $menuAll ,'id' => (isset($menu->parent_id ) ? $menu->parent_id : 0),'deep' => 1])
+                            @include('tree.menuSelect',['menu' => $menuAll ,'id' => (isset($menu->parent_id ) ? $menu->parent_id : 0),'deep' => 1])
                         </select>
                     </div>
                 </div>

@@ -22,7 +22,7 @@
         <div class="box-body">
                 <div class="dd" id="nestable" style="width: 100%; max-width:100%;">
                     <ol class="dd-list">
-                        @include('tree.branch',['menu'=>$menu,'path' => config('app.admin_path') ])
+                        @include('tree.menu',['menu'=>$menu,'path' => config('app.admin_path') ])
                     </ol>
                 </div>
                 <textarea name="menu" style="display: none;" id="nestable-output"></textarea>

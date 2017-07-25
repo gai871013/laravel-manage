@@ -85,12 +85,10 @@ Route::group(
             Route::get('category', $news . 'getCategoryManage')->name('admin.news.category');
             // 新闻管理
             Route::get('newsList', $news . 'getNewsList')->name('admin.news.newsList');
-            // 添加新闻
-            Route::get('addNews/', $news . 'getAddNews')->name('admin.news.addNews');
             // 编辑新闻
-            Route::get('editNews/{id?}', $news . 'getEditNews')->name('admin.news.editNews');
+            Route::get('newsEdit', $news . 'getNewsEdit')->name('admin.news.newEdit');
             // 删除新闻
-            Route::get('deleteNews/{id}', $news . 'getDeleteNews')->name('admin.news.deleteNews');
+            Route::get('newsDelete', $news . 'getNewsDelete')->name('admin.news.newsDelete');
             // 添加新闻单页
             Route::get('addSinglePage', $news . 'getAddSinglePage')->name('admin.news.addSinglePage');
         });

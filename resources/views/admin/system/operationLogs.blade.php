@@ -6,7 +6,7 @@
                         class="fa fa-trash"></i>清除记录</a>
         </div>
         <div class="box-body">
-            <table class="table">
+            <table class="table table-hover table-bordered">
                 <tr>
                     <th>@lang('admin.id')</th>
                     <th>@lang('admin.username')</th>

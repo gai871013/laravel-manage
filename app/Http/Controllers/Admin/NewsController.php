@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -37,11 +38,12 @@ class NewsController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getEditNews($id, Request $request)
+    public function getNewsEdit(Request $request)
     {
-        $title = trans('admin.editNews');
+        $id = (int)$request->input('id');
         $news = News::where('id', $id)->first();
-        return view('admin.news.addNews', compact('title', 'news'));
+        $categories = Categories::orderBy('list_order', 'asc')->get();
+        return view('admin.news.newsEdit', compact('news', 'categories'));
     }
 
     /**
