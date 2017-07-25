@@ -105,7 +105,14 @@ class HomeController extends Controller
             if ($v == '.' || $v == '..' || $v == '.gitignore') {
                 continue;
             }
-            if (is_dir($dir . '/' . $v)) {
+            if (is_dir($dir . $v)) {
+                $handle = scandir($dir);
+                foreach ($handle as $item) {
+                    if ($item == '.' || $item == '..') {
+                        continue;
+                    }
+                    $this->delete($dir . '/' . $item);
+                }
                 rmdir($dir . '/' . $v);
             } else {
                 @unlink($dir . '/' . $v);
