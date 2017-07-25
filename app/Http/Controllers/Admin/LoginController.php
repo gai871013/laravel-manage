@@ -38,18 +38,23 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin', ['except' => 'logout']);
+        $this->middleware('guest:admin')->except(['logout','showLoginForm']);
         $this->username = config('admin.global.username');
     }
 
     /**
      * 重写登录视图页面
-     * @author 晚黎
-     * @date   2016-09-05T23:06:16+0800
+     * @author gai871013
+     * @date   2017-07-25T23:06:16+0800
      * @return [type]                   [description]
      */
     public function showLoginForm()
     {
+        $auth = $this->guard()->check();
+        if ($auth) {
+            flash()->error('您已经登陆，如需重新登陆请先退出')->important();
+            return redirect()->route('admin.home');
+        }
         return view('admin.login.index');
     }
 
