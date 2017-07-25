@@ -82,7 +82,7 @@ Route::group(
         // 新闻管理
         Route::group(['prefix' => 'news'], function () use ($news) {
             // 分类管理
-            Route::get('categoryManage', $news . 'getCategoryManage')->name('admin.news.category');
+            Route::get('category', $news . 'getCategoryManage')->name('admin.news.category');
             // 新闻管理
             Route::get('newsList', $news . 'getNewsList')->name('admin.news.newsList');
             // 添加新闻
