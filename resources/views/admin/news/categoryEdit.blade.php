@@ -46,7 +46,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                        <img class="img-view" src="{{ asset('storage') }}/{{ $category->thumb or old('thumb') }}"
+                        <img class="img-view" onerror="javascript:this.src='{{ asset('img/nopic.jpg') }}'" src="{{ asset('storage') }}/{{ $category->thumb or old('thumb') }}"
                              style="max-height: 200px;">
                         <div class="input-group">
                             <input type="text" name="info[icon]" value="{{ $category->thumb or old('thumb') }}"
