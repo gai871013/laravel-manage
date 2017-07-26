@@ -40,10 +40,11 @@ class NewsController extends Controller
     public function getCategoryEdit(Request $request)
     {
         $id = (int)$request->input('id');
-        $son = $this->categorySon($id);
-        $parents = $this->categoryParent($id);
-        dump($son);
-        dump($parents);
+//        $son = $this->categorySon($id);
+        $parent_id = 6;
+//        $parents = $this->updateCategoryParent($parent_id);
+//        dump($parents);
+//        dump($son);
         $category = Categories::where('id', $id)->first();
         $categories = Categories::where('id', '!=', $id)->orderBy('sort', 'asc')->orderBy('id', 'desc')->get();
         return view('admin.news.categoryEdit', compact('category', 'id', 'categories'));
@@ -57,15 +58,33 @@ class NewsController extends Controller
     public function postCategoryEdit(Request $request)
     {
         $data = $request->input('info');
-        $id = $data['id'];
+        $id = (int)$data['id'];
+        $parent_id = (int)$data['parent_id'];
         unset($data['id']);
-        $data['arr_parent_id'] = implode(',', $this->categoryParent($id));
-        $data['child_id'] = implode(',', $this->categorySon($id));
+        // 编辑分类
         if ($id > 0) {
+            $old = Categories::where('id', $id)->first();
+            $son = isset($old->child_id) ? explode(',', $old->child_id) : [];
+            if ($id == $parent_id || in_array($parent_id, $son)) {
+                flash()->error(__('admin.edit') . __('admin.fail') . '!父ID不能是自己或者是自己子分类');
+                return redirect()->back()->withInput($data);
+            }
             Categories::where('id', $id)->update($data);
+            // 更新就栏目父级栏目关系
+            $this->updateCategoryParent($old->parent_id);
         } else {
-            Categories::create($data);
+            $parent = $this->categoryParent($parent_id);
+            $parent = array_unique(array_merge($parent, [$parent_id]));
+            sort($parent);
+            $data['arr_parent_id'] = implode(',', $parent);
+            // 添加记录到数据库
+            $category = Categories::create($data);
+            // 更新子分类
+            Categories::where('id', $category->id)->update(['child_id' => $category->id]);
         }
+        // 更新父级分类
+        $this->updateCategoryParent($parent_id);
+        // 通知成功
         flash()->success(__('admin.save') . __('admin.success'));
         return redirect()->route('admin.news.categories');
     }
@@ -80,14 +99,47 @@ class NewsController extends Controller
     {
         $category = Categories::where('id', $cat_id)->first();
         $arr_parent_id = [];
-        $parent = [];
         if (!empty($category)) {
-            $arr_parent_id[] = $category->parent_id;
-            $parent = $this->categoryParent($category->parent_id);
+            $arr_parent_id[] = $parent_id = $category->parent_id;
+            if ($parent_id > 0) {
+                $parent = $this->categoryParent($parent_id);
+                $arr_parent_id = array_merge($arr_parent_id, $parent);
+            }
         }
-        return array_merge($arr_parent_id, $parent);
+        sort($arr_parent_id);
+        return $arr_parent_id;
     }
 
+    /**
+     * 更新栏目
+     * @param $cat_id
+     */
+    public function updateCategoryParent($cat_id)
+    {
+        $category = Categories::where('id', $cat_id)->lockForUpdate()->first();
+        if (!empty($category)) {
+            $son = $this->categorySon($cat_id);
+            $parent = $this->categoryParent($cat_id);
+            $sonStr = implode(',', $son);
+            $parentStr = implode(',', $parent);
+            $category->child_id = $sonStr;
+            $category->arr_parent_id = $parentStr;
+            if (count($son) == 1) {
+                $category->child = 0;
+            } else {
+                $category->child = 1;
+            }
+            $category->save();
+            $this->updateCategoryParent($category->parent_id);
+//            $category->child
+        }
+    }
+
+    /**
+     * 获取该分类下所有分类
+     * @param $cat_id
+     * @return array
+     */
     public function categorySon($cat_id)
     {
         $child_id = [$cat_id];
@@ -100,6 +152,7 @@ class NewsController extends Controller
             }
         }
         $child_id = array_unique($child_id);
+//        Categories::where('id', $cat_id)->update(['child_id' => implode(',', $child_id)]);
         return $child_id;
     }
 
