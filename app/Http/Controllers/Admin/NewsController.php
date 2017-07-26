@@ -61,6 +61,7 @@ class NewsController extends Controller
         $id = (int)$data['id'];
         $parent_id = (int)$data['parent_id'];
         unset($data['id']);
+        // todo 判断分类下是否有文章
         // 编辑分类
         if ($id > 0) {
             $old = Categories::where('id', $id)->first();
@@ -72,7 +73,7 @@ class NewsController extends Controller
             Categories::where('id', $id)->update($data);
             // 更新就栏目父级栏目关系
             $this->updateCategoryParent($old->parent_id);
-        } else {
+        } else { // 添加分类
             $parent = $this->categoryParent($parent_id);
             $parent = array_unique(array_merge($parent, [$parent_id]));
             sort($parent);
@@ -154,6 +155,32 @@ class NewsController extends Controller
         $child_id = array_unique($child_id);
 //        Categories::where('id', $cat_id)->update(['child_id' => implode(',', $child_id)]);
         return $child_id;
+    }
+
+    /**
+     * 排序
+     * @param Request $request
+     * @return array|string
+     */
+    public function postCategoriesSort(Request $request)
+    {
+        $data = $request->input('info');
+        foreach ($data['id'] as $k => $v) {
+            Categories::where('id', $v)->update(['sort' => $data['sort'][$k]]);
+        }
+        flash()->success(__('admin.save') . __('admin.success'));
+        return redirect()->back();
+    }
+
+    /**
+     * 删除分类
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getCategoryDelete(Request $request)
+    {
+        flash(__('admin.delete') . __('admin.success'))->success();
+        return redirect()->back();
     }
 
     /**

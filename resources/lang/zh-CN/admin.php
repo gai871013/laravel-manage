@@ -191,4 +191,6 @@ return [
     'uploadPicture' => '上传图片',
     'is_menu' => '是否显示到导航',
     'letter' => '栏目拼音',
+    'module' => '模型',
+    'domain' => '域名',
 ];

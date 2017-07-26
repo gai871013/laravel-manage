@@ -38,6 +38,9 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     Route::post('sendSms', 'CommonController@sendSms')->name('sendSms');
     // 根据关键词获取搜索建议
     Route::any('placeSuggestion', 'CommonController@getPlaceSuggestion')->name('placeSuggestion');
+    // 分类页面
+    Route::get('cate/{id}', $news . 'getCategory')->name('category');
+
 });
 
 // 微信端访问控制器
