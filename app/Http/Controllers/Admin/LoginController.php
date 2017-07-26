@@ -38,7 +38,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except(['logout','showLoginForm']);
+        $this->middleware('guest:admin')->except(['logout', 'showLoginForm']);
         $this->username = config('admin.global.username');
     }
 

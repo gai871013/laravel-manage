@@ -14,5 +14,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categories extends Model
 {
-
+    protected $table = 'categories';
+    protected $fillable = [
+        'module',
+        'type',
+        'parent_id',
+        'arr_parent_id',
+        'child',
+        'child_id',
+        'catname',
+        'thumb',
+        'style',
+        'description',
+        'url',
+        'hits',
+        'setting',
+        'sort',
+        'is_menu',
+        'letter',
+    ];
 }

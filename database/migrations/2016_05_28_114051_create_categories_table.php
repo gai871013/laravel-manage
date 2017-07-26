@@ -21,8 +21,8 @@ class CreateCategoriesTable extends Migration
             $table->boolean('child')->default(0)->comment('是否有子栏目');
             $table->mediumText('child_id')->nullable()->comment('所有子栏目ID');
             $table->string('catname',50)->default('')->comment('栏目名称');
-            $table->string('thumb')->default('')->comment('栏目缩略图');
-            $table->string('style',24)->default('')->comment('栏目标题样式');
+            $table->string('thumb')->default('')->nullable()->comment('栏目缩略图');
+            $table->string('style',24)->default('')->nullable()->comment('栏目标题样式');
             $table->mediumText('description')->nullable()->comment('栏目描述');
             $table->string('url')->default('')->nullable()->comment('（外部）链接地址');
             $table->integer('hits')->default(0)->comment('点击数量');

@@ -49,7 +49,7 @@
                         <img class="img-view" onerror="javascript:this.src='{{ asset('img/nopic.jpg') }}'" src="{{ asset('storage') }}/{{ $category->thumb or old('thumb') }}"
                              style="max-height: 200px;">
                         <div class="input-group">
-                            <input type="text" name="info[icon]" value="{{ $category->thumb or old('thumb') }}"
+                            <input type="text" name="info[thumb]" value="{{ $category->thumb or old('thumb') }}"
                                    class="filePath form-control" readonly>
                             <span class="input-group-btn">
                                 <button onclick="daoru()" type="button"
@@ -78,7 +78,7 @@
                     <label class="col-md-2 control-label">@lang('admin.sort')</label>
                     <div class="col-md-2">
                         <input type="text" name="info[sort]" class="form-control"
-                               value="{{ $category->sort or old('sort') }}">
+                               value="{{ $category->sort or 50 }}">
                     </div>
                 </div>
                 <div class="form-group">

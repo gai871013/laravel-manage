@@ -40,15 +40,67 @@ class NewsController extends Controller
     public function getCategoryEdit(Request $request)
     {
         $id = (int)$request->input('id');
+        $son = $this->categorySon($id);
+        $parents = $this->categoryParent($id);
+        dump($son);
+        dump($parents);
         $category = Categories::where('id', $id)->first();
         $categories = Categories::where('id', '!=', $id)->orderBy('sort', 'asc')->orderBy('id', 'desc')->get();
         return view('admin.news.categoryEdit', compact('category', 'id', 'categories'));
     }
 
+    /**
+     * 保存栏目 2017-7-26 10:49:32 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postCategoryEdit(Request $request)
     {
         $data = $request->input('info');
-        return $data;
+        $id = $data['id'];
+        unset($data['id']);
+        $data['arr_parent_id'] = implode(',', $this->categoryParent($id));
+        $data['child_id'] = implode(',', $this->categorySon($id));
+        if ($id > 0) {
+            Categories::where('id', $id)->update($data);
+        } else {
+            Categories::create($data);
+        }
+        flash()->success(__('admin.save') . __('admin.success'));
+        return redirect()->route('admin.news.categories');
+    }
+
+
+    /**
+     * 获取父级分类 2017-7-26 11:05:15 by gai871013
+     * @param $cat_id
+     * @return array
+     */
+    public function categoryParent($cat_id)
+    {
+        $category = Categories::where('id', $cat_id)->first();
+        $arr_parent_id = [];
+        $parent = [];
+        if (!empty($category)) {
+            $arr_parent_id[] = $category->parent_id;
+            $parent = $this->categoryParent($category->parent_id);
+        }
+        return array_merge($arr_parent_id, $parent);
+    }
+
+    public function categorySon($cat_id)
+    {
+        $child_id = [$cat_id];
+        $category = Categories::where('parent_id', $cat_id)->get();
+        if (!empty($category)) {
+            foreach ($category as $v) {
+                $child_id[] = $v->id;
+                $children = $this->categorySon($v->id);
+                $child_id = array_merge($child_id, $children);
+            }
+        }
+        $child_id = array_unique($child_id);
+        return $child_id;
     }
 
     /**
