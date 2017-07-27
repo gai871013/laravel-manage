@@ -18,4 +18,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .less('resources/assets/less/AdminLTE.less', 'public/css')
     .copy('resources/assets/js/jquery.nestable.js', 'public/js')
     .copy('resources/assets/js/fontawesome-iconpicker.js', 'public/js')
+    .copy('node_modules/bootstrap/dist/css/bootstrap.css', 'public/css')
+    .copy('resources/assets/css/style.css', 'public/css')
     .version();

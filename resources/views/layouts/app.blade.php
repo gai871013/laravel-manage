@@ -8,56 +8,77 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>@yield('title') - {{ config('app.name', 'LaravelManageSystem') }}</title>
 	<!-- Styles -->
-	<link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{{--	<link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">--}}
+	<script src="{{ asset(mix('js/app.js')) }}"></script>
+	<script>
+        $.pjax.defaults.timeout = 5000;
+        $(document).pjax('a:not(a[target="_blank"],.no_pjax)', {
+            container: 'body'
+        });
+        $(document).on('pjax:start', function () {
+            layer.load(1, {shade: [0.1, '#000']});
+            Pace.start();
+        });
+        $(document).on('pjax:end', function () {
+            // Pace.stop();
+            layer.closeAll();
+//            layer.msg('加载完成', {offset: '90%', time: 700});
+        });
+        $(document).on('pjax:error', function (event, xhr) {
+            layer.alert('链接错误');
+        });
+        $(document).on("pjax:timeout", function (event) {
+            // 阻止超时导致链接跳转事件发生
+            event.preventDefault()
+        });
+
+	</script>
+	@yield('head')
 </head>
 <body>
 <header class="header">
-	<nav class="navbar navbar-default shadow" id="navbar" style="position: fixed; top: 0px;">
+	<nav class="navbar navbar-default" id="navbar">
 		<div class="container">
-			<div class="header-topbar hidden-xs link-border" style="display: none;">
+			<div class="header-topbar hidden-xs link-border">
 				<ul class="site-nav topmenu">
 
-					<li><a href="http://www.ice-breaker.cn/links" rel="nofollow" draggable="false">友情链接</a></li>
+					<li><a href="/links" rel="nofollow">友情链接</a></li>
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button"
-					                        aria-haspopup="true" aria-expanded="false" rel="nofollow" draggable="false">关注本站
-							<span class="caret"></span></a>
+					                        aria-haspopup="true" aria-expanded="false" rel="nofollow">关注本站 <span
+									class="caret"></span></a>
 						<ul class="dropdown-menu header-topbar-dropdown-menu">
-							<li><a data-toggle="modal" data-target="#WeChat" rel="nofollow" draggable="false"><i
-											class="fa fa-weixin"></i> 微信</a></li>
-							<li><a href="http://weibo.com/5742755940" target="_blank" rel="nofollow"
-							       draggable="false"><i class="fa fa-weibo"></i> 微博</a></li>
-							<li><a data-toggle="modal" data-target="#qq" rel="nofollow" draggable="false"><i
-											class="fa fa-qq"></i>交流群</a></li>
+							<li><a data-toggle="modal" data-target="#WeChat" rel="nofollow"><i class="fa fa-weixin"></i>
+									微信</a></li>
+							<li><a href="http://weibo.com/5742755940" target="_blank" rel="nofollow"><i
+											class="fa fa-weibo"></i> 微博</a></li>
+							<li><a data-toggle="modal" data-target="#qq" rel="nofollow"><i class="fa fa-qq"></i>交流群</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 
-				<a data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow"
-				   draggable="false">Hi,请登录</a>&nbsp;&nbsp;
-				<a data-toggle="modal" data-target="#regModal" class="register" rel="nofollow"
-				   draggable="false">我要注册</a>
+				<a data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;
+				<a data-toggle="modal" data-target="#regModal" class="register" rel="nofollow">我要注册</a>
 			</div>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
 				        data-target="#header-navbar" aria-expanded="false"><span class="sr-only"></span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<h1 class="logo hvr-bounce-in"><a href="" title="" draggable="false"><img
-								src="http://www.ice-breaker.cn/public/Home/images/logo.png" alt=""
-								draggable="false"></a></h1>
+				<h1 class="logo hvr-bounce-in"><a href="" title="">{{ config('app.name') }}</a></h1>
 			</div>
 			<div class="collapse navbar-collapse" id="header-navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden-index active"><a data-cont="破冰者首页" href="http://www.ice-breaker.cn"
-					                                   draggable="false">破冰者首页</a></li>
-					<li><a href="http://www.ice-breaker.cn/cate/1" draggable="false">前端技术</a></li>
-					<li><a href="http://www.ice-breaker.cn/cate/2" draggable="false">后端程序</a></li>
-					<li><a href="http://www.ice-breaker.cn/cate/3" draggable="false">linux运维</a></li>
-					<li><a href="http://www.ice-breaker.cn/cate/4" draggable="false">网络安全</a></li>
-					<li><a href="http://www.ice-breaker.cn/cate/5" draggable="false">程序人生</a></li>
-					<li><a href="http://www.ice-breaker.cn/message" draggable="false">留言</a></li>
+					<li class="hidden-index active"><a data-cont="{{ config('app.name') }}"
+					                                   href="{{ route('index') }}">@lang('index.index')</a></li>
+					<li><a href="/cate/1.html">前端技术</a></li>
+					<li><a href="/cate/2.html">后端程序</a></li>
+					<li><a href="/cate/3.html">linux运维</a></li>
+					<li><a href="/cate/4.html">网络安全</a></li>
+					<li><a href="/cate/5.html">程序人生</a></li>
 				</ul>
-
 			</div>
 		</div>
 	</nav>
@@ -76,6 +97,43 @@
 	<div id="gotop" style="display: block;"><a class="gotop" draggable="false"></a></div>
 </footer>
 <!-- Scripts -->
-<script src="{{ asset(mix('js/app.js')) }}"></script>
+@yield('scripts')
 </body>
 </html>
+<script>
+    //导航智能定位
+    $.fn.navSmartFloat = function () {
+        var position = function (element) {
+            var top = element.position().top,
+                pos = element.css("position");
+            $(window).scroll(function () {
+                var scrolls = $(this).scrollTop();
+                if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度
+                    $('.header-topbar').fadeOut(0);
+                    if (window.XMLHttpRequest) { //如果不是ie6
+                        element.css({
+                            position: "fixed",
+                            top: 0
+                        }).addClass("shadow");
+                    } else { //如果是ie6
+                        element.css({
+                            top: scrolls
+                        });
+                    }
+                } else {
+                    $('.header-topbar').fadeIn(500);
+                    element.css({
+                        position: pos,
+                        top: top
+                    }).removeClass("shadow");
+                }
+            });
+        };
+        return $(this).each(function () {
+            position($(this));
+        });
+    };
+
+    //启用导航定位
+    $("#navbar").navSmartFloat();
+</script>
