@@ -97,11 +97,14 @@ Route::group(
             // 新闻管理
             Route::get('newsList', $news . 'getNewsList')->name('admin.news.newsList');
             // 编辑新闻
-            Route::get('newsEdit', $news . 'getNewsEdit')->name('admin.news.newEdit');
+            Route::get('newsEdit', $news . 'getNewsEdit')->name('admin.news.newsEdit');
+            Route::post('newsEdit', $news . 'postNewsEdit');
             // 删除新闻
             Route::get('newsDelete', $news . 'getNewsDelete')->name('admin.news.newsDelete');
-            // 添加新闻单页
-            Route::get('addSinglePage', $news . 'getAddSinglePage')->name('admin.news.addSinglePage');
+            // 新闻单页
+            Route::get('pages', $news . 'getSinglePage')->name('admin.news.singlePage');
+            // 评论管理
+            Route::get('comment', $news . 'getComment')->name('admin.news.comment');
         });
         // 系统相关
         Route::group(['prefix' => 'system'], function () use ($system) {

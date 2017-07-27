@@ -79,7 +79,6 @@ return [
     'companyList' => '公司列表',
     'menuManage' => '菜单管理',
     'categoryManage' => '分类管理',
-    'newsList' => '新闻列表',
     'addMenu' => '添加菜单',
     'addCategory' => '添加分类',
     'gameModelManage' => '游戏模型管理',
@@ -193,4 +192,6 @@ return [
     'letter' => '栏目拼音',
     'module' => '模型',
     'domain' => '域名',
+    'comment' => '评论',
+    'time' => '时间',
 ];

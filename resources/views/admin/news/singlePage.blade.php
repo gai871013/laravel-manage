@@ -2,32 +2,37 @@
 @section('section-content')
 	<div class="box box-primary">
 		<div class="box-header">
-			<a href="{{ route('admin.news.newsEdit') }}" class="btn btn-sm btn-success"><i
-						class="fa fa-plus"></i> @lang('admin.addNews')</a>
+			<a href="{{ route('admin.news.newsEdit',['type' => 'single']) }}" class="btn btn-sm btn-success"><i
+						class="fa fa-plus"></i> @lang('admin.addSinglePage')</a>
 		</div>
 		<div class="box-body">
 			<table class="table table-bordered table-hover">
 				<tr>
 					<th>@lang('admin.id')</th>
 					<th>@lang('admin.title')</th>
-					<th>@lang('admin.category')</th>
 					<th>@lang('admin.description')</th>
 					<th>@lang('admin.updated_at')</th>
+					<th>@lang('admin.thumb')</th>
 					<th>@lang('admin.operating')</th>
 				</tr>
 				@foreach($lists as $k => $v)
 					<tr>
 						<td>{{ $v->id }}</td>
-						<td>{{ $v->title }}</td>
-						<td>{{ $v->cat_id }}</td>
+						<td>
+							{{ $v->title }}
+						</td>
 						<td>{{ $v->description }}</td>
 						<td>{{ $v->updated_at }}</td>
 						<td>
+							<img onerror="javascript:this.src='{{ asset('img/nopic.jpg') }}'"
+							     src="{{ asset('storage') }}/{{ $v->thumb or '' }}" style="max-height:50px;">
+						</td>
+						<td>
 							<a class="btn btn-success btn-xs"
-							   href="{{ route('admin.news.newsEdit',['id'=>$v->id]) }}"><i
+							   href="{{ route('admin.news.newsEdit',['id'=>$v->id ,'type' => 'single']) }}"><i
 										class="fa fa-edit"></i> @lang('admin.edit')</a>
 							<a class="btn btn-danger btn-xs delete"
-							   href="{{ route('admin.news.deleteNews',['id'=>$v->id]) }}"><i
+							   href="{{ route('admin.news.newsDelete',['id'=>$v->id]) }}"><i
 										class="fa fa-trash"></i> @lang('admin.delete')</a>
 						</td>
 					</tr>

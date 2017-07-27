@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Models\Comments;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,8 @@ class NewsController extends Controller
      */
     public function getNewsList(Request $request)
     {
-        $title = trans('admin.newsList');
-        $lists = News::paginate(env('PAGE_SIZE'));
-        return view('admin.news.newsList', compact('title', 'lists'));
+        $lists = News::where('status', 1)->where('cat_id', '>', 0)->paginate(env('PAGE_SIZE'));
+        return view('admin.news.newsList', compact('lists'));
     }
 
     /**
@@ -204,7 +204,28 @@ class NewsController extends Controller
         $id = (int)$request->input('id');
         $news = News::where('id', $id)->first();
         $categories = Categories::orderBy('sort', 'asc')->get();
-        return view('admin.news.newsEdit', compact('news', 'categories', 'id'));
+        return view('admin.news.newsEdit', compact('news', 'categories', 'id', 'request'));
+    }
+
+
+    public function postNewsEdit(Request $request)
+    {
+        $data = $request->input('info');
+
+        // 编辑文章
+        if ($data['id'] && $data['id'] > 0) {
+            News::where('id', $data['id'])->update($data);
+        } else {
+            unset($data['id']);
+            News::create($data);
+        }
+        if ($data['cat_id'] > 0) {
+            $route = 'admin.news.newsList';
+        } else {
+            $route = 'admin.news.singlePage';
+        }
+        flash(__('admin.save') . __('admin.success'))->success();
+        return redirect()->route($route);
     }
 
     /**
@@ -212,10 +233,10 @@ class NewsController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getAddSinglePage(Request $request)
+    public function getSinglePage(Request $request)
     {
-        $title = trans('admin.addSinglePage');
-        return view('admin.news.addSinglePage', compact('title'));
+        $lists = News::where('cat_id', 0)->paginate(env('PAGE_SIZE'));
+        return view('admin.news.singlePage', compact('lists'));
     }
 
     /**
@@ -235,5 +256,16 @@ class NewsController extends Controller
         }
         flash($title)->success();
         return redirect()->back();
+    }
+
+    /**
+     * 评论管理 2017-7-27 11:46:07 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getComment(Request $request)
+    {
+        $lists = Comments::orderBy('id', 'desc')->paginate(env('PAGE_SIZE'));
+        return view('admin.news.comment', compact('lists'));
     }
 }
