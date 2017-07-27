@@ -19,7 +19,7 @@
 					<tr>
 						<td>{{ $v->id }}</td>
 						<td>
-							{{ $v->title }}
+							<a href="{{ route('page', ['id' => $v->id]) }}" target="_blank">{{ $v->title }}</a>
 						</td>
 						<td>{{ $v->description }}</td>
 						<td>{{ $v->updated_at }}</td>

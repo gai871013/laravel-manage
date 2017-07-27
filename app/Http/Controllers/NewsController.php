@@ -16,6 +16,12 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    /**
+     * 栏目页面 2017-7-27 12:04:38 by gai871013
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function getCategory($id, Request $request)
     {
         $category = Categories::find($id);
@@ -25,6 +31,30 @@ class NewsController extends Controller
         $son = explode(',', $category->child_id);
         $news = News::whereIn('cat_id', $son)->paginate(env('PAGE_SIZE'));
         return view('news.category', compact('category', 'news'));
+    }
+
+    /**
+     * 获取内容 2017-7-27 12:04:32 by gai871013
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getShow($id, Request $request)
+    {
+        $news = News::find($id);
+        return view('news.show', compact('news'));
+    }
+
+    /**
+     * 获取单页 2017-7-27 12:04:27 by gai871013
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getPage($id, Request $request)
+    {
+        $news = News::find($id);
+        return view('news.show', compact('news'));
     }
 
 }

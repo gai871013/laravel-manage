@@ -32,4 +32,13 @@ class News extends Model
         'read',
         'like'
     ];
+
+    /**
+     * 新闻所在栏目
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Categories::class,'cat_id');
+    }
 }

@@ -40,6 +40,10 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     Route::any('placeSuggestion', 'CommonController@getPlaceSuggestion')->name('placeSuggestion');
     // 分类页面
     Route::get('cate/{id}', $news . 'getCategory')->name('category');
+    // 内容页
+    Route::get('show/{id}.html', $news . 'getShow')->name('show');
+    // 单页
+    Route::get('page/{id}.html', $news . 'getPage')->name('page');
 
 });
 

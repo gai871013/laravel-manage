@@ -18,8 +18,9 @@
 				@foreach($lists as $k => $v)
 					<tr>
 						<td>{{ $v->id }}</td>
-						<td>{{ $v->title }}</td>
-						<td>{{ $v->cat_id }}</td>
+						<td><a href="{{ route('show', ['id' => $v->id]) }}" target="_blank">{{ $v->title }}</a></td>
+						<td><a href="{{ route('category' , ['id' => $v->category->id]) }}"
+						       target="_blank">{{ $v->category->catname }}</a></td>
 						<td>{{ $v->description }}</td>
 						<td>{{ $v->updated_at }}</td>
 						<td>
@@ -27,7 +28,7 @@
 							   href="{{ route('admin.news.newsEdit',['id'=>$v->id]) }}"><i
 										class="fa fa-edit"></i> @lang('admin.edit')</a>
 							<a class="btn btn-danger btn-xs delete"
-							   href="{{ route('admin.news.deleteNews',['id'=>$v->id]) }}"><i
+							   href="{{ route('admin.news.newsDelete',['id'=>$v->id]) }}"><i
 										class="fa fa-trash"></i> @lang('admin.delete')</a>
 						</td>
 					</tr>
