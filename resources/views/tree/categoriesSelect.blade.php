@@ -13,7 +13,7 @@
 	@if($parent == $parent_id)
 		<option @if($id == $_id) selected
 		        @endif value="{{ $_id }}">
-			@for($i = 0; $i < $deep; $i++)&nbsp;&nbsp;&nbsp;&nbsp;@endfor├─ {{ $catname }}
+			@for($i = 1; $i < $deep; $i++)&nbsp;&nbsp;&nbsp;&nbsp;├─@endfor {{ $catname }}
 		</option>
 		@if($child > 0)
 			@php

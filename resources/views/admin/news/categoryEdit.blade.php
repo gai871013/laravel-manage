@@ -27,6 +27,9 @@
 					<div class="col-md-10">
 						<select name="info[parent_id]" id="parent_id" class="form-control">
 							<option value="0">作为一级菜单</option>
+							@php
+							$id = $parent_id > 0 ? $parent_id : $id;
+							@endphp
 							@include('tree.categoriesSelect', ['categories' => $categories, 'id' => $id,'parent' => 0])
 						</select>
 					</div>

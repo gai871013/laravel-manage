@@ -40,14 +40,10 @@ class NewsController extends Controller
     public function getCategoryEdit(Request $request)
     {
         $id = (int)$request->input('id');
-//        $son = $this->categorySon($id);
-        $parent_id = 6;
-//        $parents = $this->updateCategoryParent($parent_id);
-//        dump($parents);
-//        dump($son);
+        $parent_id = (int)$request->input('parent_id');
         $category = Categories::where('id', $id)->first();
         $categories = Categories::where('id', '!=', $id)->orderBy('sort', 'asc')->orderBy('id', 'desc')->get();
-        return view('admin.news.categoryEdit', compact('category', 'id', 'categories'));
+        return view('admin.news.categoryEdit', compact('category', 'id', 'categories', 'parent_id'));
     }
 
     /**
@@ -179,7 +175,21 @@ class NewsController extends Controller
      */
     public function getCategoryDelete(Request $request)
     {
-        flash(__('admin.delete') . __('admin.success'))->success();
+        $id = $request->input('id');
+        $category = Categories::find($id);
+        if (!empty($category) && $category->child_id != $id) {
+            flash(__('admin.delete') . __('admin.fail') . ',请确保分类为终极分类')->error();
+        } else {
+            $news = News::where('cat_id', $id)->first();
+            if (!empty($news)) {
+                flash(__('admin.delete') . __('admin.fail') . ',请先转移该分类下的内容')->error();
+            } else {
+                Categories::where('id', $id)->delete();
+                $this->updateCategoryParent($category->parent_id);
+                flash(__('admin.delete') . __('admin.success'))->success();
+            }
+        }
+//        flash(__('admin.delete') . __('admin.success'))->success();
         return redirect()->back();
     }
 
