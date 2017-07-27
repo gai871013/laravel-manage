@@ -70,6 +70,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () use ($lo
     // 登录页面
     Route::get('login', $login . 'showLoginForm')->name('admin.login');
     Route::post('login', $login . 'login');
+    // 登录背景
+    Route::get('img', $login . 'bing')->name('admin.login.img');
 
 });
 
