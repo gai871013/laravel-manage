@@ -24,15 +24,14 @@
         $(document).pjax('a:not(a[target="_blank"],.no_pjax)', {
             container: 'body'
         });
-        $(document).on('submit', 'form', function (event) {
-            $.pjax.submit(event, 'body', {fragment: 'body'});
-        });
         $(document).on('pjax:start', function () {
+            layer.load(1,{shade: [0.1,'#000']});
             Pace.start();
         });
         $(document).on('pjax:end', function () {
             // Pace.stop();
-            layer.msg('加载完成', {offset: '90%', time: 700});
+	        layer.closeAll();
+//            layer.msg('加载完成', {offset: '90%', time: 700});
         });
         $(document).on('pjax:error', function (event, xhr) {
             layer.alert('链接错误');
