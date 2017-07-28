@@ -30,7 +30,8 @@ class AdminAuthMiddleware
             $name = $request->path();
             $action_lists = Helper::leftMenu('admin', 'all');
             $permission = Helper::actionUri($action_lists);
-            $base = ['admin/home', 'admin/logout', 'admin'];
+            $admin = config('app.admin_path');
+            $base = [$admin . '/home', $admin . '/logout', $admin];
             $permission = array_merge($base, $permission);
             if (!in_array($name, $permission)) {
                 return abort(403);

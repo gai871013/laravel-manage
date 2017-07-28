@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/home';
+    protected $redirectTo;
     protected $username;
 
     /**
@@ -41,6 +41,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest:admin')->except(['logout', 'showLoginForm']);
         $this->username = config('admin.global.username');
+        $this->redirectTo = config('app.admin_path') . '/home';
     }
 
     /**
@@ -68,7 +69,6 @@ class LoginController extends Controller
      */
     public function bing(Request $request)
     {
-
         //设置bing参数
         $idx = (int)$request->input('index');
         $download = isset($_GET['download']) ? true : false;

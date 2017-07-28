@@ -66,7 +66,7 @@ Route::group(['middleware' => ['web', 'auth']], function () use ($home) {
 
 
 // 登录后台
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () use ($login) {
+Route::group(['prefix' => config('app.admin_path'), 'namespace' => 'Admin'], function () use ($login) {
     // 登录页面
     Route::get('login', $login . 'showLoginForm')->name('admin.login');
     Route::post('login', $login . 'login');
