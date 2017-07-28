@@ -33,8 +33,22 @@ git clone https://git.oschina.net/gai871013/laravelmanage.git
 
 ## 安装
 #### 1.修改配置文件
+##### 1.1 拷贝
 ```shell
 copy .env.example .env
+```
+##### 1.2 修改配置
+```shell
+1. 应用URL地址
+APP_URL
+2. 修改数据库配置 
+DB_CONNECTION
+DB_HOST
+DB_PORT
+DB_DATABASE
+DB_USERNAME
+DB_PASSWORD
+DB_PREFIX
 ```
 
 #### 2.程序依赖安装
@@ -57,13 +71,17 @@ php artisan db:seed --class=AdminActionTableSeeder
 php artisan db:seed --class=RoleTableSeeder
 php artisan db:seed --class=AdminsTableSeeder
 ```
+#### 5.文件存储
+```shell
+php artisan storage:link
+```
 
-#### 5.前台资源
+#### 6.前台资源 (选)
 ```shell
 npm install
 ```
 
-#### 6.前台资源编译
+#### 6.1.前台资源编译
 ##### ① 生产环境
 ```shell
 npm run production
@@ -82,7 +100,7 @@ watch-poll
 hot
 ```
 
-登录
+#### 7.登录
 ```
 地址 http://domain/admin
 账号 wang.gaichao@163.com
