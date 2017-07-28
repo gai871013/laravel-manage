@@ -7,7 +7,7 @@
 		</div>
 		<div class="box-body">
 			<table class="table table-bordered table-hover">
-				<tr>
+				<tr class="active">
 					<th>@lang('admin.id')</th>
 					<th>@lang('admin.title')</th>
 					<th>@lang('admin.category')</th>
