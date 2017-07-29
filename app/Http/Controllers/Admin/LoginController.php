@@ -45,6 +45,15 @@ class LoginController extends Controller
     }
 
     /**
+     * 登录用户名
+     * @return mixed
+     */
+    public function username()
+    {
+        return $this->username;
+    }
+
+    /**
      * 重写登录视图页面
      * @author gai871013
      * @date   2017-07-25T23:06:16+0800

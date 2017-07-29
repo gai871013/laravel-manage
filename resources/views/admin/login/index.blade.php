@@ -10,11 +10,11 @@
 			<form class="form-horizontal" role="form" method="POST" action="{{ route('admin.login') }}">
 				{{ csrf_field() }}
 				<div class="form-group has-feedback">
-					<input type="email" name="email" class="form-control" placeholder="Email">
+					<input type="text" name="username" class="form-control" placeholder="请输入{{ config('admin.global.username') }}">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" name="password" class="form-control" placeholder="Password">
+					<input type="password" name="password" class="form-control" placeholder="请输入密码">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
@@ -81,7 +81,7 @@
 		.pagination > li > a {
 			background: rgba(255, 255, 255, .1);
 			border: 0;
-			color:#fff;
+			color: #fff;
 		}
 	</style>
 @endsection

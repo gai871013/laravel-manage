@@ -13,7 +13,7 @@ return [
     */
 
     'name' => env('APP_NAME', '🎈LaravelManageSystem✨'),
-    'admin_path' => 'admin',
+    'admin_path' => 'manage',
 
     /*
     |--------------------------------------------------------------------------
