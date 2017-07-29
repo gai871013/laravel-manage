@@ -57,7 +57,7 @@
 				        data-target="#header-navbar" aria-expanded="false"><span class="sr-only"></span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<h1 class="logo hvr-bounce-in"><a href="{{ route('index') }}" title="">{{ config('app.name') }}</a></h1>
+				<h1 class="logo hvr-bounce-in" style="margin-top:10px;"><a href="{{ route('index') }}" title="">{{ config('app.name') }}</a></h1>
 			</div>
 			<div class="collapse navbar-collapse" id="header-navbar">
 				<ul class="nav navbar-nav navbar-right">

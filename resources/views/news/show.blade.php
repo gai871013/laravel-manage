@@ -23,7 +23,8 @@
 					<span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
 					      data-original-title="栏目：{{ $news->category->catname or '' }}">
                     <i class="fa fa-list"></i>
-                    <a href="###" title="" draggable="false">{{ $news->category->catname or '' }}</a>
+                    <a href="{{ route('category', ['id' => $news->cat_id]) }}" title=""
+                       draggable="false">{{ $news->category->catname or '' }}</a>
                 </span>
 					<span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
 					      data-original-title="查看：{{ $news->view->total or 0 }}">
