@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    public function __construct()
+    {
+    }
+
     /**
      * 栏目页面 2017-7-27 12:04:38 by gai871013
      * @param $id
@@ -30,7 +34,8 @@ class NewsController extends Controller
         }
         $son = explode(',', $category->child_id);
         $news = News::whereIn('cat_id', $son)->paginate(env('PAGE_SIZE'));
-        return view('news.category', compact('category', 'news'));
+        $title = $category->catname;
+        return view('news.category', compact('category', 'news', 'title'));
     }
 
     /**
@@ -54,7 +59,10 @@ class NewsController extends Controller
     public function getPage($id, Request $request)
     {
         $news = News::find($id);
-        return view('news.show', compact('news'));
+        $title = $news->title;
+        $keywords = $news->title;
+        $description = $news->description;
+        return view('news.page', compact('news', 'title', 'keywords', 'description'));
     }
 
 }

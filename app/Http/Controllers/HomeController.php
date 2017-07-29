@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,6 +34,7 @@ class HomeController extends Controller
      */
     public function getIndex(Request $request)
     {
-        return view('welcome');
+        $news = News::orderBy('id', 'desc')->paginate(env('PAGE_SIZE'));
+        return view('welcome', compact('news'));
     }
 }

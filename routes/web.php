@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     // 根据关键词获取搜索建议
     Route::any('placeSuggestion', 'CommonController@getPlaceSuggestion')->name('placeSuggestion');
     // 分类页面
-    Route::get('cate/{id}.html', $news . 'getCategory')->name('category');
+    Route::get('category/{id}.html', $news . 'getCategory')->name('category');
     // 内容页
     Route::get('show/{id}.html', $news . 'getShow')->name('show');
     // 单页

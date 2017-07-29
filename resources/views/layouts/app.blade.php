@@ -7,11 +7,24 @@
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>@yield('title') - {{ config('app.name', 'LaravelManageSystem') }}</title>
+	<meta name="author" content="gai871013">
+	<meta name="keywords" content="{{ config('app.name', 'LaravelManageSystem') }}@yield('keywords')">
+	<meta name="description" content="@yield('description')">
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-		<link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+	<link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
 	<script src="{{ asset(mix('js/app.js')) }}"></script>
+	<!--[if gte IE 9]>
+	<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+	<script src="{{ asset('js/html5shiv.min.js')  }}"></script>
+	<script src="{{ asset('js/respond.min.js') }}"></script>
+
+	<![endif]-->
+	<!--[if lt IE 9]>
+	<script>window.location.href = 'upgrade-browser';</script>
+	<![endif]-->
+
 	@yield('head')
 </head>
 <body>
@@ -48,8 +61,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="header-navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden-index active">
-						<a data-cont="{{ config('app.name') }}" href="{{ route('index') }}">@lang('index.index')</a>
+					<li><a data-cont="{{ config('app.name') }}" href="{{ route('index') }}">@lang('index.index')</a>
 					</li>
 					@if(isset($nav))
 						@foreach($nav as $v)
