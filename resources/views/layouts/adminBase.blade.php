@@ -107,7 +107,10 @@
 		<section class="sidebar">
 			<div class="user-panel">
 				<div class="pull-left image">
-					<img src="{{ asset('img/avatar5.png') }}" class="img-circle" alt="User Image">
+					@php
+						$avatar = isset($user->avatar) && !empty($user->avatar) ? Storage::url($user->avatar) : asset('img/avatar5.png');
+					@endphp
+					<img src="{{ $avatar }}" class="img-circle" alt="User Image">
 				</div>
 				<div class="pull-left info">
 					<p>{{ $user->username or '' }}</p>

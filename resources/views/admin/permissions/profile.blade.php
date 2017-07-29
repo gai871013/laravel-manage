@@ -15,6 +15,31 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-md-2 control-label">@lang('admin.avatar'):
+                        <span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="text" name="info[avatar]" value="{{ $user->avatar or old('avatar') }}"
+                                   class="filePath form-control" readonly>
+                            <span class="input-group-btn">
+                                <button onclick="daoru()" type="button"
+                                        class="btn btn-info btn-flat"><i
+                                            class="fa fa-picture-o"></i> @lang('admin.uploadPicture')</button>
+                            </span>
+                        </div>
+                        <input type="file" style="display: none;" accept="image/*">
+                    </div>
+                    <div class="col-md-2">
+                        @php
+                        $avatar = isset($user->avatar) && !empty($user->avatar) ? Storage::url($user->avatar) : asset('img/nopic.jpg');
+                        @endphp
+                        <img class="img-view"
+                             src="{{ $avatar }}"
+                             style="max-height: 100px; max-width:100%;">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-md-2 control-label">@lang('admin.email'):
                         <span class="required">*</span>
                     </label>
@@ -28,7 +53,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control form-filter" name="info[password]" value="">
+                        <input type="password" class="form-control" name="info[password]" value="">
                     </div>
                 </div>
                 <div class="form-group">
@@ -36,7 +61,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control form-filter" name="info[password_confirmation]"
+                        <input type="password" class="form-control" name="info[password_confirmation]"
                                value="">
                     </div>
                 </div>
@@ -92,4 +117,6 @@
         </div>
     </div>
 @endsection
-@section('scripts')@endsection
+@section('scripts')
+    @include('layouts.adminUpload')
+@endsection
