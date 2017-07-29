@@ -193,6 +193,8 @@ return [
 
         // laravel-lang
         Overtrue\LaravelLang\TranslationServiceProvider::class,
+        // 视图合成器
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 

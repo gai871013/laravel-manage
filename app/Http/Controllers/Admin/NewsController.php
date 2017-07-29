@@ -61,11 +61,12 @@ class NewsController extends Controller
         // 编辑分类
         if ($id > 0) {
             $old = Categories::where('id', $id)->first();
-            $son = isset($old->child_id) ? explode(',', $old->child_id) : [];
+            $son = isset($old->child_id) && !empty($old->child_id) ? explode(',', $old->child_id) : [];
             if ($id == $parent_id || in_array($parent_id, $son)) {
                 flash()->error(__('admin.edit') . __('admin.fail') . '!父ID不能是自己或者是自己子分类');
                 return redirect()->back()->withInput($data);
             }
+            $data['child_id'] = implode(',', array_merge($son, [$id]));
             Categories::where('id', $id)->update($data);
             // 更新就栏目父级栏目关系
             $this->updateCategoryParent($old->parent_id);

@@ -26,9 +26,7 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     // 查看日志
     Route::get('laravel-logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     // 系统首页
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('index');
+    Route::get('/', $home.'getIndex')->name('index');
 
     // 用户登录注册等
 //    Auth::routes();

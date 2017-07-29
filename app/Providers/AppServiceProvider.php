@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Categories;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $nav = Categories::where('is_menu', 1)->get();
+        View::share('nav', $nav);
     }
 
     /**

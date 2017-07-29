@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class HomeController extends Controller
 {
     /**
@@ -11,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('sendSms');
+        $this->middleware('auth')->except('sendSms', 'getIndex');
     }
 
     /**
@@ -22,5 +24,15 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    /**
+     * 网站首页 2017-7-29 11:03:41 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getIndex(Request $request)
+    {
+        return view('welcome');
     }
 }

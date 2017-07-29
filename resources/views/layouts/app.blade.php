@@ -10,7 +10,7 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-{{--	<link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">--}}
+	{{--	<link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">--}}
 	<script src="{{ asset(mix('js/app.js')) }}"></script>
 	<script>
         $.pjax.defaults.timeout = 5000;
@@ -42,7 +42,7 @@
 	<nav class="navbar navbar-default" id="navbar">
 		<div class="container">
 			<div class="header-topbar hidden-xs link-border">
-				<ul class="site-nav topmenu">
+				{{--<ul class="site-nav topmenu">
 
 					<li><a href="/links" rel="nofollow">友情链接</a></li>
 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -57,27 +57,28 @@
 							</li>
 						</ul>
 					</li>
-				</ul>
+				</ul>--}}
 
-				<a data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;
-				<a data-toggle="modal" data-target="#regModal" class="register" rel="nofollow">我要注册</a>
+				{{--<a data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;--}}
+				{{--<a data-toggle="modal" data-target="#regModal" class="register" rel="nofollow">我要注册</a>--}}
 			</div>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
 				        data-target="#header-navbar" aria-expanded="false"><span class="sr-only"></span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<h1 class="logo hvr-bounce-in"><a href="" title="">{{ config('app.name') }}</a></h1>
+				<h1 class="logo hvr-bounce-in"><a href="{{ route('index') }}" title="">{{ config('app.name') }}</a></h1>
 			</div>
 			<div class="collapse navbar-collapse" id="header-navbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden-index active"><a data-cont="{{ config('app.name') }}"
-					                                   href="{{ route('index') }}">@lang('index.index')</a></li>
-					<li><a href="/cate/1.html">前端技术</a></li>
-					<li><a href="/cate/2.html">后端程序</a></li>
-					<li><a href="/cate/3.html">linux运维</a></li>
-					<li><a href="/cate/4.html">网络安全</a></li>
-					<li><a href="/cate/5.html">程序人生</a></li>
+					<li class="hidden-index active">
+						<a data-cont="{{ config('app.name') }}" href="{{ route('index') }}">@lang('index.index')</a>
+					</li>
+					@if(isset($nav))
+						@foreach($nav as $v)
+							<li><a href="{{ route('category', ['id' => $v->id]) }}">{{ $v->catname }}</a></li>
+						@endforeach
+					@endif
 				</ul>
 			</div>
 		</div>
