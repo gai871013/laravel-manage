@@ -111,7 +111,7 @@ class HomeController extends Controller
                     if ($item == '.' || $item == '..') {
                         continue;
                     }
-                    $this->delete($dir . '/' . $item);
+                    $this->delete($dir . $item);
                 }
                 rmdir($dir . '/' . $v);
             } else {
