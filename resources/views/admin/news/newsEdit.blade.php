@@ -35,9 +35,12 @@
 						<input type="file" style="display: none;">
 					</div>
 					<div class="col-md-2">
-						<img class="img-view" onerror="javascript:this.src='{{ asset('img/nopic.jpg') }}'"
-						     src="{{ asset('storage') }}/{{ $news->thumb or old('thumb') }}"
-						     style="max-height: 100px; max-width:100%;">
+						@php
+							$thumb = !empty($category->thumb) ? $category->thumb : '';
+							$thumb = !empty(old('thumb')) ? old('thumb') : $thumb;
+							$thumb = empty($thumb) ? asset('img/nopic.jpg') : asset('storage/'.$thumb);
+						@endphp
+						<img class="img-view" src="{{ $thumb }}" style="max-height: 100px; max-width:100%;">
 					</div>
 				</div>
 				@if((isset($request['type']) && $request['type'] == 'single') || (isset($news->cat_id) && $news->cat_id == 0))
@@ -163,8 +166,12 @@
 	</div>
 @endsection
 @section('scripts')
-	@include('layouts.adminUpload')
 	<script>
+		@if((isset($request['type']) && $request['type'] == 'single') || (isset($news->cat_id) && $news->cat_id == 0))
+        setUrl('{{ route('admin.news.singlePage') }}');
+		@else
+        setUrl('{{ route('admin.news.newsList') }}');
+		@endif
         // 修复左侧菜单链接
         (function () {
             $('.my-colorpicker1').colorpicker();
@@ -200,4 +207,5 @@
             });
         })();
 	</script>
+	@include('layouts.adminUpload')
 @endsection

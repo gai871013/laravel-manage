@@ -36,6 +36,18 @@
         });
         $(document).on('pjax:end', function () {
             // Pace.stop();
+            $('.content-wrapper').css('min-height', $(window).height() - 101);
+            // 左侧菜单
+            var _href2 = (typeof window._href === 'undefined') ? '' : window._href;
+            window._href = undefined;
+            $('.sidebar-menu a').each(function (index) {
+                $href = $(this).attr('href');
+                if ($href === window.location.href || $href === _href2) {
+                    $(this).parents('.treeview').addClass('active');
+                    $(this).parent('li').addClass('active').siblings().removeClass('active');
+                    return false;
+                }
+            });
             layer.closeAll();
             layer.msg('加载完成 😊', {offset: '90%', time: 700});
         });
@@ -136,9 +148,9 @@
 	</div>
 	<footer class="main-footer">
 		<div class="pull-right hidden-xs">
-			<b>Version</b> {{ config('app.version', 'v1.0') }}
+			<b>Version</b> {{ config('app.version', '1.0.0') }}
 		</div>
-		<strong>Copyright &copy; 2016-{{ date('Y') }} <a target="_blank" href="http://weibo.com/gai871013">gai871013</a>&nbsp;<a
+		<strong>Copyright &copy; 2012-{{ date('Y') }} <a target="_blank" href="http://weibo.com/gai871013">gai871013</a>&nbsp;<a
 					href="http://www.wc87.com" target="_blank">WC87.COM</a>.</strong> All rights
 		reserved.
 	</footer>
@@ -147,6 +159,7 @@
 <script src="{{ asset('js/fontawesome-iconpicker.js') }}"></script>
 @yield('scripts')
 <a href="" id="jump"></a>
+</body>
 <script type="text/javascript">
     $(function () {
         $('.content-wrapper').css('min-height', $(window).height() - 101);
@@ -207,6 +220,15 @@
         $('#flash-overlay-modal').modal();
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     });
+
+    /**
+     * 设置URL
+     * @param url
+     */
+    function setUrl(url) {
+        if (typeof url !== 'undefined') {
+            window._href = url;
+        }
+    }
 </script>
-</body>
 </html>

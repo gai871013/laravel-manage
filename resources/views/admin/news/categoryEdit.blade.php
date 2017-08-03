@@ -19,6 +19,31 @@
 						       value="{{ $category->style or old('style') }}">
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label">@lang('admin.thumb'):
+						<span class="required">*</span>
+					</label>
+					<div class="col-md-8">
+						<div class="input-group">
+							<input type="text" name="info[thumb]" value="{{ $category->thumb or old('thumb') }}"
+							       class="filePath form-control" readonly>
+							<span class="input-group-btn">
+                                <button onclick="daoru()" type="button"
+                                        class="btn btn-info btn-flat"><i
+			                                class="fa fa-picture-o"></i> @lang('admin.uploadPicture')</button>
+                            </span>
+						</div>
+						<input type="file" style="display: none;">
+					</div>
+					<div class="col-md-2">
+						@php
+							$thumb = !empty($category->thumb) ? $category->thumb : '';
+							$thumb = !empty(old('thumb')) ? old('thumb') : $thumb;
+							$thumb = empty($thumb) ? asset('img/nopic.jpg') : asset('storage/'.$thumb);
+						@endphp
+						<img class="img-view" src="{{ $thumb }}" style="max-height: 200px;">
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label class="col-md-2 control-label">@lang('admin.parent')@lang('admin.category'):
@@ -44,26 +69,6 @@
 					<div class="col-md-10">
                         <textarea name="info[description]" id="" cols="30" rows="3"
                                   class="form-control form-filter">{{ $category->description or old('description') }}</textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-2 control-label">@lang('admin.thumb'):
-						<span class="required">*</span>
-					</label>
-					<div class="col-md-10">
-						<img class="img-view" onerror="javascript:this.src='{{ asset('img/nopic.jpg') }}'"
-						     src="{{ asset('storage') }}/{{ $category->thumb or old('thumb') }}"
-						     style="max-height: 200px;">
-						<div class="input-group">
-							<input type="text" name="info[thumb]" value="{{ $category->thumb or old('thumb') }}"
-							       class="filePath form-control" readonly>
-							<span class="input-group-btn">
-                                <button onclick="daoru()" type="button"
-                                        class="btn btn-info btn-flat"><i
-			                                class="fa fa-picture-o"></i> @lang('admin.uploadPicture')</button>
-                            </span>
-						</div>
-						<input type="file" style="display: none;">
 					</div>
 				</div>
 				<div class="form-group">
@@ -109,6 +114,7 @@
 @section('scripts')
 	@include('layouts.adminUpload')
 	<script>
+		setUrl('{{ route('admin.news.categories') }}');
         $(function () {
             $('.my-colorpicker1').colorpicker();
         });
