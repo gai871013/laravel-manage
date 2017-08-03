@@ -34,9 +34,7 @@
 					</tr>
 				@endforeach
 			</table>
-			<div class="row">
-				{{ $lists->links() }}
-			</div>
+			{{ $lists->links() }}
 		</div>
 	</div>
 @endsection

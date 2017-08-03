@@ -39,10 +39,11 @@
             $('.content-wrapper').css('min-height', $(window).height() - 101);
             // 左侧菜单
             var _href2 = (typeof window._href === 'undefined') ? '' : window._href;
+            var _href3 = window.location.origin + window.location.pathname;
             window._href = undefined;
             $('.sidebar-menu a').each(function (index) {
                 $href = $(this).attr('href');
-                if ($href === window.location.href || $href === _href2) {
+                if ($href === _href3 || $href === _href2) {
                     $(this).parents('.treeview').addClass('active');
                     $(this).parent('li').addClass('active').siblings().removeClass('active');
                     return false;
@@ -182,10 +183,12 @@
             $(this).attr("disabled", "disabled").parents('form').submit();
         });
         // 左侧菜单
+        var _href2 = (typeof window._href === 'undefined') ? '' : window._href;
+        var _href3 = window.location.origin + window.location.pathname;
+        window._href = undefined;
         $('.sidebar-menu a').each(function (index) {
             $href = $(this).attr('href');
-            _href = (typeof _href == 'undefined') ? '' : window._href;
-            if ($href == window.location.href || $href == _href) {
+            if ($href === _href3 || $href === _href2) {
                 $(this).parents('.treeview').addClass('active');
                 $(this).parent('li').addClass('active').siblings().removeClass('active');
                 return false;
