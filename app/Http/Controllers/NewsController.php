@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\News;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -28,6 +29,15 @@ class NewsController extends Controller
      */
     public function getCategory($id, Request $request)
     {
+        $url = 'http://dwz.cn/create.php';
+        $params = [
+            'url' => 'http://ebzzlt.bzh001.com/WeChat/SmsMarketing?invite=9999910',
+            'alias' => '',
+            'access_type' => 'web'
+        ];
+        $client = new Client();
+        $response = $client->post($url, ['form_params' => $params])->getBody()->getContents();
+        return $response;
         $category = Categories::find($id);
         if (empty($category)) {
             return redirect()->route('index');

@@ -25,14 +25,14 @@
 					<div class="col-md-8">
 						<div class="input-group">
 							<input type="text" name="info[thumb]" value="{{ $news->thumb or old('thumb') }}"
-							       class="filePath form-control" readonly>
+							       class="filePath form-control filePath" readonly>
 							<span class="input-group-btn">
                                 <button onclick="daoru()" type="button"
                                         class="btn btn-info btn-flat"><i
 			                                class="fa fa-picture-o"></i> @lang('admin.uploadPicture')</button>
                             </span>
+							<input type="file" style="display: none;">
 						</div>
-						<input type="file" style="display: none;">
 					</div>
 					<div class="col-md-2">
 						@php
