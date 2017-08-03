@@ -80,6 +80,7 @@
 @section('scripts')
     <script>
         $(function () {
+            setUrl('{{ route('admin.system.menuManage') }}');
             var val = $(this).find('option:selected').attr('data-url');
             $('.url').html(val);
             $('.parent_id').on('change', function () {

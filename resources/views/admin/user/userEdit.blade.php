@@ -199,6 +199,7 @@
 @section('scripts')
     <script>
         $(function () {
+            setUrl('{{ route('admin.userManage') }}');
             $(".select2").select2();
 //            Inputmask().mask(document.querySelectorAll("input"));
             $('[data-toggle="datepicker"]').datepicker({
