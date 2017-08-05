@@ -64,12 +64,19 @@ class UserController extends Controller
      */
     public function getFollowerLists(Request $request)
     {
-        $lists = Follower::orderBy('id', 'desc')->paginate(env('PAGE_SIZE'));
-        return view('admin.user.followerLists', compact('lists'));
+        $type = $request->input('type');
+        $black = empty($type) ? 0 : 1;
+        $lists = Follower::orderBy('id', 'desc');
+        if ($black > 0) {
+            $lists = $lists->where('black', $black)->paginate(env('PAGE_SIZE'));
+        } else {
+            $lists = $lists->paginate(env('PAGE_SIZE'));
+        }
+        return view('admin.user.followerLists', compact('lists', 'type'));
     }
 
     /**
-     * 刷新微信用户
+     * 刷新微信用户 2017-8-6 00:16:18 by gai871013
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -144,6 +151,90 @@ class UserController extends Controller
             }
             return redirect()->route('admin.follower');
         }
+    }
+
+    /**
+     * 粉丝备注 2017-8-6 00:20:38 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getFollowerRemark(Request $request)
+    {
+        // 更新微信
+        $openid = $request->input('openid');
+        $remark = $request->input('remark');
+        $app = new Application(config('wechat'));
+        $userService = $app->user;
+        try {
+            $res = $userService->remark($openid, $remark);
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+        Follower::where('openid', $openid)->update(['remark' => $remark]);
+        flash()->success(__('admin.operating') . __('admin.success'));
+        return redirect()->back();
+    }
+
+    /**
+     * 黑名单操作 2017-8-6 01:19:47 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getFollowerBlack(Request $request)
+    {
+        $action = $request->input('action');
+        $openid = $request->input('openid');
+        $app = new Application(config('wechat'));
+        $userService = $app->user;
+        if ($action == 'black') {
+            try {
+                $userService->batchBlock([$openid]);
+                Follower::where('openid', $openid)->update(['black' => 1]);
+            } catch (\Exception $exception) {
+                Log::error($exception);
+            }
+        }
+        if ($action == 'unBlack') {
+            try {
+                $userService->batchUnblock([$openid]);
+                Follower::where('openid', $openid)->update(['black' => 0]);
+            } catch (\Exception $exception) {
+                Log::error($exception);
+            }
+        }
+        flash()->success(__('admin.operating') . __('admin.success'));
+        return redirect()->back();
+    }
+
+    /**
+     * 更新到黑名单列表 2017-8-6 01:36:28 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function getFollowerBlackLists(Request $request)
+    {
+        set_time_limit(0);
+        $next = $request->input('next');
+        $app = new Application(config('wechat'));
+        $userService = $app->user;
+        try {
+            $blacklist = $userService->blacklist($next)->toArray();
+            $users = $blacklist['data']['openid'];
+            if (count($users) > 1) {
+                Follower::whereIn('openid', $users)->update(['black' => 1]);
+                $next = route('admin.follower.blackLists', ['next' => $blacklist['next_openid']]);
+                $detail = '本次更新' . count($users) . '条数据';
+                $sec = 1;
+                return view('info', compact('next', 'detail', 'sec'));
+            } else {
+                flash()->success(__('admin.operating') . __('admin.success'));
+                return redirect()->route('admin.follower');
+            }
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+        flash()->success(__('admin.operating') . __('admin.success'));
+        return redirect()->route('admin.follower');
     }
 
 }

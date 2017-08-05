@@ -37,6 +37,7 @@ class CreateFollowersTable extends Migration
             $table->integer('point')->default(0)->comment('积分');
             $table->string('address')->nullable()->comment('地址');
             $table->string('ip')->default('::1')->comment('操作IP');
+            $table->tinyInteger('black')->default(0)->nullable()->comment('是否为黑名单');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable()->comment('删除时间');
         });

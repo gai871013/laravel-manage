@@ -21,6 +21,7 @@ $upload = 'UploadController@';
 $car = 'CarController@';
 $journeyTask = 'JourneyTaskController@';
 $weChat = 'WeChatController@';
+$follower = 'FollowerController@';
 
 Route::group(['middleware' => ['web']], function () use ($news, $home) {
     // 查看日志
@@ -76,7 +77,7 @@ Route::group(['prefix' => config('app.admin_path'), 'namespace' => 'Admin'], fun
 // 后台用户管理
 Route::group(
     ['prefix' => config('app.admin_path'), 'namespace' => 'Admin', 'middleware' => ['auth.admin:admin', 'admin.log']],
-    function () use ($home, $login, $system, $permissions, $user, $news, $upload, $car, $journeyTask) {
+    function () use ($follower, $home, $login, $system, $permissions, $user, $news, $upload, $car, $journeyTask) {
         // 后台首页
         Route::get('/', $home . 'index');
         Route::get('home', $home . 'index')->name('admin.home');
@@ -154,11 +155,24 @@ Route::group(
             Route::get('user/edit', $user . 'getUserEdit')->name('admin.user.edit');
             Route::post('user/editAction', $user . 'postUserEdit')->name('admin.user.editAction');
             // 微信用户管理
-            Route::get('follower', $user . 'getFollowerLists')->name('admin.follower');
-            // 微信用户列表刷新
-            Route::get('follower/refresh', $user . 'getFollowerRefresh')->name('admin.follower.refresh');
-            // 微信用户详情更新
-            Route::get('follower/refreshDetail',$user.'getFollowerRefreshDetail')->name('admin.follower.refreshDetail');
+            Route::group(['prefix' => 'follower'], function () use ($user) {
+                // 列表
+                Route::get('/', $user . 'getFollowerLists')->name('admin.follower');
+                // 微信用户列表刷新
+                Route::get('refresh', $user . 'getFollowerRefresh')->name('admin.follower.refresh');
+                // 微信用户详情更新
+                Route::get('refreshDetail', $user . 'getFollowerRefreshDetail')->name('admin.follower.refreshDetail');
+                // 备注管理
+                Route::any('remark', $user . 'getFollowerRemark')->name('admin.follower.remark');
+                // 加入、取消黑名单
+                Route::get('black', $user . 'getFollowerBlack')->name('admin.follower.black');
+                // 更新黑名单列表
+                Route::get('blackLists', $user . 'getFollowerBlackLists')->name('admin.follower.blackLists');
+            });
+        });
+
+        Route::group(['prefix' => 'WeChat'], function () use ($follower) {
+
         });
 
         // 上传

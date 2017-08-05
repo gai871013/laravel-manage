@@ -160,6 +160,11 @@
 <script src="{{ asset('js/fontawesome-iconpicker.js') }}"></script>
 @yield('scripts')
 <a href="" id="jump"></a>
+<script>
+    // 一次通知
+    $('#flash-overlay-modal').modal();
+    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+</script>
 </body>
 <script type="text/javascript">
     $(function () {
