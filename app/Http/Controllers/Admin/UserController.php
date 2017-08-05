@@ -133,6 +133,7 @@ class UserController extends Controller
             $user = $userService->get($openid)->toArray();
             $user['tagid_list'] = implode(',', $user['tagid_list']);
             Follower::where('openid', $user['openid'])->update($user);
+            flash()->success(__('admin.operating') . __('admin.success'));
             return redirect()->route('admin.follower', ['page' => $page]);
 
         } else {
@@ -145,10 +146,13 @@ class UserController extends Controller
                     $user['tagid_list'] = implode(',', $user['tagid_list']);
                     Follower::where('openid', $user['openid'])->update($user);
                 }
-                $detail = '更新了' . count($data) . '条记录';
+                $title = '更新成功！';
+                $detail = '更新了' . count($data) . '条记录 openID:[ "' . implode('" , "', $data) .'" "]';
                 $next = route('admin.follower.refreshDetail', ['page' => $page]);
-                return view('info', compact('script', 'next', 'detail'));
+                $sec = 1;
+                return view('info', compact('script', 'next', 'detail', 'sec', 'title'));
             }
+            flash()->success(__('admin.operating') . __('admin.success'));
             return redirect()->route('admin.follower');
         }
     }

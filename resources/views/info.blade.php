@@ -3,9 +3,7 @@
 @section('section-content')
     <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">@lang('index.tips')</h3>
-
-            <p class="error">{{ $title or '' }}</p>
+            <h3 class="box-title">{{ $title or __('index.tips') }}</h3>
             <p class="detail">{{ $detail or '' }}</p>
             <p class="jump">
                 <b id="wait">{{ $sec or 3 }}</b> @lang('admin.secondJump')
