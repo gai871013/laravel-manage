@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     // 查看日志
     Route::get('laravel-logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     // 系统首页
-    Route::get('/', $home.'getIndex')->name('index');
+    Route::get('/', $home . 'getIndex')->name('index');
 
     // 用户登录注册等
 //    Auth::routes();
@@ -155,7 +155,8 @@ Route::group(
             Route::post('user/editAction', $user . 'postUserEdit')->name('admin.user.editAction');
             // 微信用户管理
             Route::get('follower', $user . 'getFollowerLists')->name('admin.follower');
-
+            // 微信用户刷新
+            Route::get('follower/refresh', $user . 'getFollowerRefresh')->name('admin.follower.refresh');
         });
 
         // 上传

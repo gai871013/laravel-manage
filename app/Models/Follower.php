@@ -8,6 +8,25 @@ class Follower extends Model
 {
     //
     protected $table = 'followers';
+    protected $fillable = [
+        'subscribe',
+        'subscribe_time',
+        'openid',
+        'nickname',
+        'sex',
+        'province',
+        'city',
+        'country',
+        'language',
+        'headimgurl',
+        'subscribe',
+        'subscribe',
+        'subscribe',
+        'subscribe',
+        'subscribe',
+        'subscribe',
+        'subscribe',
+    ];
 
     /**
      * 获取绑定用户信息

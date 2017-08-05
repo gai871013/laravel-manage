@@ -1,6 +1,9 @@
 @extends('layouts.a')
 @section('section-content')
     <section class="box box-primary">
+        <div class="box-header">
+            <a href="{{ route('admin.follower.refresh') }}" class="btn btn-sm btn-success"><i class="fa fa-refresh"></i> @lang('admin.refresh')@lang('admin.list')</a>
+        </div>
         <div class="box-body">
             <table class="table table-bordered table-hover table-responsive">
                 <tr>

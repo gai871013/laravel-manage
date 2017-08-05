@@ -17,7 +17,7 @@ class CreateFollowersTable extends Migration
             $table->increments('id');
             $table->integer('app_id')->default(1)->comment('应用ID');
             $table->integer('subscribe')->comment('是否关注');
-            $table->integer('subscribe_time')->comment('关注时间');
+            $table->integer('subscribe_time')->default(0)->nullable()->comment('关注时间');
             $table->string('openid', 28)->unique()->comment('用户OPENID');
             $table->text('nickname')->nullable()->comment('微信昵称');
             $table->integer('sex')->default(0)->comment('性别');
