@@ -131,8 +131,8 @@ class PermissionsController extends Controller
             'username' => 'required|unique:admins,username,' . $user['id'] . ',id',
             'email' => 'required|email|unique:admins,email,' . $user['id'] . ',id',
             'password' => 'confirmed',
-            'name' => 'required',
-            'nickname' => 'required',
+//            'name' => 'required',
+//            'nickname' => 'required',
         ]);
         if ($validator->fails()) {
             $err = $validator->errors()->all();

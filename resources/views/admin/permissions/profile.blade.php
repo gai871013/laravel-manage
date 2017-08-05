@@ -44,7 +44,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control form-filter" name="info[email]"
+                        <input type="text" class="form-control" name="info[email]"
                                value="{{ $user->email or '' }}">
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control form-filter" name="info[name]"
+                        <input type="text" class="form-control" name="info[name]"
                                value="{{ $user->name or '' }}">
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control form-filter" name="info[nickname]"
+                        <input type="text" class="form-control" name="info[nickname]"
                                value="{{ $user->nickname or '' }}">
                     </div>
                 </div>
