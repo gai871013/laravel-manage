@@ -194,4 +194,5 @@ return [
     'domain' => '域名',
     'comment' => '评论',
     'time' => '时间',
+    'subscribe' => '关注',
 ];

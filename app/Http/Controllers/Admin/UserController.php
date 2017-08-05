@@ -102,13 +102,48 @@ class UserController extends Controller
             } catch (\Exception $exception) {
                 Log::error($exception);
             }
-            $next = route('admin.follower.refresh', ['next' => $v]);
+            $next = route('admin.follower.refresh', ['next' => $lists->next_openid]);
             $script = 'setUrl("' . $next . '")';
             $detail = '更新了' . $count . '条记录';
             return view('info', compact('script', 'next', 'detail'));
         }
         return redirect()->route('admin.follower');
+    }
 
+    /**
+     * 获取用户详情 2017-8-5 23:36:26 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function getFollowerRefreshDetail(Request $request)
+    {
+        set_time_limit(0);
+        $page = (int)$request->input('page');
+        $openid = $request->input('openid');
+        $app = new Application(config('wechat'));
+        $userService = $app->user;
+        if ($openid) {
+            $user = $userService->get($openid)->toArray();
+            $user['tagid_list'] = implode(',', $user['tagid_list']);
+            Follower::where('openid', $user['openid'])->update($user);
+            return redirect()->route('admin.follower', ['page' => $page]);
+
+        } else {
+            $page = $page == 0 ? $page + 2 : $page + 1;
+            $lists = Follower::select('openid')->orderBy('id', 'desc')->paginate(env('PAGE_SIZE'))->toArray();
+            $data = array_flatten($lists['data']);
+            if (count($data) > 0) {
+                $users = $userService->batchGet($data)->toArray();
+                foreach ($users['user_info_list'] as $user) {
+                    $user['tagid_list'] = implode(',', $user['tagid_list']);
+                    Follower::where('openid', $user['openid'])->update($user);
+                }
+                $detail = '更新了' . count($data) . '条记录';
+                $next = route('admin.follower.refreshDetail', ['page' => $page]);
+                return view('info', compact('script', 'next', 'detail'));
+            }
+            return redirect()->route('admin.follower');
+        }
     }
 
 }

@@ -155,8 +155,10 @@ Route::group(
             Route::post('user/editAction', $user . 'postUserEdit')->name('admin.user.editAction');
             // 微信用户管理
             Route::get('follower', $user . 'getFollowerLists')->name('admin.follower');
-            // 微信用户刷新
+            // 微信用户列表刷新
             Route::get('follower/refresh', $user . 'getFollowerRefresh')->name('admin.follower.refresh');
+            // 微信用户详情更新
+            Route::get('follower/refreshDetail',$user.'getFollowerRefreshDetail')->name('admin.follower.refreshDetail');
         });
 
         // 上传
