@@ -41,6 +41,11 @@ class FollowerController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * 编辑、添加标签
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getTagEdit(Request $request)
     {
         $id = (int)$request->input('id');
@@ -68,12 +73,17 @@ class FollowerController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * 删除标签 2017-8-6 13:31:05 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getTagDelete(Request $request)
     {
         $id = (int)$request->input('id');
         $app = new Application(config('wechat'));
         $tag = $app->user_tag;
-        FollowerTags::where('id',$id)->delete();
+        FollowerTags::where('id', $id)->delete();
 
         try {
             $tag->delete($id);
