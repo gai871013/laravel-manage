@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -90,32 +92,51 @@ class HomeController extends Controller
         $this->delete($cache_dir);
         $this->delete($sessions_dir);
         $this->delete($views_dir);
+        $this->mkDir($cache_dir);
+        $this->mkDir($sessions_dir);
+        $this->mkDir($views_dir);
         flash('清理完成')->success();
         return redirect()->back();
     }
 
     /**
-     * 删除文件/文件夹
+     * 创建目录 2017-8-6 22:51:27 by gai871013
+     * @param $dir
+     */
+    private function mkDir($dir)
+    {
+        try {
+            mkdir($dir);
+            file_put_contents($dir . '/.gitignore', "*
+!.gitignore
+");
+
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+    }
+
+    /**
+     * 清除目录 2017-8-6 22:52:02 by gai871013
      * @param $dir
      */
     private function delete($dir)
     {
-        $dir_arr = scandir($dir);
-        foreach ($dir_arr as $k => $v) {
-            if ($v == '.' || $v == '..' || $v == '.gitignore') {
-                continue;
-            }
-            if (is_dir($dir . $v)) {
-                $handle = scandir($dir);
-                foreach ($handle as $item) {
-                    if ($item == '.' || $item == '..') {
-                        continue;
+        if (file_exists($dir)) {//判断目录是否存在，如果不存在rmdir()函数会出错
+            if ($dir_handle = @opendir($dir)) {//打开目录返回目录资源，并判断是否成功
+                while ($filename = readdir($dir_handle)) {//遍历目录，读出目录中的文件或文件夹
+                    if ($filename != '.' && $filename != '..') {//一定要排除两个特殊的目录
+                        $subFile = $dir . "/" . $filename;//将目录下的文件与当前目录相连
+                        if (is_dir($subFile)) {//如果是目录条件则成了
+                            $this->delete($subFile);//递归调用自己删除子目录
+                        }
+                        if (is_file($subFile)) {//如果是文件条件则成立
+                            unlink($subFile);//直接删除这个文件
+                        }
                     }
-                    $this->delete($dir . $item);
                 }
-                rmdir($dir . '/' . $v);
-            } else {
-                @unlink($dir . '/' . $v);
+                closedir($dir_handle);//关闭目录资源
+                rmdir($dir);//删除空目录
             }
         }
     }
