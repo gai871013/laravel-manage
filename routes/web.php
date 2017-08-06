@@ -157,7 +157,7 @@ Route::group(
             // 微信用户管理
             Route::group(['prefix' => 'follower'], function () use ($follower, $user) {
                 // 列表
-                Route::get('/', $user . 'getFollowerLists')->name('admin.follower');
+                Route::get('lists', $user . 'getFollowerLists')->name('admin.follower');
                 // 微信用户列表刷新
                 Route::get('refresh', $user . 'getFollowerRefresh')->name('admin.follower.refresh');
                 // 微信用户详情更新

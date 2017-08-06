@@ -36,20 +36,6 @@
         });
         $(document).on('pjax:end', function () {
             // Pace.stop();
-            $('.content-wrapper').css('min-height', $(window).height() - 101);
-            // 左侧菜单
-            var _href2 = (typeof window._href === 'undefined') ? '' : window._href;
-            var _href3 = window.location.origin + window.location.pathname;
-            window._href = undefined;
-            $('.sidebar-menu a').each(function (index) {
-                $href = $(this).attr('href');
-                if ($href === _href3 || $href === _href2 || $href.indexOf(_href3) === 0 || (_href2 !== '' && $href.indexOf(_href2) === 0)) {
-                    $(this).parents('.treeview').addClass('active');
-                    $(this).parents('.treeview-menu').addClass('menu-open');
-                    $(this).parent('li').addClass('active').siblings().removeClass('active');
-                    return false;
-                }
-            });
             layer.closeAll();
             layer.msg('加载完成 😊', {offset: '90%', time: 700});
         });
@@ -168,12 +154,6 @@
 <script src="{{ asset('js/fontawesome-iconpicker.js') }}"></script>
 @yield('scripts')
 <a href="" id="jump"></a>
-<script>
-    // 一次通知
-    $('#flash-overlay-modal').modal();
-    $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
-</script>
-</body>
 <script type="text/javascript">
     $(function () {
         $('.content-wrapper').css('min-height', $(window).height() - 101);
@@ -248,4 +228,5 @@
         }
     }
 </script>
+</body>
 </html>
