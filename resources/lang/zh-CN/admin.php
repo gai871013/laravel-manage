@@ -185,4 +185,5 @@ return [
     'all' => '全部',
     'blackList' => '黑名单',
     'join' => '加入',
+    'tag' => '标签',
 ];

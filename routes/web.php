@@ -148,14 +148,14 @@ Route::group(
         });
 
         // 用户管理
-        Route::group(['prefix' => 'user'], function () use ($user) {
+        Route::group(['prefix' => 'user'], function () use ($follower, $user) {
             // 前台用户管理
             Route::get('userManage', $user . 'getUserManage')->name('admin.userManage');
             // 编辑用户
             Route::get('user/edit', $user . 'getUserEdit')->name('admin.user.edit');
             Route::post('user/editAction', $user . 'postUserEdit')->name('admin.user.editAction');
             // 微信用户管理
-            Route::group(['prefix' => 'follower'], function () use ($user) {
+            Route::group(['prefix' => 'follower'], function () use ($follower, $user) {
                 // 列表
                 Route::get('/', $user . 'getFollowerLists')->name('admin.follower');
                 // 微信用户列表刷新
@@ -168,6 +168,14 @@ Route::group(
                 Route::get('black', $user . 'getFollowerBlack')->name('admin.follower.black');
                 // 更新黑名单列表
                 Route::get('blackLists', $user . 'getFollowerBlackLists')->name('admin.follower.blackLists');
+                // 标签管理
+                Route::get('tags', $follower . 'getTags')->name('admin.follower.tags');
+                // 从服务器更新标签
+                Route::get('tagUpdate', $follower . 'getTagUpdate')->name('admin.follower.tagUpdate');
+                // 编辑标签
+                Route::get('tagEdit', $follower . 'getTagEdit')->name('admin.follower.tagEdit');
+                // 删除标签
+                Route::get('tagDelete', $follower . 'getTagDelete')->name('admin.follower.tagDelete');
             });
         });
 
