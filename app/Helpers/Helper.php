@@ -70,7 +70,7 @@ class Helper
             if ($user->action_list != 'all') {
                 $roleActionList = \App\Models\Role::find($user->role_id);
                 if ($roleActionList->action_list == 'all') {
-                    return $navAll;
+                    return self::formatMenu($navAll);
                 }
                 $navTmp = array_unique(explode(',', $roleActionList->action_list));
                 $parent_id = [];
@@ -98,14 +98,43 @@ class Helper
                         }
                     }
                 }
-                $navAll = $navs;
+                $navAll = self::formatMenu($navs);
             }
 
         } else {
             $navAll = null;
         }
-
         return $navAll;
+    }
+
+    /**
+     * 格式化菜单 2017-8-6 11:00:52 by gai871013
+     * @param $action
+     * @param int $parent_id
+     * @return array
+     */
+    public static function formatMenu($action, $parent_id = 0)
+    {
+        $tmp = [];
+        foreach ($action as $k => $v) {
+            if ($v['parent_id'] == $parent_id) {
+                unset($v['created_at']);
+                unset($v['updated_at']);
+                unset($v['deleted_at']);
+                $tmp[] = $v;
+                unset($action[$k]);
+            }
+        }
+
+        if (!empty($action)) {
+            foreach ($tmp as $k => $v) {
+                $children = self::formatMenu($action, $v['id']);
+                if (!empty($children)) {
+                    $tmp[$k]['children'] = $children;
+                }
+            }
+        }
+        return $tmp;
     }
 
     /**

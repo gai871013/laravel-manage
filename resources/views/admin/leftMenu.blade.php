@@ -1,28 +1,21 @@
-<li class="header">MAIN NAVIGATION</li>
-<li class="treeview"><a href="{{ route('admin.home') }}"><i class="fa fa-dashboard"></i><span>后台首页</span></a></li>
-@foreach($navAll as $k=>$v)
-	@if($v['parent_id'] == 0)
-		<li class="treeview">
-			<a href="javascript:;">
-				<i class="fa fa-{{ $v['icon'] }}"></i>
-				<span>{{ !empty($v['remark']) ? $v['remark'] : trans('admin.'.$v['lang']).trans('admin.manage') }}</span>
-				<span class="pull-right-container">
+@foreach($navAll as $k => $v)
+    <li class="treeview">
+        @php
+            $url = $v['route'] ? route($v['route']) : url($uri . $v['code']);
+        @endphp
+        <a href="@if(isset($v['children']))javascript:;@else{{ $url }}@endif">
+            <i class="fa fa-{{ $v['icon'] }}"></i>
+            {{ !empty($v['remark']) ? $v['remark'] : trans('admin.'.$v['lang']).trans('admin.manage') }}
+            @if(isset($v['children']))
+                <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-			</a>
-			<ul class="treeview-menu">
-				@foreach($navAll as $kk => $vv)
-					@if($vv['parent_id'] == $v['id'])
-						@php
-							$url = $vv['route'] ? route($vv['route']) : url(config('app.admin_path').'/'.$v['code']).'/'.$vv['code'];
-						@endphp
-						<li><a title="{{ $vv['remark'] }}" href="{{ $url }}"
-						       @if(!empty($vv['class']))clsss="{{ $vv['class'] }}"@endif><i
-										class="fa fa-{{ $vv['icon'] }}"></i>
-								{{ !empty($vv['remark']) ? $vv['remark'] : trans('admin.'.$vv['lang']) }}</a></li>
-					@endif
-				@endforeach
-			</ul>
-		</li>
-	@endif
+            @endif
+        </a>
+        @if(isset($v['children']))
+            <ul class="treeview-menu">
+                @include('admin.leftMenu', ['navAll' => $v['children'], 'uri' => $url . '/'])
+            </ul>
+        @endif
+    </li>
 @endforeach

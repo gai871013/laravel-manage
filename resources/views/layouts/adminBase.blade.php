@@ -43,8 +43,9 @@
             window._href = undefined;
             $('.sidebar-menu a').each(function (index) {
                 $href = $(this).attr('href');
-                if ($href === _href3 || $href === _href2) {
+                if ($href === _href3 || $href === _href2 || $href.indexOf(_href3) === 0 || (_href2 !== '' && $href.indexOf(_href2) === 0)) {
                     $(this).parents('.treeview').addClass('active');
+                    $(this).parents('.treeview-menu').addClass('menu-open');
                     $(this).parent('li').addClass('active').siblings().removeClass('active');
                     return false;
                 }
@@ -132,7 +133,14 @@
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                @include('admin.leftMenu',['navAll'=>\App\Helpers\Helper::leftMenu('admin')]);
+                <li class="header">MAIN NAVIGATION</li>
+                <li class="treeview"><a href="{{ route('admin.home') }}"><i
+                                class="fa fa-dashboard"></i><span>后台首页</span></a>
+                    @php
+                        $navAll = \App\Helpers\Helper::leftMenu('admin');
+                        $uri = config('app.admin_path') .'/';
+                    @endphp
+                    @include('admin.leftMenu', ['navAll'=>\App\Helpers\Helper::leftMenu('admin'), 'uri' => $uri]);
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -193,8 +201,9 @@
         window._href = undefined;
         $('.sidebar-menu a').each(function (index) {
             $href = $(this).attr('href');
-            if ($href === _href3 || $href === _href2) {
+            if ($href === _href3 || $href === _href2 || $href.indexOf(_href3) === 0 || (_href2 !== '' && $href.indexOf(_href2) === 0)) {
                 $(this).parents('.treeview').addClass('active');
+                $(this).parents('.treeview-menu').addClass('menu-open');
                 $(this).parent('li').addClass('active').siblings().removeClass('active');
                 return false;
             }
