@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use App\Models\Car;
-use App\Models\Expense;
 use App\Models\Follower;
 use App\Models\Journey;
 use App\Models\Task;
-use App\User;
-use EasyWeChat\Foundation\Application;
-use function EasyWeChat\Payment\get_client_ip;
 use Illuminate\Http\Request;
 
 class WeChatController extends Controller
@@ -23,7 +18,7 @@ class WeChatController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('weChat.updateFollower');
+        $this->middleware('weChat.updateFollower')->except('getIndex');
     }
 
 
