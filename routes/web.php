@@ -61,6 +61,7 @@ Route::group(['prefix' => 'wechat', 'middleware' => ['web', 'weChat.oauth:snsapi
     // 首页
     Route::get('/', $weChat . 'getIndex')->name('weChat.home');
 });
+// 微信服务
 Route::any('WeChat','WeChatServeController@handleMessage');
 
 // 需要登录之后才能访问
