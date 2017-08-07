@@ -82,11 +82,11 @@
         $(function () {
             setUrl('{{ route('admin.system.menuManage') }}');
             var val = $(this).find('option:selected').attr('data-url');
-            $('.url').html(val);
+            $('.url').html(val + '/');
             $('.parent_id').on('change', function () {
                 var val = $(this).find('option:selected').attr('data-url');
 //                console.log(val);
-                $('.url').html(val);
+                $('.url').html(val + '/');
             });
             $('.icon').iconpicker({placement: 'bottomLeft'});
         });

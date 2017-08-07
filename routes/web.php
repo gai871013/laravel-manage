@@ -22,6 +22,12 @@ $car = 'CarController@';
 $journeyTask = 'JourneyTaskController@';
 $weChat = 'WeChatController@';
 $follower = 'FollowerController@';
+$material = 'MaterialController@';
+$menu = 'MenuController@';
+$message = 'MessageController@';
+$broadcast = 'BroadcastController@';
+
+
 
 Route::group(['middleware' => ['web']], function () use ($news, $home) {
     // 查看日志
@@ -77,7 +83,7 @@ Route::group(['prefix' => config('app.admin_path'), 'namespace' => 'Admin'], fun
 // 后台用户管理
 Route::group(
     ['prefix' => config('app.admin_path'), 'namespace' => 'Admin', 'middleware' => ['auth.admin:admin', 'admin.log']],
-    function () use ($follower, $home, $login, $system, $permissions, $user, $news, $upload, $car, $journeyTask) {
+    function () use ($broadcast, $message, $menu, $material, $follower, $home, $login, $system, $permissions, $user, $news, $upload, $car, $journeyTask) {
         // 后台首页
         Route::get('/', $home . 'index');
         Route::get('home', $home . 'index')->name('admin.home');
@@ -148,26 +154,31 @@ Route::group(
         });
 
         // 用户管理
-        Route::group(['prefix' => 'user'], function () use ($follower, $user) {
+        Route::group(['prefix' => 'user'], function () use ($user) {
             // 前台用户管理
             Route::get('userManage', $user . 'getUserManage')->name('admin.userManage');
             // 编辑用户
             Route::get('user/edit', $user . 'getUserEdit')->name('admin.user.edit');
             Route::post('user/editAction', $user . 'postUserEdit')->name('admin.user.editAction');
+        });
+
+        // 微信相关管理
+        Route::group(['prefix' => 'WeChat'], function () use ($broadcast, $message, $menu, $material, $follower) {
+
             // 微信用户管理
-            Route::group(['prefix' => 'follower'], function () use ($follower, $user) {
+            Route::group(['prefix' => 'follower'], function () use ($follower) {
                 // 列表
-                Route::get('lists', $user . 'getFollowerLists')->name('admin.follower');
+                Route::get('lists', $follower . 'getFollowerLists')->name('admin.follower');
                 // 微信用户列表刷新
-                Route::get('refresh', $user . 'getFollowerRefresh')->name('admin.follower.refresh');
+                Route::get('refresh', $follower . 'getFollowerRefresh')->name('admin.follower.refresh');
                 // 微信用户详情更新
-                Route::get('refreshDetail', $user . 'getFollowerRefreshDetail')->name('admin.follower.refreshDetail');
+                Route::get('refreshDetail', $follower . 'getFollowerRefreshDetail')->name('admin.follower.refreshDetail');
                 // 备注管理
-                Route::any('remark', $user . 'getFollowerRemark')->name('admin.follower.remark');
+                Route::any('remark', $follower . 'getFollowerRemark')->name('admin.follower.remark');
                 // 加入、取消黑名单
-                Route::get('black', $user . 'getFollowerBlack')->name('admin.follower.black');
+                Route::get('black', $follower . 'getFollowerBlack')->name('admin.follower.black');
                 // 更新黑名单列表
-                Route::get('blackLists', $user . 'getFollowerBlackLists')->name('admin.follower.blackLists');
+                Route::get('blackLists', $follower . 'getFollowerBlackLists')->name('admin.follower.blackLists');
                 // 标签管理
                 Route::get('tags', $follower . 'getTags')->name('admin.follower.tags');
                 // 从服务器更新标签
@@ -176,11 +187,32 @@ Route::group(
                 Route::get('tagEdit', $follower . 'getTagEdit')->name('admin.follower.tagEdit');
                 // 删除标签
                 Route::get('tagDelete', $follower . 'getTagDelete')->name('admin.follower.tagDelete');
+                // 分组管理
+                Route::get('groups', $follower . 'getGroups')->name('admin.follower.groups');
             });
-        });
 
-        Route::group(['prefix' => 'WeChat'], function () use ($follower) {
+            // 素材管理
+            Route::group(['prefix' => 'material'], function () use ($material) {
+                // 永久素材
+                Route::get('forever', $material . 'getForeverLists')->name('admin.material.forever');
+                // 临时素材
+                Route::get('temporary', $material . 'getTemporaryLists')->name('admin.material.temporary');
+            });
 
+            // 菜单管理
+            Route::group(['prefix' => 'menu'], function () use ($menu) {
+                Route::get('/', $menu . 'getIndex')->name('admin.WeChat.menu');
+            });
+
+            // 自动回复
+            Route::group(['prefix' => 'message'], function () use ($message) {
+                Route::get('/', $message . 'getIndex')->name('admin.WeChat.message');
+            });
+
+            // 消息群发
+            Route::group(['prefix' => 'broadcast'], function () use ($broadcast) {
+                Route::get('/', $broadcast . 'getIndex')->name('admin.WeChat.broadcast');
+            });
         });
 
         // 上传
