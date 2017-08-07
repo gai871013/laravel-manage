@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAdminsTable extends Migration
 {
@@ -15,7 +15,7 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->increments('id')->comment('ID');
-            $table->string('username')->unique()->comment('用户名');
+            $table->string('username', 100)->unique()->comment('用户名');
             $table->string('email')->comment('邮箱');
             $table->string('password')->comment('密码');
             $table->string('name')->nullable()->comment('姓名');
