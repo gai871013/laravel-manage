@@ -40,7 +40,7 @@ return [
      */
     'log' => [
         'level' => env('WECHAT_LOG_LEVEL', 'debug'),
-        'file' => env('WECHAT_LOG_FILE', storage_path('logs/wechat.log')),
+        'file' => env('WECHAT_LOG_FILE', storage_path('logs/wechat-' . date('Y-m-d') . '.log')),
     ],
 
     /*
@@ -84,7 +84,7 @@ return [
         "province" => "河南",
         "city" => "郑州",
         "country" => "中国",
-        "language"=>"zh_CN",
+        "language" => "zh_CN",
         "headimgurl" => "http://wx.qlogo.cn/mmopen/EZib9CYjmh35m2ichlYbq3BczibLbfUUpsg7GzK7Wryia8SocxnScia613RHbDRYlhnibzwUGxRqayvrbR2TsLgAJdx6tWicc52hRbl/0",
     ],
 ];

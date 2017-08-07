@@ -25,8 +25,8 @@ class WeChatServeController extends Controller
             Log::info(json_encode($message));
             $msgType = $message->MsgType;
             $message->ToUserName;    //接收方帐号（该公众号 ID）
-            $message->FromUserName;  //发送方帐号（OpenID, 代表用户的唯一标识）
-            $message->CreateTime;    //消息创建时间（时间戳）
+            $openid = $message->FromUserName;  //发送方帐号（OpenID, 代表用户的唯一标识）
+            $time = $message->CreateTime;    //消息创建时间（时间戳）
             $message->MsgId;         //消息 ID（64位整型）
             if ($msgType == 'event') {# 事件消息...
                 Log::info($message->Event);
@@ -35,6 +35,7 @@ class WeChatServeController extends Controller
                     case 'subscribe':
                         return '欢迎关注https//:www.wc87.com';
                         break;
+
                     default:
                         # code...
                         break;
