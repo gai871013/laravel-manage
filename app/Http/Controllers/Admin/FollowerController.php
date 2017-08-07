@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Follower;
 use App\models\FollowerTags;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 
 class FollowerController extends Controller
@@ -28,7 +28,7 @@ class FollowerController extends Controller
         } else {
             $lists = $lists->paginate(env('PAGE_SIZE'));
         }
-        return view('admin.user.followerLists', compact('lists', 'type'));
+        return view('admin.WeChat.follower.followerLists', compact('lists', 'type'));
     }
 
     /**
@@ -103,7 +103,7 @@ class FollowerController extends Controller
                     Follower::where('openid', $user['openid'])->update($user);
                 }
                 $title = '更新成功！';
-                $detail = '更新了' . count($data) . '条记录 openID:[ "' . implode('" , "', $data) .'" "]';
+                $detail = '更新了' . count($data) . '条记录 openID:[ "' . implode('" , "', $data) . '" "]';
                 $next = route('admin.follower.refreshDetail', ['page' => $page]);
                 $sec = 1;
                 return view('info', compact('script', 'next', 'detail', 'sec', 'title'));
@@ -205,7 +205,7 @@ class FollowerController extends Controller
     public function getTags(Request $request)
     {
         $lists = FollowerTags::orderBy('id', 'asc')->get();
-        return view('admin.user.tags', compact('lists'));
+        return view('admin.WeChat.follower.tags', compact('lists'));
     }
 
     /**
@@ -281,8 +281,13 @@ class FollowerController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * 粉丝分组管理 2017-8-7 11:21:42 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getGroups(Request $request)
     {
-        return [2,3,4];
+        return view('admin.WeChat.follower.groups');
     }
 }

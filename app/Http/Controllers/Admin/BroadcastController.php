@@ -9,6 +9,6 @@ class BroadcastController extends Controller
 {
     public function getIndex(Request $request)
     {
-        return $request;
+        return view('admin.WeChat.broadcast.index');
     }
 }

@@ -3,6 +3,8 @@
     $uri_arr = explode('/',$uri);
     $lang = end($uri_arr);
     $tit_parent = trans('admin.' . $uri_arr[1]);
+    $tit_parent_2 = \App\Models\AdminAction::where('lang', $uri_arr[1])->first();
+    $tit_parent = !empty($tit_parent_2) ? $tit_parent_2->remark : $tit_parent;
     $str = 'admin.' . $lang;
     $tit = trans($str);
     $action = \App\Models\AdminAction::where('lang', $lang)->first();
