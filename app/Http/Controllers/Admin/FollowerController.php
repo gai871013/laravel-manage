@@ -300,11 +300,11 @@ class FollowerController extends Controller
      */
     public function getGroupUpdate(Request $request, Application $app)
     {
-        $tag = $app->user_group;
+        $group = $app->user_group;
         try {
-            $tags = $tag->lists()->toArray()['groups'];
+            $group->lists()->toArray()['groups'];
             FollowerGroups::truncate();
-            FollowerGroups::insert($tags);
+            FollowerGroups::insert($group);
         } catch (\Exception $exception) {
             Log::error($exception);
         }
@@ -322,11 +322,11 @@ class FollowerController extends Controller
         $id = (int)$request->input('id');
         $remark = $request->input('remark');
         $app = new Application(config('wechat'));
-        $tag = $app->user_group;
+        $group = $app->user_group;
         // 更新
         if ($id > 0) {
             try {
-                $res = $tag->update($id, $remark);
+                $res = $group->update($id, $remark);
                 FollowerGroups::where('id', $id)->update(['name' => $remark]);
             } catch (\Exception $exception) {
                 Log::error($exception);
@@ -334,7 +334,7 @@ class FollowerController extends Controller
         } else {
             // 添加
             try {
-                $tag->create($remark);
+                $group->create($remark);
                 FollowerGroups::create(['name' => $remark]);
             } catch (\Exception $exception) {
                 Log::error($exception);
@@ -353,9 +353,9 @@ class FollowerController extends Controller
     public function getGroupDelete(Request $request, Application $app)
     {
         $id = (int)$request->input('id');
-        $tag = $app->user_group;
+        $group = $app->user_group;
         try {
-            $res = $tag->delete($id);
+            $group->delete($id);
             FollowerGroups::where('id', $id)->delete();
         } catch (\Exception $exception) {
             Log::error($exception);
