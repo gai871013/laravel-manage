@@ -190,6 +190,12 @@ Route::group(
                 Route::get('tagDelete', $follower . 'getTagDelete')->name('admin.follower.tagDelete');
                 // 分组管理
                 Route::get('groups', $follower . 'getGroups')->name('admin.follower.groups');
+                // 从服务器更新标签
+                Route::get('groupUpdate', $follower . 'getGroupUpdate')->name('admin.follower.groupUpdate');
+                // 编辑标签
+                Route::get('groupEdit', $follower . 'getGroupEdit')->name('admin.follower.groupEdit');
+                // 删除标签
+                Route::get('groupDelete', $follower . 'getGroupDelete')->name('admin.follower.groupDelete');
             });
 
             // 素材管理

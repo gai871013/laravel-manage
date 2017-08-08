@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Follower;
+use App\models\FollowerGroups;
 use App\models\FollowerTags;
 use EasyWeChat\Foundation\Application;
 use Illuminate\Http\Request;
@@ -288,6 +289,78 @@ class FollowerController extends Controller
      */
     public function getGroups(Request $request)
     {
-        return view('admin.WeChat.follower.groups');
+        $lists = FollowerGroups::orderBy('id', 'asc')->get();
+        return view('admin.WeChat.follower.groups', compact('lists'));
+    }
+
+    /**
+     * 更新分组 2017-8-8 14:51:02 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getGroupUpdate(Request $request, Application $app)
+    {
+        $tag = $app->user_group;
+        try {
+            $tags = $tag->lists()->toArray()['groups'];
+            FollowerGroups::truncate();
+            FollowerGroups::insert($tags);
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+        flash()->success(__('admin.operating') . __('admin.success'));
+        return redirect()->back();
+    }
+
+    /**
+     * 编辑分类 2017-8-8 14:56:02 by gai871013
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getGroupEdit(Request $request)
+    {
+        $id = (int)$request->input('id');
+        $remark = $request->input('remark');
+        $app = new Application(config('wechat'));
+        $tag = $app->user_group;
+        // 更新
+        if ($id > 0) {
+            try {
+                $res = $tag->update($id, $remark);
+                FollowerGroups::where('id', $id)->update(['name' => $remark]);
+            } catch (\Exception $exception) {
+                Log::error($exception);
+            }
+        } else {
+            // 添加
+            try {
+                $tag->create($remark);
+                FollowerGroups::create(['name' => $remark]);
+            } catch (\Exception $exception) {
+                Log::error($exception);
+            }
+        }
+        flash()->success(__('admin.operating') . __('admin.success'));
+        return redirect()->back();
+    }
+
+    /**
+     * 删除分组 2017-8-8 15:20:42 by gai871013
+     * @param Request $request
+     * @param Application $app
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getGroupDelete(Request $request, Application $app)
+    {
+        $id = (int)$request->input('id');
+        $tag = $app->user_group;
+        try {
+            $res = $tag->delete($id);
+            FollowerGroups::where('id', $id)->delete();
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+        flash()->success(__('admin.operating') . __('admin.success'));
+        return redirect()->back();
     }
 }

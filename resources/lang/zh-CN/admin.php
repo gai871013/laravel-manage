@@ -186,4 +186,5 @@ return [
     'blackList' => '黑名单',
     'join' => '加入',
     'tag' => '标签',
+    'group' => '分组',
 ];
