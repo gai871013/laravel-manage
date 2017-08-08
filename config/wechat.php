@@ -21,6 +21,14 @@ return [
     'token' => env('WECHAT_TOKEN', 'your-token'),          // Token
     'aes_key' => env('WECHAT_AES_KEY', ''),                    // EncodingAESKey
 
+    'mini_program' => [
+        'app_id' => 'wx86703f5c395c067e',
+        'secret' => '1d3923444ccc98b7be1f54bd8e182004',
+        // token 和 aes_key 开启消息推送后可见
+        'token' => 'your-token',
+        'aes_key' => 'your-aes-key'
+    ],
+
     /**
      * 开放平台第三方平台配置信息
      */

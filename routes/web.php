@@ -28,7 +28,6 @@ $message = 'MessageController@';
 $broadcast = 'BroadcastController@';
 
 
-
 Route::group(['middleware' => ['web']], function () use ($news, $home) {
     // 查看日志
     Route::get('laravel-logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
@@ -62,7 +61,7 @@ Route::group(['prefix' => 'wechat', 'middleware' => ['web', 'weChat.oauth:snsapi
     Route::get('/', $weChat . 'getIndex')->name('weChat.home');
 });
 // 微信服务
-Route::any('WeChat','WeChatServeController@handleMessage');
+Route::any('WeChat', 'WeChatServeController@handleMessage');
 
 // 需要登录之后才能访问
 Route::group(['middleware' => ['web', 'auth']], function () use ($home) {
@@ -209,6 +208,8 @@ Route::group(
             // 自动回复
             Route::group(['prefix' => 'message'], function () use ($message) {
                 Route::get('/', $message . 'getIndex')->name('admin.WeChat.message');
+                // 关注回复
+                Route::get('subscribe', $message . 'getSubscribe')->name('admin.WeChat.message.subscribe');
             });
 
             // 消息群发

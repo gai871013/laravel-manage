@@ -46,7 +46,15 @@
             // 阻止超时导致链接跳转事件发生
             event.preventDefault()
         });
-
+        /**
+         * 设置URL
+         * @param url
+         */
+        window.setUrl = function (url) {
+            if (typeof url !== 'undefined') {
+                window._href = url;
+            }
+        }
     </script>
     @include('vendor.ueditor.assets')
     @yield('head')
@@ -217,16 +225,6 @@
         $('#flash-overlay-modal').modal();
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     });
-
-    /**
-     * 设置URL
-     * @param url
-     */
-    window.setUrl = function (url) {
-        if (typeof url !== 'undefined') {
-            window._href = url;
-        }
-    }
 </script>
 </body>
 </html>
