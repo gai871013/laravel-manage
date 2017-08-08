@@ -37,5 +37,14 @@ class Follower extends Model
         return $this->belongsTo(\App\User::class, 'user_id');
     }
 
+    /**
+     * 用户所在组
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function group()
+    {
+        return $this->belongsTo(FollowerGroups::class, 'groupid');
+    }
+
 
 }

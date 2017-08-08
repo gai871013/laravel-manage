@@ -300,11 +300,13 @@ class FollowerController extends Controller
      */
     public function getGroupUpdate(Request $request, Application $app)
     {
+//        $app = new Application(config('wechat'));
         $group = $app->user_group;
         try {
-            $group->lists()->toArray()['groups'];
+            $lists = $group->lists()->toArray()['groups'];
+
             FollowerGroups::truncate();
-            FollowerGroups::insert($group);
+            FollowerGroups::insert($lists);
         } catch (\Exception $exception) {
             Log::error($exception);
         }
@@ -313,7 +315,7 @@ class FollowerController extends Controller
     }
 
     /**
-     * 编辑分类 2017-8-8 14:56:02 by gai871013
+     * 编辑分组 2017-8-8 14:56:02 by gai871013
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -334,8 +336,8 @@ class FollowerController extends Controller
         } else {
             // 添加
             try {
-                $group->create($remark);
-                FollowerGroups::create(['name' => $remark]);
+                $res = $group->create($remark);
+                FollowerGroups::create($res->toArray()['group']);
             } catch (\Exception $exception) {
                 Log::error($exception);
             }
