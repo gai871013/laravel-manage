@@ -152,17 +152,10 @@ class Helper
             if ($v['parent_id'] == $parent_id) {
                 $tmp[] = $v;
                 $uri[] = $url . '/' . $v['code'];
-                unset($action[$k]);
             }
-        }
-
-
-        if (!empty($action)) {
-            foreach ($tmp as $k => $v) {
-                $children = self::actionUri($action, $v['id'], $uri[$k]);
-                if (!empty($children)) {
-                    $uri = array_merge($uri, $children);
-                }
+            if (isset($v['children'])) {
+                $a = self::actionUri($v['children'], $v['id'], $url . '/' . $v['code']);
+                $uri = array_merge($uri, $a);
             }
         }
 
