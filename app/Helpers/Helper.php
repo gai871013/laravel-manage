@@ -33,10 +33,7 @@ namespace App\Helpers;
 
 
 use App\Models\SMSRecord;
-use App\Models\Uploads;
 use GuzzleHttp\Client;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 class Helper
 {
@@ -73,31 +70,14 @@ class Helper
                     return self::formatMenu($navAll);
                 }
                 $navTmp = array_unique(explode(',', $roleActionList->action_list));
-                $parent_id = [];
-                foreach ($navTmp as $k => $v) {
-                    foreach ($navAll as $kk => $vv) {
+                $navTmp = array_unique(self::parentId($navTmp, $navAll));
 
-                        $parent_id_tmp = 0;
-                        if ($vv['id'] == $v) {
-                            $navs[] = $navAll[$kk];
-                            $parent_id_tmp = $navAll[$kk]['parent_id'];
-                        }
-                        if (!in_array($parent_id_tmp, $parent_id)) {
-                            $parent_id[] = $parent_id_tmp;
-                        }
+                foreach ($navAll as $v) {
+                    if (in_array($v['id'], $navTmp)) {
+                        $navs[] = $v;
                     }
                 }
 
-                unset($parent_id[0]);
-                $parent_id = array_unique($parent_id);
-
-                foreach ($parent_id as $k => $v) {
-                    foreach ($navAll as $kk => $vv) {
-                        if ($vv['id'] == $v) {
-                            $navs[] = $navAll[$kk];
-                        }
-                    }
-                }
                 $navAll = self::formatMenu($navs);
             }
 
@@ -105,6 +85,46 @@ class Helper
             $navAll = null;
         }
         return $navAll;
+    }
+
+    /**
+     * 获取权限ids对应的所有菜单 2017-8-9 17:59:13 by gai871013
+     * @param array $ids
+     * @param array $all
+     * @return array
+     */
+    private static function parentId(Array $ids, Array $all)
+    {
+        foreach ($ids as $id) {
+            $parent = self::parent($id, $all);
+            foreach ($parent as $v) {
+                if ($v > 0 && !in_array($v, $ids)) {
+                    $ids[] = $v;
+                }
+            }
+        }
+        return $ids;
+    }
+
+    /**
+     * 获取id的所有父级ID
+     * @param $id
+     * @param $all
+     * @return array
+     */
+    private static function parent($id, $all)
+    {
+        $parent = [];
+        foreach ($all as $v) {
+            if ($v['id'] == $id) {
+                $parent[] = $v['parent_id'];
+                if ($v['parent_id'] > 0) {
+                    $tmp = self::parent($v['parent_id'], $all);
+                    $parent = array_merge($parent, $tmp);
+                }
+            }
+        }
+        return $parent;
     }
 
     /**

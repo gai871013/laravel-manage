@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AdminAction;
@@ -57,6 +58,7 @@ class PermissionsController extends Controller
             $action_list = explode(',', $role->action_list);
         }
         $admin_action = AdminAction::orderBy('list_order', 'asc')->orderBy('id', 'asc')->get();
+        $admin_action = Helper::formatMenu($admin_action, 0);
         return view('admin.permissions.roleEdit', compact('title', 'role', 'admin_action', 'action_list'));
     }
 

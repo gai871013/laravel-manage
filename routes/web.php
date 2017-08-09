@@ -107,6 +107,7 @@ Route::group(
             Route::get('categoryDelete', $news . 'getCategoryDelete')->name('admin.news.category.delete');
 
             // 新闻管理
+            Route::get('', $news . 'getNewsList')->name('admin.news.newsListIndex');
             Route::get('newsList', $news . 'getNewsList')->name('admin.news.newsList');
             // 编辑新闻
             Route::get('newsEdit', $news . 'getNewsEdit')->name('admin.news.newsEdit');
