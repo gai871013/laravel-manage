@@ -1,9 +1,17 @@
 <script type="text/javascript">
-    function daoru() {
-        $("input[type='file']").click();
+    globalIndex = 0;
+
+    function daoru(index) {
+        globalIndex = typeof index === 'undefined' ? 0 : index;
+        $("input[type='file']").eq(globalIndex).click();
+        upload();
     }
-    $(function () {
-        $("input[type='file']").change(function () {
+
+    /**
+     * 上传方法 2017-8-11 15:03:27
+     */
+    function upload() {
+        $("input[type='file']").eq(globalIndex).change(function () {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('input[name="_token"]').val()
@@ -26,9 +34,9 @@
                 dataType: 'json',    //不可缺
                 success: function (data) {
                     if (data.status_code == 20001) {
-                        $('.filePath').val(data.filename);
-                        $('.importData').fadeIn().css('display', 'inline');
-                        $('.img-view').attr('src', data.url);
+                        $('.filePath').eq(globalIndex).val(data.filename);
+                        $('.importData').eq(globalIndex).fadeIn().css('display', 'inline');
+                        $('.img-view').eq(globalIndex).attr('src', data.url);
                         layer.msg('上传成功，请及时处理');
 
                     } else {
@@ -37,6 +45,6 @@
                 }
             });
         });
-    });
+    }
 
 </script>

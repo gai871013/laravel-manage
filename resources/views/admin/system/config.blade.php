@@ -277,9 +277,17 @@
 										<span class="required">*</span>
 									</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control form-filter"
-										       name="WECHAT_PAYMENT_CERT_PATH"
-										       value="{{ env('WECHAT_PAYMENT_CERT_PATH','') }}">
+										<div class="input-group">
+											<input type="text" class="form-control form-filter filePath"
+											       name="WECHAT_PAYMENT_CERT_PATH"
+											       value="{{ env('WECHAT_PAYMENT_CERT_PATH','') }}">
+											<span class="input-group-btn">
+				                                <button onclick="daoru(0)" type="button" class="btn btn-info btn-flat">
+					                                <i class="fa fa-file"></i> @lang('admin.uploadFile')
+				                                </button>
+				                            </span>
+											<input type="file" style="display: none;">
+										</div>
 									</div>
 								</div>
 								<div class="form-group">
@@ -288,14 +296,15 @@
 									</label>
 									<div class="col-md-10">
 										<div class="input-group">
-											<input type="text" class="form-control form-filter"
+											<input type="text" class="form-control form-filter filePath"
 											       name="WECHAT_PAY_KEY_PATH"
 											       value="{{ env('WECHAT_PAY_KEY_PATH','') }}">
 											<span class="input-group-btn">
-				                                <button onclick="daoru()" type="button" class="btn btn-info btn-flat">
+				                                <button onclick="daoru(1)" type="button" class="btn btn-info btn-flat">
 					                                <i class="fa fa-file"></i> @lang('admin.uploadFile')
 				                                </button>
 				                            </span>
+											<input type="file" style="display: none;">
 
 										</div>
 									</div>
