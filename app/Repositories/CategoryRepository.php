@@ -12,6 +12,10 @@ namespace App\Repositories;
 
 use App\Models\Categories;
 
+/**
+ * Class CategoryRepository
+ * @package App\Repositories
+ */
 class CategoryRepository
 {
     /**
@@ -34,7 +38,7 @@ class CategoryRepository
      * 获取分类信息 2017-8-15 11:22:30 by gai871013
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function get($where = [])
+    public function get(array $where = [])
     {
         return $this->category->where($where)->orderBy('sort', 'asc')->orderBy('id', 'desc')->get();
     }
@@ -59,7 +63,7 @@ class CategoryRepository
      * @param array $where
      * @return \Illuminate\Database\Eloquent\Model|null|static
      */
-    public function findForUpdate($where = [])
+    public function findForUpdate(array $where = [])
     {
         return $this->category->where($where)->lockForUpdate()->first();
     }
@@ -70,7 +74,7 @@ class CategoryRepository
      * @param array $update
      * @return $this|bool|\Illuminate\Database\Eloquent\Model
      */
-    public function save($update = [], $where = [])
+    public function save(array $update = [], array $where = [])
     {
         if (empty($where)) {
             return $this->category->create($update);

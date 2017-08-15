@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Comments;
 use App\Repositories\CategoryRepository;
 use App\Repositories\NewsRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -64,8 +65,7 @@ class NewsController extends Controller
         $id = (int)$request->input('id');
         $parent_id = (int)$request->input('parent_id');
         $category = $this->category->find($id);
-        $where = [['id', '!=', $id]];
-        $categories = $this->category->get($where);
+        $categories = $this->category->get([['id', '!=', $id]]);
         return view('admin.news.categoryEdit', compact('category', 'id', 'categories', 'parent_id'));
     }
 
@@ -175,7 +175,6 @@ class NewsController extends Controller
             }
         }
         $child_id = array_unique($child_id);
-//        Categories::where('id', $cat_id)->update(['child_id' => implode(',', $child_id)]);
         return $child_id;
     }
 

@@ -196,7 +196,10 @@ return [
         Overtrue\LaravelLang\TranslationServiceProvider::class,
         // 视图合成器
         App\Providers\ComposerServiceProvider::class,
-
+        // laravel-repository
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        // https://github.com/spatie/laravel-fractal
+        Spatie\Fractal\FractalServiceProvider::class,
     ],
 
     /*
