@@ -220,7 +220,6 @@ class NewsController extends Controller
 
     /**
      * 编辑新闻
-     * @param $id
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
