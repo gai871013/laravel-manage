@@ -3,10 +3,10 @@
 基于Laravel的管理系统,致力于做一个五站合一(电脑站 + 手机站 + 微信公众平台 + APP + 小程序 五合一)的系统 演示网址:[https://www.wc87.com](https://www.wc87.com)
 
 ## 服务器要求
-本系统基于Laravel开发完成，Laravel 框架会有一些系统上的要求。当然，这些要求在 Laravel Homestead 虚拟机上都已经完全配置好了。所以，非常推荐你使用 Homestead 作为你的本地 Laravel 开发环境。
+本系统基于Laravel 5.5开发完成，Laravel 框架会有一些系统上的要求。当然，这些要求在 Laravel Homestead 虚拟机上都已经完全配置好了。所以，非常推荐你使用 Homestead 作为你的本地 Laravel 开发环境。
 如果你没有使用 Homestead ，你需要确保你的服务器上安装了下面的几个拓展：
 ```
-PHP >= 5.6.4
+PHP >= 7.0.0
 OpenSSL PHP Extension
 PDO PHP Extension
 Mbstring PHP Extension
