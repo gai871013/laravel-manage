@@ -52,6 +52,13 @@ DB_PREFIX
 ```
 
 #### 2.程序依赖安装
+安装依赖前准备：
+先注释掉 ``app/Providers/AppServiceProvider.php`` 第 ``18、19``两行
+```php
+        // $nav = Categories::where('is_menu', 1)->get();
+        // View::share('nav', $nav);
+```
+然后执行
 ```shell
 composer install
 ```
@@ -61,6 +68,7 @@ composer install
 ```shell
 php artisan migrate
 ```
+数据库迁移完成后打开 ``app/Providers/AppServiceProvider.php`` 第 ``18、19``两行注释
 
 #### 4.数据填充
 ```shell
