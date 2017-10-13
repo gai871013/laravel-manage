@@ -1,11 +1,11 @@
 {
     "name": "gai871013/LaravelManage",
     "description": "基于Laravel的管理系统,致力于做一个五站合一(电脑站 + 手机站 + 微信公众平台 + APP + 小程序 五合一)的系统",
-    "keywords": ["framework", "laravel", "manage", "manageSystem"],
+    "keywords": ["LaravelManage"],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1.0",
         "barryvdh/laravel-ide-helper": "^2.4",
         "fideloper/proxy":"~3.3",
         "guzzlehttp/guzzle": "^6.2",

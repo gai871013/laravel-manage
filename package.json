@@ -13,17 +13,17 @@
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
     "cross-env": "^3.2.3",
-    "inputmask": "^3.3.5",
+    "inputmask": "^3.3.9",
     "jquery": "^3.1.1",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
-    "vue": "^2.4.2"
+    "vue": "^2.5.0"
   },
   "dependencies": {
     "@fengyuanchen/datepicker": "github:fengyuanchen/datepicker",
     "admin-lte": "^2.3.11",
     "bootstrap": "^3.3.7",
-    "bootstrap-colorpicker": "^2.5.1",
+    "bootstrap-colorpicker": "^2.5.2",
     "bootstrap-validator": "^0.11.9",
     "csshake": "^1.5.2",
     "datetimepicker": "^0.1.38",
@@ -36,9 +36,10 @@
     "jquery": "^1.12.4",
     "jquery-pjax": "github:defunkt/jquery-pjax",
     "layer": "github:sentsin/layer",
+    "layui-layer": "github:sentsin/layer",
     "pace": "0.0.4",
     "pace-progress": "github:HubSpot/pace",
-    "select2": "^4.0.3",
+    "select2": "^4.0.4",
     "zepto": "^1.1.6"
   }
 }

@@ -6,7 +6,7 @@
 本系统基于Laravel 5.5开发完成，Laravel 框架会有一些系统上的要求。当然，这些要求在 Laravel Homestead 虚拟机上都已经完全配置好了。所以，非常推荐你使用 Homestead 作为你的本地 Laravel 开发环境。
 如果你没有使用 Homestead ，你需要确保你的服务器上安装了下面的几个拓展：
 ```
-PHP >= 7.0.0
+PHP >= 7.1.0
 OpenSSL PHP Extension
 PDO PHP Extension
 Mbstring PHP Extension
@@ -52,13 +52,7 @@ DB_PREFIX
 ```
 
 #### 2.程序依赖安装
-安装依赖前准备：
-先注释掉 ``app/Providers/AppServiceProvider.php`` 第 ``18、19``两行
-```php
-        // $nav = Categories::where('is_menu', 1)->get();
-        // View::share('nav', $nav);
-```
-然后执行
+执行
 ```shell
 composer install
 ```
@@ -68,7 +62,6 @@ composer install
 ```shell
 php artisan migrate
 ```
-数据库迁移完成后打开 ``app/Providers/AppServiceProvider.php`` 第 ``18、19``两行注释
 
 #### 4.数据填充
 ```shell

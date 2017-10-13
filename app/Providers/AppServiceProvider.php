@@ -15,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $nav = Categories::where('is_menu', 1)->get();
+        try {
+            $nav = Categories::where('is_menu', 1)->get();
+        } catch (\Exception $exception) {
+            \Log::error($exception);
+            $nav = [];
+        }
         View::share('nav', $nav);
     }
 
