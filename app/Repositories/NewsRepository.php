@@ -41,7 +41,7 @@ class NewsRepository
         if ($page_size == 0) {
             $page_size = env('PAGE_SIZE');
         }
-        return $this->news->where($where)->paginate($page_size);
+        return $this->news->orderBy('id', 'desc')->where($where)->paginate($page_size);
     }
 
     /**
