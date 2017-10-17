@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', '🎈LaravelManageSystem✨'),
+    'name' => base64_decode(env('BASE64_APP_TITLE', '🎈LaravelManageSystem✨')),
     'admin_path' => env('ADMIN_PATH', 'admin'),
     'version' => '0.0.1 alpha',
 

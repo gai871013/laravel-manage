@@ -12,7 +12,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\News;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -57,6 +56,7 @@ class NewsController extends Controller
     public function getShow($id, Request $request)
     {
         $news = News::find($id);
+        News::where('id', $id)->update(['read' => $news->read + 1]);
         return view('news.show', compact('news'));
     }
 

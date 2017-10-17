@@ -247,7 +247,7 @@ class NewsController extends Controller
             unset($data['id']);
             $this->news->save($data);
         }
-        if ($data['cat_id'] > 0) {
+        if (isset($data['cat_id']) && $data['cat_id'] > 0) {
             $route = 'admin.news.newsList';
         } else {
             $route = 'admin.news.singlePage';

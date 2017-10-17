@@ -12,8 +12,8 @@
 				<div class="article-meta">
                 <span class="item article-meta-time">
 	                <time class="time" data-toggle="tooltip" data-placement="bottom" title=""
-	                      data-original-title="时间：{{ $news->updated_at or '' }}">
-                        <i class="fa fa-clock-o">{{ $news->updated_at or '' }}</i>
+	                      data-original-title="时间：{{ $news->created_at or '' }}">
+                        <i class="fa fa-clock-o">{{ $news->created_at or '' }}</i>
                     </time>
 	            </span>
 					<span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title=""
@@ -27,8 +27,8 @@
                        draggable="false">{{ $news->category->catname or '' }}</a>
                 </span>
 					<span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
-					      data-original-title="查看：{{ $news->view->total or 0 }}">
-                    <i class="fa fa-eye"></i> 阅读 ({{ $news->view->total or 0 }})
+					      data-original-title="查看：{{ $news->read or 0 }}">
+                    <i class="fa fa-eye"></i> 阅读 ({{ $news->read or 0 }})
                 </span>
 				</div>
 			</header>
