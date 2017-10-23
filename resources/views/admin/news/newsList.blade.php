@@ -1,7 +1,7 @@
 @extends('layouts.a')
 @section('section-content')
 	<div class="box box-primary">
-		<div class="box-header">
+		<div class="box-header with-border">
 			<a href="{{ route('admin.news.newsEdit') }}" class="btn btn-sm btn-success"><i
 						class="fa fa-plus"></i> @lang('admin.addNews')</a>
 		</div>
