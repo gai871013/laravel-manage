@@ -56,7 +56,8 @@ class NewsController extends Controller
     public function getShow($id, Request $request)
     {
         $news = News::find($id);
-        News::where('id', $id)->update(['read' => $news->read + 1]);
+//        News::where('id', $id)->update(['read' => $news->read + 1]);
+        News::where('id', $id)->increment('read');
         return view('news.show', compact('news'));
     }
 
@@ -72,6 +73,8 @@ class NewsController extends Controller
         $title = $news->title;
         $keywords = $news->title;
         $description = $news->description;
+        News::where('id', $id)->increment('read');
+//        News::where('id',$id)->decrement('read', 2);
         return view('news.page', compact('news', 'title', 'keywords', 'description'));
     }
 
