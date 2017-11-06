@@ -25,7 +25,7 @@
 						</header>
 						<p class="meta">
 							<time class="time"><i class="fa fa-clock-o"></i>{{ $v->updated_at or '' }}</time>
-							<span class="views"><i class="fa fa-eye"></i>共{{ $v->view->total or 0 }}人围观</span>
+							<span class="views"><i class="fa fa-eye"></i>共{{ $v->read or 0 }}人围观</span>
 							<a class="comment" href="{{ $url }}#comment"></a>
 						</p>
 						<p class="note">{{ $v->description }}</p>
