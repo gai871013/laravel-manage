@@ -40,6 +40,7 @@
     "pace": "0.0.4",
     "pace-progress": "github:HubSpot/pace",
     "select2": "^4.0.4",
+    "syntaxhighlighter": "github:syntaxhighlighter/syntaxhighlighter",
     "zepto": "^1.1.6"
   }
 }
