@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Categories;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
             $nav = [];
         }
         View::share('nav', $nav);
-        \Carbon\Carbon::setLocale('zh');
+        Carbon::setLocale('zh');
     }
 
     /**
