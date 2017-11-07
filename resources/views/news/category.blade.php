@@ -24,7 +24,7 @@
 							<h2><a href="{{ $url }}">{{ $v->title }}</a></h2>
 						</header>
 						<p class="meta">
-							<time class="time"><i class="fa fa-clock-o"></i>{{ $v->updated_at or '' }}</time>
+							<time class="time" title="{{ $v->created_at }}"><i class="fa fa-clock-o"></i>@if($v->created_at->gt(\Carbon\Carbon::now()->modify('-7 days'))){{ $v->created_at->diffForHumans() }}@else{{ $v->created_at }}@endif</time>
 							<span class="views"><i class="fa fa-eye"></i>共{{ $v->read or 0 }}人围观</span>
 							<a class="comment" href="{{ $url }}#comment"></a>
 						</p>

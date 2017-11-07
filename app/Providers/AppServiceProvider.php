@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
             $nav = [];
         }
         View::share('nav', $nav);
+        \Carbon\Carbon::setLocale('zh');
     }
 
     /**
