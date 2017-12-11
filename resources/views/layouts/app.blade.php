@@ -88,6 +88,7 @@
 </footer>
 <!-- Scripts -->
 @yield('scripts')
+<script src="https://s5.cnzz.com/z_stat.php?id=2984609&web_id=2984609" language="JavaScript"></script>
 </body>
 </html>
 <script>
