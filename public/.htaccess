@@ -5,8 +5,8 @@
 
     RewriteEngine On
 	# 网站跳转都https服务
-	RewriteCond %{SERVER_PORT} !^443$
-	RewriteRule ^(.*)?$ https://%{SERVER_NAME}/$1 [L,R]
+	#RewriteCond %{SERVER_PORT} !^443$
+	#RewriteRule ^(.*)?$ https://%{SERVER_NAME}/$1 [L,R]
 
 	# Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d

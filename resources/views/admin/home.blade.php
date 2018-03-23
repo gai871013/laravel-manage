@@ -45,7 +45,7 @@
                                     @else
                                         {{ @gethostbyname($_SERVER['SERVER_NAME']) }}
                                     @endif
-                                    ）&nbsp;&nbsp;你的IP地址是：{{ \EasyWeChat\Payment\get_client_ip() }}</td>
+                                    ）&nbsp;&nbsp;你的IP地址是：{{ request()->ip() }}</td>
                             </tr>
                             <tr>
                                 <td>服务器操作系统</td>
