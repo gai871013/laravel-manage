@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use function EasyWeChat\Kernel\Support\get_client_ip;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use function EasyWeChat\Payment\get_client_ip;
 
 class LoginController extends Controller
 {
