@@ -1,10 +1,61 @@
 /**app.wxss**/
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
+page{
+  background-color:#f5f6fa;
+}
+
+.box{
+  width: 690rpx;
+  height: 443rpx;
+  background: #fff;
+  border-radius: 18rpx;
+  margin: 80rpx auto 0;
+  box-shadow: 0 0 20rpx rgba(0, 0, 0, .07);
+  overflow: hidden;
+}
+.clearfix{
+  width: 100%;
+  clear: both;
+  display: block;
+  content: '';
+}
+
+
+.button {
+  width: 100vw;
+  margin: 2rem auto;
+}
+
+.button button {
+  color: #fff;
+  background: #37ce5a;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   box-sizing: border-box;
-} 
+  font-size: 32rpx;
+  text-align: center;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  border-radius: 10rem;
+  /* box-shadow: 3px 3px 15px rgba(0, 0, 0, .1); */
+  width: 692rpx;
+  height: 83rpx;
+  line-height: 83rpx;
+  border: 1rpx solid #2c9c45;
+}
+
+
+.col-md-1{width: 8.333%;display: inline-block}
+.col-md-2{width: 16.667%;display: inline-block}
+.col-md-3{width: 25%;display: inline-block}
+.col-md-4{width: 33.333%;display: inline-block}
+.col-md-5{width: 41.667%;display: inline-block}
+.col-md-6{width: 50%;display: inline-block}
+.col-md-7{width: 58.333%;display: inline-block}
+.col-md-8{width: 66.667%;display: inline-block}
+.col-md-9{width: 75%;display: inline-block}
+.col-md-10{width: 83.333%;display: inline-block}
+.col-md-11{width: 91.667%;display: inline-block}
+.col-md-12{width: 100%;display: inline-block}

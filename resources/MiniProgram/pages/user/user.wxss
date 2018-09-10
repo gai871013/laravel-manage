@@ -1,0 +1,72 @@
+page{
+  overflow-x: hidden;
+}
+.header {
+  width: 100vw;
+  height: 318rpx;
+  overflow: hidden;
+}
+
+.header .user_top {
+  width: 100vw;
+  height: 318rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.header .avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 10rem;
+  border: 1rpx solid #fff;
+  position: absolute;
+  left: 24rpx;
+  top: 84rpx;
+  box-shadow: 0 0 40rpx rgba(0, 0, 0, .2)
+}
+
+.header .nickName {
+  position: absolute;
+  left: 205rpx;
+  top: 150rpx;
+  color: #fff;
+  font-size: 34rpx;
+}
+
+.form-box {
+  width: 690rpx;
+  padding: 16rpx 30rpx;
+  background: #fff;
+  border: 1rpx solid #f2f2f2;
+  margin-bottom: 28rpx;
+  /* box-sizing: border-box; */
+}
+
+.form-group {
+  display: flex;
+  min-height: 75rpx;
+  line-height: 75rpx;
+  border-bottom: 1rpx solid #e1e1e1;
+}
+
+.form-group:last-child {
+  border: none;
+}
+
+.form-group image {
+  height: 40rpx;
+  max-width: 100%;
+}
+
+.form-group input {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  margin-top: 10rpx;
+}
+.form-group textarea{
+  font-size: 30rpx;
+  line-height: 1.5;
+  width:100%;
+}

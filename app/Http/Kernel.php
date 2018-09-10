@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
+//            'throttle:60,1',
             'bindings',
         ],
     ];
@@ -62,6 +62,8 @@ class Kernel extends HttpKernel
         'auth.admin' => \App\Http\Middleware\AdminAuthMiddleware::class,
         'weChat.updateFollower' => \App\Http\Middleware\WeChatUpdateFollowerMiddleware::class,
         'admin.log'         => \App\Http\Middleware\OperationLog::class,
+        // 小程序API
+        'MiniProgram.api' => \App\Http\Middleware\MiniProgramApi::class,
 
     ];
 }

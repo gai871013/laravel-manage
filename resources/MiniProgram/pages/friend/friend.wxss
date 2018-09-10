@@ -126,3 +126,13 @@ page {
   margin: 0 auto;
   max-width: 100%;
 }
+
+.button button{
+  background:#fff;
+  color:#17c73e;
+  margin-top: 40rpx;
+  border: 1rpx solid #d5d5d6;
+}
+.button button:last-child{
+  margin-top: 28rpx;
+}

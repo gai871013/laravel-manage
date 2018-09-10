@@ -1,0 +1,42 @@
+<!--pages/card.wxml-->
+<view class='header'>
+  <form report-submit='true'>
+    <input name='keyword' bindinput='search' placeholder='搜索人名、公司、职位' placeholder-class='placeholder-search' class='class'></input>
+  </form>
+</view>
+<scroll-view class='scroll-view' scroll-y='true'>
+  <view class='card-box'>
+    <view class='title'>我的名片</view>
+    <view class='row' bindtap='index'>
+      <block wx:if='{{ user.name }}'>
+        <view class='col-md-2'>
+          <image src='{{ user.avatarUrl }}'></image>
+        </view>
+        <view class='col-md-10'>
+          <text>{{ user.name }}</text>
+          <text>{{ user.company_name }}</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class='col-md-12' style='font-size:30rpx; color:#999; margin-bottom:15rpx;'>暂未创建名片</view>
+      </block>
+    </view>
+  </view>
+  <view class='card-box' wx:for='{{ date }}' wx:key='{{ item }}'>
+    <view class='title'>{{ item }} 添加</view>
+    <block wx:for='{{ all }}' wx:for-item='list' wx:key='{{ list.id }}'>
+      <block wx:if='{{ list.date == item }}'>
+        <view class='row' bindtap='friend' data-id='{{ list.friend_id }}'>
+          <view class='col-md-2'>
+            <image src='{{ list.detail.avatarUrl }}'></image>
+          </view>
+          <view class='col-md-10'>
+            <text>{{ list.detail.name }}</text>
+            <text>{{ list.detail.company_name }}</text>
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+
+</scroll-view>

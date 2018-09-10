@@ -1,16 +1,6 @@
-<!--index.wxml-->
+<!--pages/friend/friend.wxml-->
 <view class='box'>
-  <block wx:if='{{ !hasUserInfo || !user.name }}'>
-    <block wx:if='{{!hasUserInfo && canIUse}}'>
-      <button class='userinfo-avatar' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 点击获取头像昵称 </button>
-    </block>
-    <block wx:else>
-      <image class="userinfo-avatar" src="{{ user.avatarUrl }}"></image>
-      <text class="userinfo-nickname">{{ user.nickName }}</text>
-    </block>
-  </block>
-  <block wx:else>
-    <image class="avatar" src="{{ user.avatarUrl }}"></image>
+  <image class="avatar" src="{{ user.avatarUrl }}"></image>
     <text class="nickname">{{user.name}}</text>
     <view class='clearfix'></view>
     <view class='form-group'>
@@ -37,18 +27,8 @@
         <text class='color-3'>{{ user.email ? user.email : '暂未设置邮箱' }}</text>
       </view>
     </view>
-  </block>
 </view>
-
-<block wx:if='{{ !hasUserInfo || !user.name }}'>
-  <text class='title'>您暂未创建名片</text>
-  <text class='body'>微名片可以帮您快速创建和分享名片</text>
-  <form report-submit='true'>
-    <button class='create' bindtap='create' bindgetuserinfo="getUserInfo">+</button>
-  </form>
-</block>
-<block wx:else>
-  <view class='view-box' style='margin-top:73rpx;'>
+ <view class='view-box' style='margin-top:73rpx;'>
     <view class='col-md-6'>
       <image src='../../images/showIcon01.png' mode='aspectFit'></image>
       <text>人气：{{ user.read }}</text>
@@ -63,7 +43,7 @@
   </view>
   <form report-submit='true'>
     <view class='button'>
-      <button bindtap='create'>编辑信息</button>
+      <button bindtap='add_cancel'>{{ add_cancel }}</button>
+      <button bindtap='go2index'>打开我的名片</button>
     </view>
   </form>
-</block>

@@ -1,0 +1,63 @@
+<!--pages/user/user.wxml-->
+<view class='header'>
+  <image class='user_top' src='../../images/user_top.jpg'></image>
+  <image class='avatar' src='{{ user.avatarUrl }}'></image>
+  <text class='nickName'>{{ user.nickName }}</text>
+</view>
+<form bindsubmit='saveInfo' report-submit='true'>
+  <view class='form-box'>
+    <view class='form-group'>
+      <view class='col-md-1'>
+        <image src='../../images/icon01.png' mode='aspectFit'></image>
+      </view>
+      <view class='col-md-11'>
+        <input name='name' placeholder='请输入姓名' value='{{ user.name }}'></input>
+      </view>
+    </view>
+    <view class='form-group'>
+      <view class='col-md-1'>
+        <image src='../../images/icon02.png' mode='aspectFit'></image>
+      </view>
+      <view class='col-md-11'>
+        <input name='mobile' placeholder='请输入手机号码' value='{{ user.mobile }}'></input>
+      </view>
+    </view>
+  </view>
+  <view class='form-box'>
+    <view class='form-group'>
+      <view class='col-md-1'>
+        <image src='../../images/icon03.png' mode='aspectFit'></image>
+      </view>
+      <view class='col-md-11'>
+        <input name='company_name' placeholder='请输入公司名称' value='{{ user.company_name }}'></input>
+      </view>
+    </view>
+    <view class='form-group'>
+      <view class='col-md-1'>
+        <image src='../../images/icon04.png' mode='aspectFit'></image>
+      </view>
+      <view class='col-md-11'>
+        <input name='position' placeholder='职务(可不填)' value='{{ user.position }}'></input>
+      </view>
+    </view>
+    <view class='form-group'>
+      <view class='col-md-1'>
+        <image src='../../images/icon05.png' mode='aspectFit'></image>
+      </view>
+      <view class='col-md-11'>
+        <input name='email' placeholder='邮箱(可不填)' value='{{ user.email }}'></input>
+      </view>
+    </view>
+    <view class='form-group' style='display:block;'>
+      <view class='col-md-1'>
+        <image src='../../images/icon06.png' mode='aspectFit'></image>
+      </view>
+      <view class='col-md-11'>
+        <textarea name='description' auto-height placeholder='简介(可不填)' value='{{ user.description }}'></textarea>
+      </view>
+    </view>
+  </view>
+  <view class='button'>
+    <button form-type='submit'>保存</button>
+  </view>
+</form>
