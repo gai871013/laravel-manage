@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use function EasyWeChat\Kernel\Support\get_client_ip;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -140,7 +139,7 @@ class LoginController extends Controller
 
         if ($this->attemptLogin($request)) {
             $self = auth('admin')->user();
-            $update = ['last_login' => $self->updated_at, 'ip' => get_client_ip(), 'login_num' => $self->login_num + 1, 'last_ip' => $self->ip];
+            $update = ['last_login' => $self->updated_at, 'ip' => $request->ip(), 'login_num' => $self->login_num + 1, 'last_ip' => $self->ip];
             Admin::where('id', $self->id)->update($update);
             return $this->sendLoginResponse($request);
         }
