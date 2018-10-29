@@ -14,7 +14,7 @@
 					@endphp
 					<article class="excerpt excerpt-1">
 						<a class="focus" href="{{ $url }}" title="{{ $v->title }}">
-							<img class="thumb" data-original="{{ $thumb }}" src="{{ $thumb }}" alt="{{ $v->title }}">
+							<img class="thumb lazyload" data-original="{{ $thumb }}" src="{{ asset('img/nopic.jpg') }}" alt="{{ $v->title }}">
 						</a>
 						<header>
 							@if($v->cat_id > 0)

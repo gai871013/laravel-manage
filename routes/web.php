@@ -53,10 +53,10 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
 
 // 微信端访问控制器
 Route::group(['prefix' => 'wechat', 'middleware' => ['web', 'weChat.oauth:snsapi_userinfo']], function () use ($weChat) {
-    Route::get('user', function () {
-        $user = session('wechat.oauth_user'); // 拿到授权用户资料
-        dd($user);
-    });
+    //Route::get('user', function () {
+    //    $user = session('wechat.oauth_user'); // 拿到授权用户资料
+    //    dd($user);
+    //});
     // 首页
     Route::get('/', $weChat . 'getIndex')->name('weChat.home');
 });

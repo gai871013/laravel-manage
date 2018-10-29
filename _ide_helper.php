@@ -1,9 +1,7 @@
 <?php
-// @formatter:off
-
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.43 on 2018-09-10 23:08:54.
+ * Generated for Laravel 5.5.42 on 2018-08-23 18:37:20.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -13,22 +11,6 @@
 
 namespace Illuminate\Support\Facades { 
 
-    /**
-     * 
-     *
-     * @method static string version()
-     * @method static string basePath()
-     * @method static string environment()
-     * @method static bool isDownForMaintenance()
-     * @method static void registerConfiguredProviders()
-     * @method static \Illuminate\Support\ServiceProvider register(\Illuminate\Support\ServiceProvider|string $provider, array $options = [], bool $force = false)
-     * @method static void registerDeferredProvider(string $provider, string $service = null)
-     * @method static void boot()
-     * @method static void booting(mixed $callback)
-     * @method static void booted(mixed $callback)
-     * @method static string getCachedServicesPath()
-     * @see \Illuminate\Foundation\Application
-     */ 
     class App {
         
         /**
@@ -1364,16 +1346,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @method static int handle(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output = null)
-     * @method static int call(string $command, array $parameters = [], $outputBuffer = null)
-     * @method static int queue(string $command, array $parameters = [])
-     * @method static array all()
-     * @method static string output()
-     * @see \Illuminate\Contracts\Console\Kernel
-     */ 
     class Artisan {
         
         /**
@@ -1511,29 +1483,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @method static mixed guard(string|null $name = null)
-     * @method static void shouldUse(string $name);
-     * @method static bool check()
-     * @method static bool guest()
-     * @method static \Illuminate\Contracts\Auth\Authenticatable|null user()
-     * @method static int|null id()
-     * @method static bool validate(array $credentials = [])
-     * @method static void setUser(\Illuminate\Contracts\Auth\Authenticatable $user)
-     * @method static bool attempt(array $credentials = [], bool $remember = false)
-     * @method static bool once(array $credentials = [])
-     * @method static void login(\Illuminate\Contracts\Auth\Authenticatable $user, bool $remember = false)
-     * @method static \Illuminate\Contracts\Auth\Authenticatable loginUsingId(mixed $id, bool $remember = false)
-     * @method static bool onceUsingId(mixed $id)
-     * @method static bool viaRemember()
-     * @method static void logout()
-     * @see \Illuminate\Auth\AuthManager
-     * @see \Illuminate\Contracts\Auth\Factory
-     * @see \Illuminate\Contracts\Auth\Guard
-     * @see \Illuminate\Contracts\Auth\StatefulGuard
-     */ 
     class Auth {
         
         /**
@@ -2085,11 +2034,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\View\Compilers\BladeCompiler
-     */ 
     class Blade {
         
         /**
@@ -2287,11 +2231,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Contracts\Broadcasting\Factory
-     */ 
     class Broadcast {
         
         /**
@@ -2404,11 +2343,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Contracts\Bus\Dispatcher
-     */ 
     class Bus {
         
         /**
@@ -2496,66 +2430,9 @@ namespace Illuminate\Support\Facades {
         {
             return \Illuminate\Bus\Dispatcher::map($map);
         }
-        
-        /**
-         * Assert if a job was dispatched based on a truth-test callback.
-         *
-         * @param string $command
-         * @param callable|int|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertDispatched($command, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\BusFake::assertDispatched($command, $callback);
-        }
-        
-        /**
-         * Determine if a job was dispatched based on a truth-test callback.
-         *
-         * @param string $command
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNotDispatched($command, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\BusFake::assertNotDispatched($command, $callback);
-        }
-        
-        /**
-         * Get all of the jobs matching a truth-test callback.
-         *
-         * @param string $command
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function dispatched($command, $callback = null)
-        {
-            return \Illuminate\Support\Testing\Fakes\BusFake::dispatched($command, $callback);
-        }
-        
-        /**
-         * Determine if there are any stored commands for a given class.
-         *
-         * @param string $command
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasDispatched($command)
-        {
-            return \Illuminate\Support\Testing\Fakes\BusFake::hasDispatched($command);
-        }
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Cache\CacheManager
-     * @see \Illuminate\Cache\Repository
-     */ 
     class Cache {
         
         /**
@@ -3066,6 +2943,19 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Get a lock instance.
+         *
+         * @param string $name
+         * @param int $seconds
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function lock($name, $seconds = 0)
+        {
+            return \Illuminate\Cache\RedisStore::lock($name, $seconds);
+        }
+        
+        /**
          * Remove all items from the cache.
          *
          * @return bool 
@@ -3073,29 +2963,41 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function flush()
         {
-            return \Illuminate\Cache\FileStore::flush();
+            return \Illuminate\Cache\RedisStore::flush();
         }
         
         /**
-         * Get the Filesystem instance.
+         * Get the Redis connection instance.
          *
-         * @return \Illuminate\Filesystem\Filesystem 
+         * @return \Predis\ClientInterface 
          * @static 
          */ 
-        public static function getFilesystem()
+        public static function connection()
         {
-            return \Illuminate\Cache\FileStore::getFilesystem();
+            return \Illuminate\Cache\RedisStore::connection();
         }
         
         /**
-         * Get the working directory of the cache.
+         * Set the connection name to be used.
          *
-         * @return string 
+         * @param string $connection
+         * @return void 
          * @static 
          */ 
-        public static function getDirectory()
+        public static function setConnection($connection)
         {
-            return \Illuminate\Cache\FileStore::getDirectory();
+            \Illuminate\Cache\RedisStore::setConnection($connection);
+        }
+        
+        /**
+         * Get the Redis database instance.
+         *
+         * @return \Illuminate\Contracts\Redis\Factory 
+         * @static 
+         */ 
+        public static function getRedis()
+        {
+            return \Illuminate\Cache\RedisStore::getRedis();
         }
         
         /**
@@ -3106,16 +3008,23 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function getPrefix()
         {
-            return \Illuminate\Cache\FileStore::getPrefix();
+            return \Illuminate\Cache\RedisStore::getPrefix();
+        }
+        
+        /**
+         * Set the cache key prefix.
+         *
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */ 
+        public static function setPrefix($prefix)
+        {
+            \Illuminate\Cache\RedisStore::setPrefix($prefix);
         }
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Config\Repository
-     */ 
     class Config {
         
         /**
@@ -3256,11 +3165,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Cookie\CookieJar
-     */ 
     class Cookie {
         
         /**
@@ -3393,12 +3297,98 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Database\DatabaseManager
-     * @see \Illuminate\Database\Connection
-     */ 
+    class Crypt {
+        
+        /**
+         * Determine if the given key and cipher combination is valid.
+         *
+         * @param string $key
+         * @param string $cipher
+         * @return bool 
+         * @static 
+         */ 
+        public static function supported($key, $cipher)
+        {
+            return \Illuminate\Encryption\Encrypter::supported($key, $cipher);
+        }
+        
+        /**
+         * Create a new encryption key for the given cipher.
+         *
+         * @param string $cipher
+         * @return string 
+         * @static 
+         */ 
+        public static function generateKey($cipher)
+        {
+            return \Illuminate\Encryption\Encrypter::generateKey($cipher);
+        }
+        
+        /**
+         * Encrypt the given value.
+         *
+         * @param mixed $value
+         * @param bool $serialize
+         * @return string 
+         * @throws \Illuminate\Contracts\Encryption\EncryptException
+         * @static 
+         */ 
+        public static function encrypt($value, $serialize = true)
+        {
+            return \Illuminate\Encryption\Encrypter::encrypt($value, $serialize);
+        }
+        
+        /**
+         * Encrypt a string without serialization.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function encryptString($value)
+        {
+            return \Illuminate\Encryption\Encrypter::encryptString($value);
+        }
+        
+        /**
+         * Decrypt the given value.
+         *
+         * @param mixed $payload
+         * @param bool $unserialize
+         * @return string 
+         * @throws \Illuminate\Contracts\Encryption\DecryptException
+         * @static 
+         */ 
+        public static function decrypt($payload, $unserialize = true)
+        {
+            return \Illuminate\Encryption\Encrypter::decrypt($payload, $unserialize);
+        }
+        
+        /**
+         * Decrypt the given string without unserialization.
+         *
+         * @param string $payload
+         * @return string 
+         * @static 
+         */ 
+        public static function decryptString($payload)
+        {
+            return \Illuminate\Encryption\Encrypter::decryptString($payload);
+        }
+        
+        /**
+         * Get the encryption key.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getKey()
+        {
+            return \Illuminate\Encryption\Encrypter::getKey();
+        }
+         
+    }
+
     class DB {
         
         /**
@@ -4304,11 +4294,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Events\Dispatcher
-     */ 
     class Event {
         
         /**
@@ -4486,78 +4471,9 @@ namespace Illuminate\Support\Facades {
         {
             return \Illuminate\Events\Dispatcher::setQueueResolver($resolver);
         }
-        
-        /**
-         * Assert if an event was dispatched based on a truth-test callback.
-         *
-         * @param string $event
-         * @param callable|int|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertDispatched($event, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\EventFake::assertDispatched($event, $callback);
-        }
-        
-        /**
-         * Assert if a event was dispatched a number of times.
-         *
-         * @param string $event
-         * @param int $times
-         * @return void 
-         * @static 
-         */ 
-        public static function assertDispatchedTimes($event, $times = 1)
-        {
-            \Illuminate\Support\Testing\Fakes\EventFake::assertDispatchedTimes($event, $times);
-        }
-        
-        /**
-         * Determine if an event was dispatched based on a truth-test callback.
-         *
-         * @param string $event
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNotDispatched($event, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\EventFake::assertNotDispatched($event, $callback);
-        }
-        
-        /**
-         * Get all of the events matching a truth-test callback.
-         *
-         * @param string $event
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function dispatched($event, $callback = null)
-        {
-            return \Illuminate\Support\Testing\Fakes\EventFake::dispatched($event, $callback);
-        }
-        
-        /**
-         * Determine if the given event has been dispatched.
-         *
-         * @param string $event
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasDispatched($event)
-        {
-            return \Illuminate\Support\Testing\Fakes\EventFake::hasDispatched($event);
-        }
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Filesystem\Filesystem
-     */ 
     class File {
         
         /**
@@ -5043,11 +4959,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Contracts\Auth\Access\Gate
-     */ 
     class Gate {
         
         /**
@@ -5253,11 +5164,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Hashing\BcryptHasher
-     */ 
     class Hash {
         
         /**
@@ -5315,11 +5221,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Translation\Translator
-     */ 
     class Lang {
         
         /**
@@ -5631,11 +5532,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Log\Writer
-     */ 
     class Log {
         
         /**
@@ -5873,11 +5769,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Mail\Mailer
-     */ 
     class Mail {
         
         /**
@@ -6159,138 +6050,9 @@ namespace Illuminate\Support\Facades {
         {
             return \Illuminate\Mail\Mailer::hasMacro($name);
         }
-        
-        /**
-         * Assert if a mailable was sent based on a truth-test callback.
-         *
-         * @param string $mailable
-         * @param callable|int|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertSent($mailable, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\MailFake::assertSent($mailable, $callback);
-        }
-        
-        /**
-         * Determine if a mailable was not sent based on a truth-test callback.
-         *
-         * @param string $mailable
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNotSent($mailable, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\MailFake::assertNotSent($mailable, $callback);
-        }
-        
-        /**
-         * Assert that no mailables were sent.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNothingSent()
-        {
-            \Illuminate\Support\Testing\Fakes\MailFake::assertNothingSent();
-        }
-        
-        /**
-         * Assert if a mailable was queued based on a truth-test callback.
-         *
-         * @param string $mailable
-         * @param callable|int|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertQueued($mailable, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\MailFake::assertQueued($mailable, $callback);
-        }
-        
-        /**
-         * Determine if a mailable was not queued based on a truth-test callback.
-         *
-         * @param string $mailable
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNotQueued($mailable, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\MailFake::assertNotQueued($mailable, $callback);
-        }
-        
-        /**
-         * Assert that no mailables were queued.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNothingQueued()
-        {
-            \Illuminate\Support\Testing\Fakes\MailFake::assertNothingQueued();
-        }
-        
-        /**
-         * Get all of the mailables matching a truth-test callback.
-         *
-         * @param string $mailable
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function sent($mailable, $callback = null)
-        {
-            return \Illuminate\Support\Testing\Fakes\MailFake::sent($mailable, $callback);
-        }
-        
-        /**
-         * Determine if the given mailable has been sent.
-         *
-         * @param string $mailable
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasSent($mailable)
-        {
-            return \Illuminate\Support\Testing\Fakes\MailFake::hasSent($mailable);
-        }
-        
-        /**
-         * Get all of the queued mailables matching a truth-test callback.
-         *
-         * @param string $mailable
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function queued($mailable, $callback = null)
-        {
-            return \Illuminate\Support\Testing\Fakes\MailFake::queued($mailable, $callback);
-        }
-        
-        /**
-         * Determine if the given mailable has been queued.
-         *
-         * @param string $mailable
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasQueued($mailable)
-        {
-            return \Illuminate\Support\Testing\Fakes\MailFake::hasQueued($mailable);
-        }
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Notifications\ChannelManager
-     */ 
     class Notification {
         
         /**
@@ -6404,94 +6166,9 @@ namespace Illuminate\Support\Facades {
             //Method inherited from \Illuminate\Support\Manager            
             return \Illuminate\Notifications\ChannelManager::getDrivers();
         }
-        
-        /**
-         * Assert if a notification was sent based on a truth-test callback.
-         *
-         * @param mixed $notifiable
-         * @param string $notification
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertSentTo($notifiable, $notification, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\NotificationFake::assertSentTo($notifiable, $notification, $callback);
-        }
-        
-        /**
-         * Assert if a notification was sent a number of times.
-         *
-         * @param mixed $notifiable
-         * @param string $notification
-         * @param int $times
-         * @return void 
-         * @static 
-         */ 
-        public static function assertSentToTimes($notifiable, $notification, $times = 1)
-        {
-            \Illuminate\Support\Testing\Fakes\NotificationFake::assertSentToTimes($notifiable, $notification, $times);
-        }
-        
-        /**
-         * Determine if a notification was sent based on a truth-test callback.
-         *
-         * @param mixed $notifiable
-         * @param string $notification
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNotSentTo($notifiable, $notification, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\NotificationFake::assertNotSentTo($notifiable, $notification, $callback);
-        }
-        
-        /**
-         * Assert that no notifications were sent.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNothingSent()
-        {
-            \Illuminate\Support\Testing\Fakes\NotificationFake::assertNothingSent();
-        }
-        
-        /**
-         * Get all of the notifications matching a truth-test callback.
-         *
-         * @param mixed $notifiable
-         * @param string $notification
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function sent($notifiable, $notification, $callback = null)
-        {
-            return \Illuminate\Support\Testing\Fakes\NotificationFake::sent($notifiable, $notification, $callback);
-        }
-        
-        /**
-         * Determine if there are more notifications left to inspect.
-         *
-         * @param mixed $notifiable
-         * @param string $notification
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasSent($notifiable, $notification)
-        {
-            return \Illuminate\Support\Testing\Fakes\NotificationFake::hasSent($notifiable, $notification);
-        }
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Auth\Passwords\PasswordBroker
-     */ 
     class Password {
         
         /**
@@ -6531,12 +6208,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Queue\QueueManager
-     * @see \Illuminate\Queue\Queue
-     */ 
     class Queue {
         
         /**
@@ -6708,82 +6379,6 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Assert if a job was pushed based on a truth-test callback.
-         *
-         * @param string $job
-         * @param callable|int|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertPushed($job, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\QueueFake::assertPushed($job, $callback);
-        }
-        
-        /**
-         * Assert if a job was pushed based on a truth-test callback.
-         *
-         * @param string $queue
-         * @param string $job
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertPushedOn($queue, $job, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\QueueFake::assertPushedOn($queue, $job, $callback);
-        }
-        
-        /**
-         * Determine if a job was pushed based on a truth-test callback.
-         *
-         * @param string $job
-         * @param callable|null $callback
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNotPushed($job, $callback = null)
-        {
-            \Illuminate\Support\Testing\Fakes\QueueFake::assertNotPushed($job, $callback);
-        }
-        
-        /**
-         * Assert that no jobs were pushed.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function assertNothingPushed()
-        {
-            \Illuminate\Support\Testing\Fakes\QueueFake::assertNothingPushed();
-        }
-        
-        /**
-         * Get all of the jobs matching a truth-test callback.
-         *
-         * @param string $job
-         * @param callable|null $callback
-         * @return \Illuminate\Support\Collection 
-         * @static 
-         */ 
-        public static function pushed($job, $callback = null)
-        {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::pushed($job, $callback);
-        }
-        
-        /**
-         * Determine if there are any stored jobs for a given class.
-         *
-         * @param string $job
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasPushed($job)
-        {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::hasPushed($job);
-        }
-        
-        /**
          * Get the size of the queue.
          *
          * @param string $queue
@@ -6792,7 +6387,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function size($queue = null)
         {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::size($queue);
+            return \Illuminate\Queue\SyncQueue::size($queue);
         }
         
         /**
@@ -6802,11 +6397,12 @@ namespace Illuminate\Support\Facades {
          * @param mixed $data
          * @param string $queue
          * @return mixed 
+         * @throws \Exception|\Throwable
          * @static 
          */ 
         public static function push($job, $data = '', $queue = null)
         {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::push($job, $data, $queue);
+            return \Illuminate\Queue\SyncQueue::push($job, $data, $queue);
         }
         
         /**
@@ -6820,13 +6416,13 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function pushRaw($payload, $queue = null, $options = array())
         {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::pushRaw($payload, $queue, $options);
+            return \Illuminate\Queue\SyncQueue::pushRaw($payload, $queue, $options);
         }
         
         /**
          * Push a new job onto the queue after a delay.
          *
-         * @param \DateTime|int $delay
+         * @param \DateTimeInterface|\DateInterval|int $delay
          * @param string $job
          * @param mixed $data
          * @param string $queue
@@ -6835,7 +6431,19 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function later($delay, $job, $data = '', $queue = null)
         {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::later($delay, $job, $data, $queue);
+            return \Illuminate\Queue\SyncQueue::later($delay, $job, $data, $queue);
+        }
+        
+        /**
+         * Pop the next job off of the queue.
+         *
+         * @param string $queue
+         * @return \Illuminate\Contracts\Queue\Job|null 
+         * @static 
+         */ 
+        public static function pop($queue = null)
+        {
+            return \Illuminate\Queue\SyncQueue::pop($queue);
         }
         
         /**
@@ -6849,14 +6457,15 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function pushOn($queue, $job, $data = '')
         {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::pushOn($queue, $job, $data);
+            //Method inherited from \Illuminate\Queue\Queue            
+            return \Illuminate\Queue\SyncQueue::pushOn($queue, $job, $data);
         }
         
         /**
          * Push a new job onto the queue after a delay.
          *
          * @param string $queue
-         * @param \DateTime|int $delay
+         * @param \DateTimeInterface|\DateInterval|int $delay
          * @param string $job
          * @param mixed $data
          * @return mixed 
@@ -6864,19 +6473,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function laterOn($queue, $delay, $job, $data = '')
         {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::laterOn($queue, $delay, $job, $data);
-        }
-        
-        /**
-         * Pop the next job off of the queue.
-         *
-         * @param string $queue
-         * @return \Illuminate\Contracts\Queue\Job|null 
-         * @static 
-         */ 
-        public static function pop($queue = null)
-        {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::pop($queue);
+            //Method inherited from \Illuminate\Queue\Queue            
+            return \Illuminate\Queue\SyncQueue::laterOn($queue, $delay, $job, $data);
         }
         
         /**
@@ -6890,30 +6488,8 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function bulk($jobs, $data = '', $queue = null)
         {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::bulk($jobs, $data, $queue);
-        }
-        
-        /**
-         * Get the connection name for the queue.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getConnectionName()
-        {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::getConnectionName();
-        }
-        
-        /**
-         * Set the connection name for the queue.
-         *
-         * @param string $name
-         * @return $this 
-         * @static 
-         */ 
-        public static function setConnectionName($name)
-        {
-            return \Illuminate\Support\Testing\Fakes\QueueFake::setConnectionName($name);
+            //Method inherited from \Illuminate\Queue\Queue            
+            return \Illuminate\Queue\SyncQueue::bulk($jobs, $data, $queue);
         }
         
         /**
@@ -6927,6 +6503,31 @@ namespace Illuminate\Support\Facades {
         {
             //Method inherited from \Illuminate\Queue\Queue            
             return \Illuminate\Queue\SyncQueue::getJobExpiration($job);
+        }
+        
+        /**
+         * Get the connection name for the queue.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getConnectionName()
+        {
+            //Method inherited from \Illuminate\Queue\Queue            
+            return \Illuminate\Queue\SyncQueue::getConnectionName();
+        }
+        
+        /**
+         * Set the connection name for the queue.
+         *
+         * @param string $name
+         * @return $this 
+         * @static 
+         */ 
+        public static function setConnectionName($name)
+        {
+            //Method inherited from \Illuminate\Queue\Queue            
+            return \Illuminate\Queue\SyncQueue::setConnectionName($name);
         }
         
         /**
@@ -6944,11 +6545,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Routing\Redirector
-     */ 
     class Redirect {
         
         /**
@@ -7155,12 +6751,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Redis\RedisManager
-     * @see \Illuminate\Contracts\Redis\Factory
-     */ 
     class Redis {
         
         /**
@@ -7201,11 +6791,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Http\Request
-     */ 
     class Request {
         
         /**
@@ -9164,11 +8749,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Contracts\Routing\ResponseFactory
-     */ 
     class Response {
         
         /**
@@ -9387,33 +8967,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @method static \Illuminate\Support\Facades\Route get(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route post(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route put(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route delete(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route patch(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route options(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route any(string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route match(array|string $methods, string $uri, \Closure|array|string|null $action = null)
-     * @method static \Illuminate\Support\Facades\Route prefix(string  $prefix)
-     * @method static \Illuminate\Routing\PendingResourceRegistration resource(string $name, string $controller, array $options = [])
-     * @method static \Illuminate\Routing\PendingResourceRegistration apiResource(string $name, string $controller, array $options = [])
-     * @method static \Illuminate\Support\Facades\Route middleware(array|string|null $middleware)
-     * @method static \Illuminate\Support\Facades\Route substituteBindings(\Illuminate\Support\Facades\Route $route)
-     * @method static void substituteImplicitBindings(\Illuminate\Support\Facades\Route $route)
-     * @method static \Illuminate\Support\Facades\Route as(string $value)
-     * @method static \Illuminate\Support\Facades\Route domain(string $value)
-     * @method static \Illuminate\Support\Facades\Route name(string $value)
-     * @method static \Illuminate\Support\Facades\Route namespace(string $value)
-     * @method static \Illuminate\Support\Facades\Route where(array|string $name, string $expression = null)
-     * @method static \Illuminate\Routing\Router group(\Closure|string|array $value, \Closure|string $routes)
-     * @method static \Illuminate\Support\Facades\Route redirect(string $uri, string $destination, int $status = 301)
-     * @method static \Illuminate\Support\Facades\Route view(string $uri, string $view, array $data = [])
-     * @see \Illuminate\Routing\Router
-     */ 
     class Route {
         
         /**
@@ -10198,15 +9751,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @method static \Illuminate\Database\Schema\Builder create(string $table, \Closure $callback)
-     * @method static \Illuminate\Database\Schema\Builder drop(string $table)
-     * @method static \Illuminate\Database\Schema\Builder dropIfExists(string $table)
-     * @method static \Illuminate\Database\Schema\Builder table(string $table, \Closure $callback)
-     * @see \Illuminate\Database\Schema\Builder
-     */ 
     class Schema {
         
         /**
@@ -10431,12 +9975,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Session\SessionManager
-     * @see \Illuminate\Session\Store
-     */ 
     class Session {
         
         /**
@@ -11001,11 +10539,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Filesystem\FilesystemManager
-     */ 
     class Storage {
         
         /**
@@ -11553,11 +11086,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Routing\UrlGenerator
-     */ 
     class URL {
         
         /**
@@ -11932,11 +11460,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\Validation\Factory
-     */ 
     class Validator {
         
         /**
@@ -12073,11 +11596,6 @@ namespace Illuminate\Support\Facades {
          
     }
 
-    /**
-     * 
-     *
-     * @see \Illuminate\View\Factory
-     */ 
     class View {
         
         /**
@@ -12839,10 +12357,6 @@ namespace Illuminate\Support\Facades {
 
 namespace Intervention\Image\Facades { 
 
-    /**
-     * 
-     *
-     */ 
     class Image {
         
         /**
@@ -12902,37 +12416,42 @@ namespace Intervention\Image\Facades {
  
 }
 
-namespace Overtrue\LaravelWeChat { 
+namespace Overtrue\LaravelWechat { 
 
-    /**
-     * Class Facade.
-     *
-     * @author overtrue <i@overtrue.me>
-     */ 
     class Facade {
         
         /**
-         * 
+         * Log configuration.
          *
-         * @return string 
+         * @param array $config
          * @static 
          */ 
-        public static function getId()
+        public static function logConfiguration($config)
         {
-            //Method inherited from \EasyWeChat\Kernel\ServiceContainer            
-            return \EasyWeChat\OfficialAccount\Application::getId();
+            return \EasyWeChat\Foundation\Application::logConfiguration($config);
         }
         
         /**
-         * 
+         * Add a provider.
          *
-         * @return array 
+         * @param string $provider
+         * @return \EasyWeChat\Foundation\Application 
          * @static 
          */ 
-        public static function getConfig()
+        public static function addProvider($provider)
         {
-            //Method inherited from \EasyWeChat\Kernel\ServiceContainer            
-            return \EasyWeChat\OfficialAccount\Application::getConfig();
+            return \EasyWeChat\Foundation\Application::addProvider($provider);
+        }
+        
+        /**
+         * Set providers.
+         *
+         * @param array $providers
+         * @static 
+         */ 
+        public static function setProviders($providers)
+        {
+            return \EasyWeChat\Foundation\Application::setProviders($providers);
         }
         
         /**
@@ -12943,33 +12462,7 @@ namespace Overtrue\LaravelWeChat {
          */ 
         public static function getProviders()
         {
-            //Method inherited from \EasyWeChat\Kernel\ServiceContainer            
-            return \EasyWeChat\OfficialAccount\Application::getProviders();
-        }
-        
-        /**
-         * 
-         *
-         * @param string $id
-         * @param mixed $value
-         * @static 
-         */ 
-        public static function rebind($id, $value)
-        {
-            //Method inherited from \EasyWeChat\Kernel\ServiceContainer            
-            return \EasyWeChat\OfficialAccount\Application::rebind($id, $value);
-        }
-        
-        /**
-         * 
-         *
-         * @param array $providers
-         * @static 
-         */ 
-        public static function registerProviders($providers)
-        {
-            //Method inherited from \EasyWeChat\Kernel\ServiceContainer            
-            return \EasyWeChat\OfficialAccount\Application::registerProviders($providers);
+            return \EasyWeChat\Foundation\Application::getProviders();
         }
         
         /**
@@ -12989,7 +12482,7 @@ namespace Overtrue\LaravelWeChat {
         public static function offsetSet($id, $value)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::offsetSet($id, $value);
+            return \EasyWeChat\Foundation\Application::offsetSet($id, $value);
         }
         
         /**
@@ -13003,7 +12496,7 @@ namespace Overtrue\LaravelWeChat {
         public static function offsetGet($id)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::offsetGet($id);
+            return \EasyWeChat\Foundation\Application::offsetGet($id);
         }
         
         /**
@@ -13016,7 +12509,7 @@ namespace Overtrue\LaravelWeChat {
         public static function offsetExists($id)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::offsetExists($id);
+            return \EasyWeChat\Foundation\Application::offsetExists($id);
         }
         
         /**
@@ -13028,7 +12521,7 @@ namespace Overtrue\LaravelWeChat {
         public static function offsetUnset($id)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::offsetUnset($id);
+            return \EasyWeChat\Foundation\Application::offsetUnset($id);
         }
         
         /**
@@ -13042,7 +12535,7 @@ namespace Overtrue\LaravelWeChat {
         public static function factory($callable)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::factory($callable);
+            return \EasyWeChat\Foundation\Application::factory($callable);
         }
         
         /**
@@ -13058,7 +12551,7 @@ namespace Overtrue\LaravelWeChat {
         public static function protect($callable)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::protect($callable);
+            return \EasyWeChat\Foundation\Application::protect($callable);
         }
         
         /**
@@ -13072,7 +12565,7 @@ namespace Overtrue\LaravelWeChat {
         public static function raw($id)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::raw($id);
+            return \EasyWeChat\Foundation\Application::raw($id);
         }
         
         /**
@@ -13093,7 +12586,7 @@ namespace Overtrue\LaravelWeChat {
         public static function extend($id, $callable)
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::extend($id, $callable);
+            return \EasyWeChat\Foundation\Application::extend($id, $callable);
         }
         
         /**
@@ -13105,7 +12598,7 @@ namespace Overtrue\LaravelWeChat {
         public static function keys()
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::keys();
+            return \EasyWeChat\Foundation\Application::keys();
         }
         
         /**
@@ -13119,7 +12612,7 @@ namespace Overtrue\LaravelWeChat {
         public static function register($provider, $values = array())
         {
             //Method inherited from \Pimple\Container            
-            return \EasyWeChat\OfficialAccount\Application::register($provider, $values);
+            return \EasyWeChat\Foundation\Application::register($provider, $values);
         }
          
     }
@@ -13128,10 +12621,6 @@ namespace Overtrue\LaravelWeChat {
 
 namespace Laracasts\Flash { 
 
-    /**
-     * 
-     *
-     */ 
     class Flash {
         
         /**
@@ -13236,11 +12725,6 @@ namespace Laracasts\Flash {
 
 namespace Spatie\Fractal { 
 
-    /**
-     * 
-     *
-     * @see \Spatie\Fractal\Fractal
-     */ 
     class FractalFacade {
         
         /**
@@ -13612,6 +13096,8 @@ namespace  {
     class Config extends \Illuminate\Support\Facades\Config {}
 
     class Cookie extends \Illuminate\Support\Facades\Cookie {}
+
+    class Crypt extends \Illuminate\Support\Facades\Crypt {}
 
     class DB extends \Illuminate\Support\Facades\DB {}
 
@@ -15733,7 +15219,7 @@ namespace  {
 
     class Image extends \Intervention\Image\Facades\Image {}
 
-    class EasyWeChat extends \Overtrue\LaravelWeChat\Facade {}
+    class EasyWeChat extends \Overtrue\LaravelWechat\Facade {}
 
     class Flash extends \Laracasts\Flash\Flash {}
 
