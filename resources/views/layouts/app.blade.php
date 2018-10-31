@@ -13,9 +13,11 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('highlight/monokai-sublime.css') }}">
 	<link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
 	<script src="{{ asset(mix('js/app.js')) }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+	<script src="{{ asset('highlight/highlight.pack.js') }}"></script>
 	<!--[if gte IE 9]>
 	<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
 	<script src="{{ asset('js/html5shiv.min.js')  }}"></script>
