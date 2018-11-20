@@ -161,6 +161,7 @@ class CommonController extends Controller
 
         $client = new Client();
         $area_info = $client->get($area . '?' . http_build_query($area_arr))->getBody();
+        return $area_info;
     }
 
 }
