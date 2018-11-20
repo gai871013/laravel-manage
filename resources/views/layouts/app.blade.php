@@ -147,8 +147,8 @@
                     + ' ,当前温度：' + data.temperature
                     + '℃, 风向：' + data.winddirection
                     + ',风力：' + data.windpower
-                    + '级,湿度:' + data.humidity
-                    + '%, 数据发布的时间' + data.reporttime;
+                    + '级,湿度：' + data.humidity
+                    + '%, 数据发布的时间：' + data.reporttime;
                 $('.link-border').html(str);
             }
         }
