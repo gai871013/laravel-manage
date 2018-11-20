@@ -140,7 +140,6 @@
         url: '{{ route('weather') }}',
         dataType: 'json',
         success: function (res) {
-            console.log(res);
             if (res.status == 1) {
                 var data = res.lives[0];
                 var str = data.province + '省' + data.city + ' ' + data.weather
