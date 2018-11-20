@@ -157,11 +157,16 @@ class CommonController extends Controller
         $area = 'https://restapi.amap.com/v3/ip';
         $weather = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
-        $area_arr = array_merge($params,['ip' => request()->ip()]);
 
         $client = new Client();
+        // 地理位置信息
+        $area_arr = array_merge($params, ['ip' => request()->ip()]);
         $area_info = $client->get($area . '?' . http_build_query($area_arr))->getBody();
-        return $area_info;
+        $area_res_arr = json_decode($area_info, true);
+
+        // 天气信息
+        $weather_arr = array_merge($params, ['city' => $area_res_arr['adcode'] ?? '410100']);
+        return $client->get($weather . '?' . http_build_query($weather_arr));
     }
 
 }
