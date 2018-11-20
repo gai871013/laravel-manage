@@ -36,7 +36,7 @@
 <header class="header">
     <nav class="navbar navbar-default" id="navbar">
         <div class="container">
-            <div class="header-topbar hidden-xs link-border">
+            <div class="header-topbar link-border">
                 {{--<ul class="site-nav topmenu">
 
                     <li><a href="/links" rel="nofollow">友情链接</a></li>
