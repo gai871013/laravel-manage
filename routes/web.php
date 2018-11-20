@@ -49,6 +49,7 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     // 单页
     Route::get('page/{id}.html', $news . 'getPage')->name('page');
 
+    Route::get('weather','');
 });
 
 // 微信端访问控制器

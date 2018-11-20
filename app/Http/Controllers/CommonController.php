@@ -58,8 +58,8 @@ class CommonController extends Controller
             $send_data = array(
                 'username' => $username,
                 'password' => $password,
-                'mobile' => $mobile,
-                'content' => $content
+                'mobile'   => $mobile,
+                'content'  => $content
             );
             $result = $this->curlPost($url, $send_data);
             if ($result) {
@@ -147,6 +147,20 @@ class CommonController extends Controller
             }
         }
         return $this->ajaxReturn($res);
+    }
+
+    public function getWeatherInfo()
+    {
+        $params = [
+            'key' => '5402ab6012842014a8d60a19f46a5640'
+        ];
+        $area = 'https://restapi.amap.com/v3/ip';
+        $weather = 'https://restapi.amap.com/v3/weather/weatherInfo';
+
+        $area_arr = array_merge($params,['ip' => request()->ip()]);
+
+        $client = new Client();
+        $area_info = $client->get($area . '?' . http_build_query($area_arr))->getBody();
     }
 
 }

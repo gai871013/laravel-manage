@@ -135,4 +135,8 @@
     //启用导航定位
     $("#navbar").navSmartFloat();
     $("img.lazyload").lazyload();
+    var area = {};
+    var weather = {};
+    var ip = '{{ request()->ip() }}';
+
 </script>
