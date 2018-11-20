@@ -149,11 +149,14 @@ class CommonController extends Controller
         return $this->ajaxReturn($res);
     }
 
+    /**
+     * 获取天气信息 2018-11-20 12:03:22 by gai817013
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     public function getWeatherInfo()
     {
-        $params = [
-            'key' => '5402ab6012842014a8d60a19f46a5640'
-        ];
+        $request = request();
+        $params = array_merge($request, ['key' => '5402ab6012842014a8d60a19f46a5640']);
         $area = 'https://restapi.amap.com/v3/ip';
         $weather = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
