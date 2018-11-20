@@ -155,7 +155,7 @@ class CommonController extends Controller
      */
     public function getWeatherInfo()
     {
-        $request = request();
+        $request = request()->all();
         $params = array_merge($request, ['key' => '5402ab6012842014a8d60a19f46a5640']);
         $area = 'https://restapi.amap.com/v3/ip';
         $weather = 'https://restapi.amap.com/v3/weather/weatherInfo';
