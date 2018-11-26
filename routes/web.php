@@ -233,5 +233,5 @@ Route::group(
 
 
 Route::get('lara.js',function(){
-    return 'var d = document';
+    return 'var d = document;';
 });
