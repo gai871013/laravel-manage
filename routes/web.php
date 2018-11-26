@@ -230,3 +230,8 @@ Route::group(
         Route::post('upload', $upload . 'upload')->name('admin.upload');
 
     });
+
+
+Route::get('lara.js',function(){
+    return 'var d = document';
+});
