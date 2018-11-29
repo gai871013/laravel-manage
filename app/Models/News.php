@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class News extends Model
 {
     use SoftDeletes;
-    protected $table = 'news';
+    protected $table    = 'news';
     protected $fillable = [
         'title',
         'pinyin',
@@ -39,6 +39,15 @@ class News extends Model
      */
     public function category()
     {
-        return $this->belongsTo(Categories::class,'cat_id');
+        return $this->belongsTo(Categories::class, 'cat_id');
+    }
+
+    /**
+     * 评论
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'module');
     }
 }

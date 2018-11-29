@@ -55,7 +55,7 @@ class NewsController extends Controller
      */
     public function getShow($id, Request $request)
     {
-        $news = News::find($id);
+        $news = News::query()->with('comments')->find($id);
 //        News::where('id', $id)->update(['read' => $news->read + 1]);
         News::where('id', $id)->increment('read');
         return view('news.show', compact('news'));
