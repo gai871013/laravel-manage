@@ -172,4 +172,14 @@ class CommonController extends Controller
         return $client->get($weather . '?' . http_build_query($weather_arr));
     }
 
+    public function getTest()
+    {
+
+        dump(request()->getSchemeAndHttpHost());
+        dump( request()->getRequestUri());
+        dump($_SERVER);
+        dump($_SERVER['HTTP_HOST']);
+        dump($_SERVER['REQUEST_URI']);
+    }
+
 }

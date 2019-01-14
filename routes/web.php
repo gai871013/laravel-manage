@@ -230,3 +230,6 @@ Route::group(
         Route::post('upload', $upload . 'upload')->name('admin.upload');
 
     });
+
+
+Route::get('test-test','CommonController@getTest');

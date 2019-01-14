@@ -101,5 +101,6 @@
                     window.changyan.api.config({appid: appid, conf: conf})
                 });
             }
-        })(); </script>
+        })();
+    </script>
 @endsection
