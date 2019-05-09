@@ -40,14 +40,18 @@
 	<aside class="sidebar">
 		<div class="fixed">
 			<div class="widget widget_search">
-				<form class="navbar-form" action="" method="post">
-					<div class="input-group">
-						<input type="text" id="keyword" class="form-control" size="35" placeholder="请输入关键字"
-						       maxlength="15" autocomplete="off">
-						<span class="input-group-btn">
-            <button class="btn btn-default btn-search" id="search" type="button">搜索</button>
-            </span></div>
-				</form>
+				<script>
+					(function() {
+						var cx = '010072567182738159839:nqwdtpa8pt8';
+						var gcse = document.createElement('script');
+						gcse.type = 'text/javascript';
+						gcse.async = true;
+						gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(gcse, s);
+					})();
+				</script>
+				<gcse:search></gcse:search>
 			</div>
 		</div>
 		<div class="widget widget_hot">
