@@ -37,4 +37,11 @@ class HomeController extends Controller
         $news = News::orderBy('id', 'desc')->paginate(env('PAGE_SIZE'));
         return view('welcome', compact('news'));
     }
+
+    public function NotifyBoc($id)
+    {
+        \Log::info($id);
+        \Log::info(\request()->all());
+        \Log::info(file_get_contents('php://input'));
+    }
 }

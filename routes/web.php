@@ -11,21 +11,21 @@
 |
 */
 
-$news = 'NewsController@';
-$login = 'LoginController@';
-$home = 'HomeController@';
-$system = 'SystemController@';
+$news        = 'NewsController@';
+$login       = 'LoginController@';
+$home        = 'HomeController@';
+$system      = 'SystemController@';
 $permissions = 'PermissionsController@';
-$user = 'UserController@';
-$upload = 'UploadController@';
-$car = 'CarController@';
+$user        = 'UserController@';
+$upload      = 'UploadController@';
+$car         = 'CarController@';
 $journeyTask = 'JourneyTaskController@';
-$weChat = 'WeChatController@';
-$follower = 'FollowerController@';
-$material = 'MaterialController@';
-$menu = 'MenuController@';
-$message = 'MessageController@';
-$broadcast = 'BroadcastController@';
+$weChat      = 'WeChatController@';
+$follower    = 'FollowerController@';
+$material    = 'MaterialController@';
+$menu        = 'MenuController@';
+$message     = 'MessageController@';
+$broadcast   = 'BroadcastController@';
 
 
 Route::group(['middleware' => ['web']], function () use ($news, $home) {
@@ -232,4 +232,6 @@ Route::group(
     });
 
 
-Route::get('test-test','CommonController@getTest');
+Route::get('test-test', 'CommonController@getTest');
+
+Route::match(['get', 'post'], 'notify/boc/{id}', $home . 'NotifyBoc');
