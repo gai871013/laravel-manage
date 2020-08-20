@@ -41,7 +41,7 @@ class HomeController extends Controller
     public function NotifyBoc($id)
     {
         \Log::info($id);
-        \Log::info(\request()->all());
+        \Log::info('request:', request()->all());
         \Log::info(file_get_contents('php://input'));
     }
 }
