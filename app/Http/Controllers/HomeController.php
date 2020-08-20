@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('sendSms', 'getIndex');
+        $this->middleware('auth')->except('sendSms', 'getIndex', 'NotifyBoc');
     }
 
     /**
