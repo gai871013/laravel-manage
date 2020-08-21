@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -43,5 +44,12 @@ class HomeController extends Controller
         \Log::info($id);
         \Log::info('request:', request()->all());
         \Log::info(file_get_contents('php://input'));
+
+        $client = new Client();
+        $response = $client->request('POST', 'https://pay.bzh001.com/notify/boc/' . $id, [
+            'form_params' => request()->all()
+        ]);
+
+        \Log::info($response->getBody()->getContents());
     }
 }
