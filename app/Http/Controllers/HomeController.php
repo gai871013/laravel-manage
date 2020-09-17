@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('sendSms', 'getIndex');
+        $this->middleware('auth')->except('sendSms', 'getIndex', 'NotifyBoc');
     }
 
     /**
@@ -36,5 +37,19 @@ class HomeController extends Controller
     {
         $news = News::orderBy('id', 'desc')->paginate(env('PAGE_SIZE'));
         return view('welcome', compact('news'));
+    }
+
+    public function NotifyBoc($id)
+    {
+        \Log::info($id);
+        \Log::info('request:', request()->all());
+        \Log::info(file_get_contents('php://input'));
+
+        $client = new Client();
+        $response = $client->request('POST', 'https://pay.bzh001.com/notify/boc/' . $id, [
+            'form_params' => request()->all()
+        ]);
+
+        \Log::info($response->getBody()->getContents());
     }
 }
