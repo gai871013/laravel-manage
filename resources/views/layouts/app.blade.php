@@ -87,7 +87,7 @@
         <p>Copyright © 2012 - {{ date('Y') }} <a
                     href="{{ route('index') }}">{{ config('app.name','LaravelManageSystem') }}</a>
             &amp; 版权所有
-            <a href="http://www.miitbeian.gov.cn/" target="_blank">{{ base64_decode(env('BASE64_ICP')) }}</a>
+            <a href="https://beian.miit.gov.cn/" target="_blank">{{ base64_decode(env('BASE64_ICP')) }}</a>
         </p>
     </div>
     <div id="gotop" style="display: block;"><a class="gotop" draggable="false"></a></div>
