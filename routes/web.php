@@ -235,3 +235,4 @@ Route::group(
 Route::get('test-test', 'CommonController@getTest');
 
 Route::match(['get', 'post'], 'notify/boc/{id}', $home . 'NotifyBoc');
+Route::match(['get', 'post'], 'notify/jdpay/{id}', $home . 'NotifyJDPay');

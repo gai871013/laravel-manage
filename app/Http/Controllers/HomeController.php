@@ -52,4 +52,25 @@ class HomeController extends Controller
 
         \Log::info($response->getBody()->getContents());
     }
+
+    public function NotifyJDPay($id)
+    {
+        \Log::info($id);
+        \Log::info('request:', request()->all());
+        \Log::info($reqXmlStr = file_get_contents('php://input'));
+
+        $client = new Client();
+
+        $param      = [
+            'headers' => [
+                'Content-Type'   => 'application/xml',
+                'Charset'        => 'utf-8',
+                'Content-Length' => strlen($reqXmlStr)
+            ],
+            'body'    => $reqXmlStr
+        ];
+        $response = $client->request('POST', 'https://pay.bzh001.com/notify/jdpay/' . $id, $param);
+
+        \Log::info($response->getBody()->getContents());
+    }
 }
