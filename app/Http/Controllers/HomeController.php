@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('sendSms', 'getIndex', 'NotifyBoc');
+        $this->middleware('auth')->except('sendSms', 'getIndex', 'NotifyBoc', 'NotifyJDPay');
     }
 
     /**
@@ -45,7 +45,7 @@ class HomeController extends Controller
         \Log::info('request:', request()->all());
         \Log::info(file_get_contents('php://input'));
 
-        $client = new Client();
+        $client   = new Client();
         $response = $client->request('POST', 'https://pay.bzh001.com/notify/boc/' . $id, [
             'form_params' => request()->all()
         ]);
@@ -61,7 +61,7 @@ class HomeController extends Controller
 
         $client = new Client();
 
-        $param      = [
+        $param    = [
             'headers' => [
                 'Content-Type'   => 'application/xml',
                 'Charset'        => 'utf-8',
