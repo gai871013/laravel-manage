@@ -942,12 +942,12 @@ function normalEncrypt($string, $operation, $key)
                 if ($x == $l) {
                     $x = 0;
                 }
-                $char .= $key{$x};
+                $char .= $key[$x];
                 $x++;
             }
             $str = '';
             for ($i = 0; $i < $len; $i++) {
-                $str .= chr(ord($string{$i}) + (ord($char{$i})) % 256);
+                $str .= chr(ord($strin[$i]) + (ord($char[$i])) % 256);
             }
             $result = base64_encode($str);
             break;
@@ -992,7 +992,7 @@ function subString($str, $start, $length)
     $i = 0;
     // 完整排除之前的UTF8字符
     while ($i < $start) {
-        $ord = ord($str{$i});
+        $ord = ord($str[$i]);
         if ($ord < 192) {
             $i++;
         } elseif ($ord < 224) {
@@ -1004,15 +1004,15 @@ function subString($str, $start, $length)
     // 开始截取
     $result = '';
     while ($i < $start + $length && $i < strlen($str)) {
-        $ord = ord($str{$i});
+        $ord = ord($str[$i]);
         if ($ord < 192) {
-            $result .= $str{$i};
+            $result .= $str[$i];
             $i++;
         } elseif ($ord < 224) {
-            $result .= $str{$i} . $str{$i + 1};
+            $result .= $str[$i] . $str[$i + 1];
             $i += 2;
         } else {
-            $result .= $str{$i} . $str{$i + 1} . $str{$i + 2};
+            $result .= $str[$i] . $str[$i + 1] . $str[$i + 2];
             $i += 3;
         }
     }
