@@ -50,6 +50,10 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     Route::get('page/{id}.html', $news . 'getPage')->name('page');
 
     Route::get('weather', 'CommonController@getWeatherInfo')->name('weather');
+    // IP查询
+    Route::get('ip', 'IpController@index')->name('ip');
+    // IP结果
+    Route::post('ip-result', 'IpController@getIp')->name('ip-result');
 });
 
 // 微信端访问控制器

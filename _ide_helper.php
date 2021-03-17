@@ -3299,6 +3299,100 @@
             /**
      * 
      *
+     * @see \Illuminate\Encryption\Encrypter
+     */ 
+        class Crypt {
+                    /**
+         * Determine if the given key and cipher combination is valid.
+         *
+         * @param string $key
+         * @param string $cipher
+         * @return bool 
+         * @static 
+         */ 
+        public static function supported($key, $cipher)
+        {
+                        return \Illuminate\Encryption\Encrypter::supported($key, $cipher);
+        }
+                    /**
+         * Create a new encryption key for the given cipher.
+         *
+         * @param string $cipher
+         * @return string 
+         * @static 
+         */ 
+        public static function generateKey($cipher)
+        {
+                        return \Illuminate\Encryption\Encrypter::generateKey($cipher);
+        }
+                    /**
+         * Encrypt the given value.
+         *
+         * @param mixed $value
+         * @param bool $serialize
+         * @return string 
+         * @throws \Illuminate\Contracts\Encryption\EncryptException
+         * @static 
+         */ 
+        public static function encrypt($value, $serialize = true)
+        {
+                        /** @var \Illuminate\Encryption\Encrypter $instance */
+                        return $instance->encrypt($value, $serialize);
+        }
+                    /**
+         * Encrypt a string without serialization.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function encryptString($value)
+        {
+                        /** @var \Illuminate\Encryption\Encrypter $instance */
+                        return $instance->encryptString($value);
+        }
+                    /**
+         * Decrypt the given value.
+         *
+         * @param mixed $payload
+         * @param bool $unserialize
+         * @return string 
+         * @throws \Illuminate\Contracts\Encryption\DecryptException
+         * @static 
+         */ 
+        public static function decrypt($payload, $unserialize = true)
+        {
+                        /** @var \Illuminate\Encryption\Encrypter $instance */
+                        return $instance->decrypt($payload, $unserialize);
+        }
+                    /**
+         * Decrypt the given string without unserialization.
+         *
+         * @param string $payload
+         * @return string 
+         * @static 
+         */ 
+        public static function decryptString($payload)
+        {
+                        /** @var \Illuminate\Encryption\Encrypter $instance */
+                        return $instance->decryptString($payload);
+        }
+                    /**
+         * Get the encryption key.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getKey()
+        {
+                        /** @var \Illuminate\Encryption\Encrypter $instance */
+                        return $instance->getKey();
+        }
+         
+    }
+            /**
+     * 
+     *
      * @see \Illuminate\Database\DatabaseManager
      * @see \Illuminate\Database\Connection
      */ 
@@ -12762,6 +12856,41 @@
      
 }
 
+    namespace Gai871013\IpLocation\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class IpLocation {
+                    /**
+         * 根据所给 IP 地址或域名返回所在地区信息
+         *
+         * @access Public
+         * @param string $ip
+         * @return mixed 
+         * @throws InvalidArgumentException
+         * @static 
+         */ 
+        public static function getLocation($ip = '')
+        {
+                        /** @var \Gai871013\IpLocation\IpLocation $instance */
+                        return $instance->getLocation($ip);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function get_client_ip()
+        {
+                        /** @var \Gai871013\IpLocation\IpLocation $instance */
+                        return $instance->get_client_ip();
+        }
+         
+    }
+     
+}
+
     namespace Laracasts\Flash { 
             /**
      * 
@@ -13322,6 +13451,7 @@ namespace  {
             class Cache extends \Illuminate\Support\Facades\Cache {}
             class Config extends \Illuminate\Support\Facades\Config {}
             class Cookie extends \Illuminate\Support\Facades\Cookie {}
+            class Crypt extends \Illuminate\Support\Facades\Crypt {}
             class DB extends \Illuminate\Support\Facades\DB {}
             class Eloquent extends \Illuminate\Database\Eloquent\Model {             
                 /**
@@ -15577,6 +15707,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Image extends \Intervention\Image\Facades\Image {}
             class EasyWeChat extends \Overtrue\LaravelWechat\Facade {}
+            class IpLocation extends \Gai871013\IpLocation\Facades\IpLocation {}
             class Flash extends \Laracasts\Flash\Flash {}
             class Captcha extends \Mews\Captcha\Facades\Captcha {}
             class Fractal extends \Spatie\Fractal\FractalFacade {}
