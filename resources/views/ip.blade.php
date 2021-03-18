@@ -74,11 +74,17 @@
             methods: {
                 onSubmit() {
                     var that = this;
+                    const loading = that.$loading({
+                        lock: true,
+                        text: '加载中...',
+                        spinner: 'el-icon-loading',
+                    });
                     console.log(this.ip);
                     axios.post('{{ route('ip-result') }}', {
                         ip: this.ip,
                         _token: '{{ csrf_token() }}'
                     }).then(function (response) {
+                        loading.close();
                         console.log(response);
                         if (response.data.code) {
                             that.$alert(response.data.msg, '错误提示', {
