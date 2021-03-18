@@ -76,7 +76,7 @@
                     var that = this;
                     const loading = that.$loading({
                         lock: true,
-                        text: '加载中...',
+                        text: '查询中...',
                         spinner: 'el-icon-loading',
                     });
                     console.log(this.ip);
