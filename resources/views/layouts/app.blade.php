@@ -93,6 +93,14 @@
     <div id="gotop" style="display: block;"><a class="gotop" draggable="false"></a></div>
 </footer>
 <!-- Scripts -->
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @yield('scripts')
 <div style="display: none;">
     <script src="https://s5.cnzz.com/z_stat.php?id=2984609&web_id=2984609" language="JavaScript"></script>
