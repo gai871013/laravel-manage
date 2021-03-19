@@ -71,7 +71,7 @@
                     </li>
                     @if(isset($nav))
                         @foreach($nav as $v)
-                            <li><a class="no_pjax" href="{{ $v->url ?? route('category', ['id' => $v->id]) }}">{{ $v->catname }}</a></li>
+                            <li><a @if($v->url) class="no_pjax" @endif href="{{ $v->url ?? route('category', ['id' => $v->id]) }}">{{ $v->catname }}</a></li>
                         @endforeach
                     @endif
                 </ul>
