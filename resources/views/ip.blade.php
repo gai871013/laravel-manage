@@ -73,11 +73,7 @@
                     <el-col :span="12" :offset="offset">城市：@{{ info.ipip.country }}</el-col>
                 </el-row>
             </div>
-            <div style="margin-top: 15px;">
-                <el-row>
-                    <el-col :span="12" :offset="offset">运营商：@{{ info.ipip.area }}</el-col>
-                </el-row>
-            </div>
+
         </div>
     </div>
 @endsection
