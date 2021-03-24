@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Gai871013\IpLocation\Facades\IpLocation;
+use Gai871013\IpLocation\ipip\db\City;
 use Illuminate\Http\Request;
 
 class IpController extends Controller
@@ -20,7 +21,7 @@ class IpController extends Controller
     {
         $ip = request()->input('ip') ?? request()->ip();
         try {
-            return ['code' => 0, 'msg' => '获取成功', 'data' => IpLocation::getLocation($ip)];
+            return ['code' => 0, 'msg' => '获取成功', 'data' => IpLocation::getLocation($ip), 'ipip' => (new City())->find($ip)];
         } catch (Exception $e) {
             return ['code' => 1, 'msg' => $e->getMessage()];
         }

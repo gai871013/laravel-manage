@@ -11,7 +11,7 @@
                     <el-alert
                             title="扩展包来自：composer require gai871013/ip-location"
                             type="success"
-                            description="数据来源：纯真网络。拓展包：https://gitee.com/gai871013/ip-location"
+                            description="数据来源：纯真网络&IPIP。拓展包：https://gitee.com/gai871013/ip-location"
                             :closable="false">
                     </el-alert>
                 </el-col>
@@ -35,6 +35,13 @@
         </div>
         <div style="margin-top: 15px;">
             <el-row>
+                <el-col :span="12" :offset="offset">
+                    <el-divider>以下数据来自纯真网络</el-divider>
+                </el-col>
+            </el-row>
+        </div>
+        <div style="margin-top: 15px;">
+            <el-row>
                 <el-col :span="12" :offset="offset">您查询的IP：@{{ info.data.ip }}</el-col>
             </el-row>
         </div>
@@ -47,6 +54,30 @@
             <el-row>
                 <el-col :span="12" :offset="offset">运营商：@{{ info.data.area }}</el-col>
             </el-row>
+        </div>
+        <div style="margin-top: 15px;">
+            <el-row>
+                <el-col :span="12" :offset="offset">
+                    <el-divider>以下数据来自IPIP</el-divider>
+                </el-col>
+            </el-row>
+        </div>
+        <div v-if="info.ipip">
+            <div style="margin-top: 15px;">
+                <el-row>
+                    <el-col :span="12" :offset="offset">您查询的IP：@{{ info.ipip.ip }}</el-col>
+                </el-row>
+            </div>
+            <div style="margin-top: 15px;">
+                <el-row>
+                    <el-col :span="12" :offset="offset">城市：@{{ info.ipip.country }}</el-col>
+                </el-row>
+            </div>
+            <div style="margin-top: 15px;">
+                <el-row>
+                    <el-col :span="12" :offset="offset">运营商：@{{ info.ipip.area }}</el-col>
+                </el-row>
+            </div>
         </div>
     </div>
 @endsection
@@ -61,7 +92,7 @@
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        new Vue({
+        var vm = new Vue({
             el: '#app',
             data: function () {
                 return {
