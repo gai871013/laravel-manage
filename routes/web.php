@@ -54,6 +54,8 @@ Route::group(['middleware' => ['web']], function () use ($news, $home) {
     Route::get('ip', 'IpController@index')->name('ip');
     // IP结果
     Route::post('ip-result', 'IpController@getIp')->name('ip-result');
+
+    Route::get('wx-app','WxAppController@index');
 });
 
 // 微信端访问控制器
