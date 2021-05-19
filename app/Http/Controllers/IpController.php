@@ -28,9 +28,8 @@ class IpController extends Controller
     {
         $ip2region = new Ip2Region();
         $ip        = request()->input('ip') ?? request()->ip();
-        $res       = IpLocation::getLocation($ip);
-        dd($ip2region->binarySearch($ip));
         try {
+            $res       = IpLocation::getLocation($ip);
             return ['code' => 0, 'msg' => '获取成功', 'data' => $res, 'ipip' => (new City())->find($ip), 'ip2region' => $ip2region->btreeSearch($res['ip'])];
         } catch (Exception $e) {
             return ['code' => 1, 'msg' => $e->getMessage()];
