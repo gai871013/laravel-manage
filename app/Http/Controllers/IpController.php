@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Exception;
 use Gai871013\IpLocation\Facades\IpLocation;
 use Gai871013\IpLocation\ipip\db\City;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use Ip2Region;
 
 class IpController extends Controller
 {
+    /**
+     * @return array|false|Factory|Application|View|mixed
+     */
     public function index()
     {
         $title = 'IP地址查询';
@@ -19,9 +26,10 @@ class IpController extends Controller
 
     public function getIp()
     {
-        $ip = request()->input('ip') ?? request()->ip();
+        $ip2region = new Ip2Region();
+        $ip        = request()->input('ip') ?? request()->ip();
         try {
-            return ['code' => 0, 'msg' => '获取成功', 'data' => IpLocation::getLocation($ip), 'ipip' => (new City())->find($ip)];
+            return ['code' => 0, 'msg' => '获取成功', 'data' => IpLocation::getLocation($ip), 'ipip' => (new City())->find($ip), 'ipregion' => $ip2region->btreeSearch($ip)];
         } catch (Exception $e) {
             return ['code' => 1, 'msg' => $e->getMessage()];
         }

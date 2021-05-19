@@ -75,6 +75,22 @@
             </div>
 
         </div>
+
+        <div style="margin-top: 15px;" v-if="info.ip2region">
+            <el-row>
+                <el-col :span="12" :offset="offset">
+                    <el-divider>以下数据来自ip2region</el-divider>
+                </el-col>
+            </el-row>
+        </div>
+        <div v-if="info.ip2region">
+            <div style="margin-top: 15px;">
+                <el-row>
+                    <el-col :span="12" :offset="offset">城市：@{{ info.ip2region.region }}</el-col>
+                </el-row>
+            </div>
+
+        </div>
     </div>
 @endsection
 
