@@ -65,8 +65,8 @@
     </aside>
     <script>
         var gitalk = new Gitalk({
-            clientID: '2eb19afceda708b27e64', // GitHub Application Client ID
-            clientSecret: '36aedb5a30321626a8631689fee5fafd5929f612', // GitHub Application Client Secret
+            clientID: 'f3f9015bb6cbc286759f', // GitHub Application Client ID
+            clientSecret: 'a1597730cd69e25d905098f422eaf6751afd0ee5', // GitHub Application Client Secret
             repo: 'laravel-manage',     // 存放评论的仓库
             owner: 'gai871013',          // 仓库的创建者，
             admin: ['gai871013'],        // 如果仓库有多个人可以操作，那么在这里以数组形式写出
