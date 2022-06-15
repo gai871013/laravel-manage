@@ -66,62 +66,8 @@ class LoginController extends Controller
             flash()->error('您已经登陆，如需重新登陆请先退出')->important();
             return redirect()->route('admin.home');
         }
-        $img = $this->bing($request);
+        $img = asset('images/bg01.png');
         return view('admin.login.index', compact('img', 'index'));
-    }
-
-    /**
-     * 获取背景图片（来源为bing）
-     * @param Request $request
-     * @return string
-     */
-    public function bing(Request $request)
-    {
-        //设置bing参数
-        $idx = (int)$request->input('index');
-        $download = isset($_GET['download']) ? true : false;
-        $domain = 'http://cn.bing.com';
-        $fun = '/HPImageArchive.aspx';
-        $param = array('format' => 'js', 'n' => 1, 'pid' => 'hd', 'video' => 1);
-        $param['nc'] = time();
-        $param['idx'] = $idx;
-        $url = $domain . $fun . '?' . http_build_query($param);
-        $dir = 'bing/' . date('Y-m', strtotime("-" . $idx . " day"));
-        // json目录及文件名称
-        $day = date('Y-m-d', strtotime("-" . $idx . " day"));
-        $jsonDir = $dir . '/json/';
-        // video
-        $videoDir = $dir . '/mp4/';
-
-        $storage_path = storage_path('app/public/' . $dir);
-        if (!is_dir($storage_path . '/json')) {
-            Storage::put($dir . '/json/.gitignore', '');
-        }
-        // 获取idx天前的json数据
-        // 首先从本地获取
-        foreach (scandir($storage_path . '/json') as $v) {
-            if ($v == $day . '.json') {
-                $url = $storage_path . '/json/' . $day . '.json';
-            }
-        }
-        $curl = file_get_contents($url);
-        $content = json_decode($curl, true);
-        // 获取图片路径
-        $img = $domain . $content['images'][0]['url'];
-        // 获取图片名称
-        $fileName = explode('/', $img);
-        $fileNmaeStr = end($fileName);
-        // 输出图片
-
-        // 获取目录下所有文件
-        $files = scandir($storage_path);
-        if (!in_array($fileNmaeStr, $files)) {
-            $IMG = file_get_contents($img);
-            Storage::put($dir . '/' . $fileNmaeStr, $IMG);
-            Storage::put($jsonDir . $day . '.json', $curl);
-        }
-        return Storage::url($dir . '/' . $fileNmaeStr);
-
     }
 
     public function login(Request $request)

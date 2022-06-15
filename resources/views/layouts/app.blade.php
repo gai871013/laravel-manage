@@ -29,7 +29,8 @@
     <!--[if lt IE 9]>
     <script>window.location.href = 'upgrade-browser';</script>
     <![endif]-->
-
+    <link rel="stylesheet" href="{{ asset('css/gitalk.min.css') }}">
+    <script src="{{ asset('js/gitalk.min.js') }}"></script>
     @yield('head')
 </head>
 <body>
@@ -71,7 +72,9 @@
                     </li>
                     @if(isset($nav))
                         @foreach($nav as $v)
-                            <li><a @if($v->url) class="no_pjax" @endif href="{{ $v->url ?? route('category', ['id' => $v->id]) }}">{{ $v->catname }}</a></li>
+                            <li><a @if($v->url) class="no_pjax"
+                                   @endif href="{{ $v->url ?? route('category', ['id' => $v->id]) }}">{{ $v->catname }}</a>
+                            </li>
                         @endforeach
                     @endif
                 </ul>
@@ -151,7 +154,7 @@
         }
     })
 
-    $('.gotop').on('click',function(){
+    $('.gotop').on('click', function () {
         window.scrollTo(0, 0);
     });
 
