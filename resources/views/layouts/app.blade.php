@@ -29,8 +29,8 @@
     <!--[if lt IE 9]>
     <script>window.location.href = 'upgrade-browser';</script>
     <![endif]-->
-    <link rel="stylesheet" href="{{ asset('css/gitalk.min.css') }}">
-    <script src="{{ asset('js/gitalk.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/gitalk.css') }}?v=1.7.2">
+    <script src="{{ asset('js/gitalk.min.js') }}?v=1.7.2"></script>
     @yield('head')
 </head>
 <body>
