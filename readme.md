@@ -1,6 +1,5 @@
-# Laravel Manage System
+# Laravel Manage
 
-基于Laravel的管理系统,致力于做一个五站合一(电脑站 + 手机站 + 微信公众平台 + APP + 小程序 五合一)的系统 演示网址:[https://www.wc87.com](https://www.wc87.com)
 
 ## 服务器要求
 本系统基于Laravel 5.5开发完成，Laravel 框架会有一些系统上的要求。当然，这些要求在 Laravel Homestead 虚拟机上都已经完全配置好了。所以，非常推荐你使用 Homestead 作为你的本地 Laravel 开发环境。
