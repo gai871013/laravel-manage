@@ -12722,13 +12722,14 @@
          *
          * @param string $id The unique identifier for the parameter or object
          * @param mixed $value The value of the parameter or a closure to define an object
+         * @return void 
          * @throws FrozenServiceException Prevent override of a frozen service
          * @static 
          */ 
         public static function offsetSet($id, $value)
         {            //Method inherited from \Pimple\Container         
                         /** @var \EasyWeChat\Foundation\Application $instance */
-                        return $instance->offsetSet($id, $value);
+                        $instance->offsetSet($id, $value);
         }
                     /**
          * Gets a parameter or an object.
@@ -12759,12 +12760,13 @@
          * Unsets a parameter or an object.
          *
          * @param string $id The unique identifier for the parameter or object
+         * @return void 
          * @static 
          */ 
         public static function offsetUnset($id)
         {            //Method inherited from \Pimple\Container         
                         /** @var \EasyWeChat\Foundation\Application $instance */
-                        return $instance->offsetUnset($id);
+                        $instance->offsetUnset($id);
         }
                     /**
          * Marks a callable as being a factory service.
@@ -12841,7 +12843,6 @@
                     /**
          * Registers a service provider.
          *
-         * @param \Pimple\ServiceProviderInterface $provider A ServiceProviderInterface instance
          * @param array $values An array of values that customizes the provider
          * @return static 
          * @static 
@@ -13380,6 +13381,7 @@
                     /**
          * Convert the object into something JSON serializable.
          *
+         * @return array 
          * @static 
          */ 
         public static function jsonSerialize()
