@@ -51,7 +51,7 @@ class GetIPAddressCommand extends Command
         }
         foreach ($res_ip as $v => $kk) {
             $ip_add = app('IpLocation')->getLocation($v);
-            $result = '[' . date('Y-m-d H:i:s') . '] ip-result.INFO: [' . $v . ']:(' . $kk . ') ' . $ip_add['country'] . ' ' . $ip_add['area'];
+            $result = '[' . date('Y-m-d H:i:s') . '] ipResult.INFO: [' . $v . ']:(' . $kk . ') ' . $ip_add['country'] . ' ' . $ip_add['area'];
             file_put_contents($file, $result . PHP_EOL, FILE_APPEND);
         }
         $this->info('共匹配' . $res . '条，共过滤并解析' . count($res_ip) . '条，解析结果请查看log文件');
