@@ -54,7 +54,6 @@ class GetIPAddressCommand extends Command
             $result = '[' . date('Y-m-d H:i:s') . '] ip-result.INFO: [' . $v . ']:(' . $kk . ') ' . $ip_add['country'] . ' ' . $ip_add['area'];
             file_put_contents($file, $result . PHP_EOL, FILE_APPEND);
         }
-        info($path . ' 解析结果', $all);
         $this->info('共匹配' . $res . '条，共过滤并解析' . count($res_ip) . '条，解析结果请查看log文件');
     }
 }
