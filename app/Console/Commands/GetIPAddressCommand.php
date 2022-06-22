@@ -39,19 +39,22 @@ class GetIPAddressCommand extends Command
         $res = preg_match_all($reg, $ip, $ips);
 //        $res2 = preg_match_all($reg2, $ip, $ips2, PREG_PATTERN_ORDER);
         // PREG_SET_ORDER
-        $all  = [];
+        $all    = [];
         $res_ip = [];
-        $file = storage_path('logs/ip_result_' . date('YmdHis') . '.log');
+        $file   = storage_path('logs/ip_result_' . date('YmdHis') . '.log');
         foreach ($ips[0] as $v) {
-            if (in_array($v, $res_ip)) {
-                continue;
+            if (in_array($v, array_keys($res_ip))) {
+                $res_ip[$v]++;
+            } else {
+                $res_ip[$v] = 1;
             }
-            $res_ip[] = $v;
+        }
+        foreach ($res_ip as $v => $kk) {
             $ip_add = app('IpLocation')->getLocation($v);
-            $all[]  = $result = '[' . $v . ']:' . $ip_add['country'] . ' ' . $ip_add['area'];
+            $result = '[' . $v . ']:(' . $kk . ') ' . $ip_add['country'] . ' ' . $ip_add['area'];
             file_put_contents($file, $result . PHP_EOL, FILE_APPEND);
         }
         info($path . ' 解析结果', $all);
-        $this->info('共匹配' . $res . '条，共过滤并解析' . count($all) . '条，解析结果请查看log文件');
+        $this->info('共匹配' . $res . '条，共过滤并解析' . count($res_ip) . '条，解析结果请查看log文件');
     }
 }
